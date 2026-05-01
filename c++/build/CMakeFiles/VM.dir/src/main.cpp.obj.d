@@ -443,4 +443,6 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/variant \
  C:/msys64/mingw64/include/c++/15.2.0/bits/monostate.h \
  C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
+ C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp \
+ C:/msys64/home/lenna/vm/c++/src/vm/parser.hpp \
  C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp

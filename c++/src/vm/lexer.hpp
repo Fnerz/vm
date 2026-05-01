@@ -5,7 +5,7 @@
 #include <vector>
 #include "types.hpp"
 
-class Lexer
+class LineLexer
 {
 private:
     std::string line = "";
@@ -17,7 +17,7 @@ private:
     std::string getSymbol();
     char advance();
 public:
-    Lexer(std::string line);
+    LineLexer(std::string line);
 
     std::vector<Token> tokenize();
 

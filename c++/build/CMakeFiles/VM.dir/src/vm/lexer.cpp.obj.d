@@ -1,6 +1,6 @@
 CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: \
  C:/msys64/home/lenna/vm/c++/src/vm/lexer.cpp \
- C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp \
+ C:/msys64/home/lenna/vm/c++/src/vm/Lexer.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/string \
  C:/msys64/mingw64/include/c++/15.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -190,4 +190,11 @@ CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/node_handle.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_map.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multimap.h \
- C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h
+ C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h \
+ C:/msys64/mingw64/include/c++/15.2.0/algorithm \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/uniform_int_dist.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
+ C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h

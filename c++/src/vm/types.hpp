@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 
 enum TokenType
@@ -23,6 +24,9 @@ enum TokenType
     COLON,
     COMMA,
 };
+std::string tokenTypeRepr(TokenType tok_type);
+std::string tokenTypesRepr(std::vector<TokenType> tok_type);
+bool inTokenTypes(TokenType tok_type, std::vector<TokenType> tok_types);
 
 
 enum InstructionType
@@ -33,6 +37,8 @@ enum InstructionType
     MUL,
     IDIV,
     FDIV,
+    MOD,
+    ABS,
     CMP,
     JMP,
     JE,
@@ -55,6 +61,8 @@ enum InstructionType
     DEC,
     INC,
     INPUT,
+    TIME,
+    HALT,
 };
 
 inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
@@ -64,8 +72,10 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"mul", InstructionType::MUL},
     {"idiv", InstructionType::IDIV},
     {"fdiv", InstructionType::FDIV},
+    {"MOD", InstructionType::MOD},
+    {"ABS", InstructionType::ABS},
     {"cmp", InstructionType::CMP},
-    {"cmp" ,InstructionType::JMP},
+    {"jmp" ,InstructionType::JMP},
     {"je" ,InstructionType::JE},
     {"jne" ,InstructionType::JNE},
     {"jg" ,InstructionType::JG},
@@ -84,8 +94,45 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"pop" ,InstructionType::POP},
     {"dec" ,InstructionType::DEC},
     {"inc" ,InstructionType::INC},
-    {"input", InstructionType::INPUT}
+    {"input", InstructionType::INPUT},
+    {"time", InstructionType::TIME},
+    {"halt", InstructionType::HALT},
 };
+
+inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
+    {InstructionType::MOV ,"mov"},
+    {InstructionType::ADD ,"add"},
+    {InstructionType::SUB ,"sub"},
+    {InstructionType::MUL ,"mul"},
+    {InstructionType::IDIV ,"idiv"},
+    {InstructionType::FDIV ,"fdiv"},
+    {InstructionType::MOD ,"MOD"},
+    {InstructionType::ABS ,"ABS"},
+    {InstructionType::CMP ,"cmp"},
+    {InstructionType::JMP ,"jmp"},
+    {InstructionType::JE ,"je"},
+    {InstructionType::JNE ,"jne"},
+    {InstructionType::JG ,"jg"},
+    {InstructionType::JL ,"jl"},
+    {InstructionType::JGE ,"jge"},
+    {InstructionType::JLE ,"jle"},
+    {InstructionType::LOAD ,"load"},
+    {InstructionType::STORE ,"store"},
+    {InstructionType::PRINT ,"print"},
+    {InstructionType::BREAKPOINT ,"bp"},
+    {InstructionType::SCREEN ,"screen"},
+    {InstructionType::RENDER ,"render"},
+    {InstructionType::CALL ,"call"},
+    {InstructionType::RET ,"ret"},
+    {InstructionType::PUSH ,"push"},
+    {InstructionType::POP ,"pop"},
+    {InstructionType::DEC ,"dec"},
+    {InstructionType::INC ,"inc"},
+    {InstructionType::INPUT ,"input"},
+    {InstructionType::TIME ,"time"},
+    {InstructionType::HALT, "halt"},
+};
+std::string instructionTypeRepr(InstructionType inst_type);
 
 struct Token
 {
@@ -95,12 +142,33 @@ struct Token
 std::string tokenRepr(Token tok);
 
 struct BinOp;
-typedef std::variant<Token, std::shared_ptr<BinOp>> Node;
+typedef std::variant<Token, std::string, std::shared_ptr<BinOp>> Node;
+struct BinOp {
+    Node left;
+    Token op;
+    Node right;
+};
+std::string nodeRepr(Node node);
+std::string BinOpRepr(std::shared_ptr<BinOp> bin_op);
+
+/*
+Instruction intermediate representation
+*/
+struct InstructionIr
+{
+    InstructionType type;
+    Node arg1;
+    Node arg2;
+    Node arg3;
+};
+std::string instructionIrRepr(InstructionIr inst_ir);
 
 struct Instruction
 {
     InstructionType type;
-    std::vector<Node> args;
+    Token arg1;
+    Token arg2;
+    Token arg3;
 };
 
 inline std::string ALLOWED_SYMBOL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789_";

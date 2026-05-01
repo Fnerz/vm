@@ -1,17 +1,17 @@
-#ifndef LEXER_CPP
-#define LEXER_CPP
+#ifndef LineLexer_CPP
+#define LineLexer_CPP
 
-#include "lexer.hpp"
+#include "Lexer.hpp"
 
 
-Lexer::Lexer(std::string line)
+LineLexer::LineLexer(std::string line)
 {
     this->line = line;
     this->advance();
     return;
 }
 
-char Lexer::advance()
+char LineLexer::advance()
 {
     this->i += 1;
     this->cur = (this->line.length() > this->i) ? this->line[this->i] : '\0';
@@ -25,7 +25,7 @@ bool isSpace(char c)
 }
 
 
-std::string Lexer::getSymbol()
+std::string LineLexer::getSymbol()
 {
     std::string buffer = "";
     while (ALLOWED_SYMBOL_CHARS.find(this->cur) != std::string::npos)
@@ -104,16 +104,8 @@ Token symbolToToken(std::string symbol)
 }
 
 
-void printTokens(std::vector<Token> tokens)
-{
-    std::cout << "Tokens (" << tokens.size() << ")" << ":" << std::endl;
-    for (auto tok : tokens)
-    {
-        std::cout << tokenRepr(tok) << std::endl;
-    }
-}
 
-std::vector<Token> Lexer::tokenize()
+std::vector<Token> LineLexer::tokenize()
 {
     std::vector<Token> tokens = {};
 
@@ -191,8 +183,6 @@ std::vector<Token> Lexer::tokenize()
         }
         this->advance();
     }
-
-    printTokens(tokens);
     return tokens;
 }
 

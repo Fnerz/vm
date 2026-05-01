@@ -5,7 +5,7 @@ class LineParser:
         self.tokens = tokens
         self.i = -1
         self.ic_line = ic_line
-        self.src_line = src_line
+        self.src_line = src_line # src = src code
         self.cur = tokens[0] if tokens else None
         self.next = tokens[1] if len(tokens) > 1 else None
         self.vm = vm
@@ -219,9 +219,6 @@ class LineParser:
                     dest = self.getValue()
                     time_inst = Instruction(InstructionType.TIME, {"dest": dest})
                     self.instructions.append(time_inst)
-
-
-
 
             elif self.cur and self.cur.type == TokenType.SYMBOL and self.next and self.next.type == TokenType.COLON:
                 label = self.cur.value

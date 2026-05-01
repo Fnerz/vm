@@ -3,6 +3,7 @@
 
 CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/parser.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/vm.hpp \
   C:/msys64/mingw64/include/_mingw.h \
@@ -455,7 +456,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h
 
 CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer.cpp \
-  C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/Lexer.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
   C:/msys64/mingw64/include/_mingw.h \
   C:/msys64/mingw64/include/_mingw_mac.h \
@@ -463,9 +464,11 @@ CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer
   C:/msys64/mingw64/include/_mingw_secapi.h \
   C:/msys64/mingw64/include/_mingw_stat64.h \
   C:/msys64/mingw64/include/_timeval.h \
+  C:/msys64/mingw64/include/c++/15.2.0/algorithm \
   C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h \
   C:/msys64/mingw64/include/c++/15.2.0/bit \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/align.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocated_ptr.h \
@@ -516,6 +519,7 @@ CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer
   C:/msys64/mingw64/include/c++/15.2.0/bits/predefined_ops.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ptr_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/range_access.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_cmp.h \
@@ -528,10 +532,12 @@ CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_abs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_bvector.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_construct.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_function.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_funcs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_types.h \
@@ -547,6 +553,7 @@ CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer
   C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/string_view.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stringfwd.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/uniform_int_dist.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/unique_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator_args.h \
@@ -585,6 +592,7 @@ CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer
   C:/msys64/mingw64/include/c++/15.2.0/numbers \
   C:/msys64/mingw64/include/c++/15.2.0/ostream \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/execution_defs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_memory_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/pstl_config.h \
   C:/msys64/mingw64/include/c++/15.2.0/stdexcept \
@@ -660,9 +668,11 @@ CMakeFiles/VM.dir/src/vm/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/pars
   C:/msys64/mingw64/include/_mingw_secapi.h \
   C:/msys64/mingw64/include/_mingw_stat64.h \
   C:/msys64/mingw64/include/_timeval.h \
+  C:/msys64/mingw64/include/c++/15.2.0/algorithm \
   C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h \
   C:/msys64/mingw64/include/c++/15.2.0/bit \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/align.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocated_ptr.h \
@@ -713,6 +723,7 @@ CMakeFiles/VM.dir/src/vm/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/pars
   C:/msys64/mingw64/include/c++/15.2.0/bits/predefined_ops.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ptr_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/range_access.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_cmp.h \
@@ -725,10 +736,12 @@ CMakeFiles/VM.dir/src/vm/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/pars
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_abs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_bvector.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_construct.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_function.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_funcs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_types.h \
@@ -744,6 +757,7 @@ CMakeFiles/VM.dir/src/vm/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/pars
   C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/string_view.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stringfwd.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/uniform_int_dist.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/unique_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator_args.h \
@@ -782,6 +796,7 @@ CMakeFiles/VM.dir/src/vm/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/pars
   C:/msys64/mingw64/include/c++/15.2.0/numbers \
   C:/msys64/mingw64/include/c++/15.2.0/ostream \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/execution_defs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_memory_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/pstl_config.h \
   C:/msys64/mingw64/include/c++/15.2.0/stdexcept \
@@ -856,9 +871,11 @@ CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types
   C:/msys64/mingw64/include/_mingw_secapi.h \
   C:/msys64/mingw64/include/_mingw_stat64.h \
   C:/msys64/mingw64/include/_timeval.h \
+  C:/msys64/mingw64/include/c++/15.2.0/algorithm \
   C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h \
   C:/msys64/mingw64/include/c++/15.2.0/bit \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/align.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/allocated_ptr.h \
@@ -909,6 +926,7 @@ CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types
   C:/msys64/mingw64/include/c++/15.2.0/bits/predefined_ops.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ptr_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/range_access.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_cmp.h \
@@ -921,10 +939,12 @@ CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_abs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algobase.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_bvector.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_construct.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_function.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_funcs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_iterator_base_types.h \
@@ -940,6 +960,7 @@ CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types
   C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/string_view.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stringfwd.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/uniform_int_dist.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/unique_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator_args.h \
@@ -978,6 +999,7 @@ CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types
   C:/msys64/mingw64/include/c++/15.2.0/numbers \
   C:/msys64/mingw64/include/c++/15.2.0/ostream \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/execution_defs.h \
+  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_memory_defs.h \
   C:/msys64/mingw64/include/c++/15.2.0/pstl/pstl_config.h \
   C:/msys64/mingw64/include/c++/15.2.0/stdexcept \
@@ -1045,6 +1067,8 @@ CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h
 
 CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/parser.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/vm.hpp \
   C:/msys64/mingw64/include/_mingw.h \
@@ -1499,9 +1523,9 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
 
 C:/msys64/home/lenna/vm/c++/src/vm/types.cpp:
 
-C:/msys64/home/lenna/vm/c++/src/vm/parser.hpp:
-
 C:/msys64/home/lenna/vm/c++/src/vm/parser.cpp:
+
+C:/msys64/home/lenna/vm/c++/src/vm/Lexer.hpp:
 
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h:
 
@@ -1737,6 +1761,8 @@ C:/msys64/mingw64/include/malloc.h:
 
 C:/msys64/mingw64/include/limits.h:
 
+C:/msys64/mingw64/include/io.h:
+
 C:/msys64/mingw64/include/c++/15.2.0/bits/stl_stack.h:
 
 C:/msys64/mingw64/include/_mingw_stat64.h:
@@ -1750,14 +1776,6 @@ C:/msys64/mingw64/include/python3.14/cpython/pymem.h:
 C:/msys64/mingw64/include/c++/15.2.0/stdlib.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/parse_numbers.h:
-
-C:/msys64/mingw64/include/pybind11/typing.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multimap.h:
-
-C:/msys64/mingw64/include/pybind11/detail/pybind11_namespace_macros.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/stl_list.h:
 
@@ -1899,6 +1917,22 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/ptr_traits.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h:
 
+C:/msys64/mingw64/include/c++/15.2.0/concepts:
+
+C:/msys64/mingw64/include/c++/15.2.0/numbers:
+
+C:/msys64/mingw64/include/time.h:
+
+C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/string_view.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h:
+
 C:/msys64/mingw64/include/python3.14/cpython/pythonrun.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/ext/alloc_traits.h:
@@ -1943,6 +1977,20 @@ C:/msys64/home/lenna/vm/c++/src/vm/vm.hpp:
 
 C:/msys64/mingw64/include/c++/15.2.0/bit:
 
+C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tree.h:
+
+C:/msys64/mingw64/include/python3.14/pystrcmp.h:
+
+C:/msys64/mingw64/include/python3.14/cpython/pyhash.h:
+
+C:/msys64/home/lenna/vm/c++/src/vm/types.hpp:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_base.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/algorithm:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h:
+
 C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/mm_malloc.h:
 
 C:/msys64/mingw64/include/pybind11/detail/struct_smart_holder.h:
@@ -1971,27 +2019,19 @@ C:/msys64/mingw64/include/python3.14/lock.h:
 
 C:/msys64/mingw64/include/_mingw_mac.h:
 
+C:/msys64/mingw64/include/pybind11/detail/pybind11_namespace_macros.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.h:
+
+C:/msys64/mingw64/include/pybind11/typing.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multimap.h:
+
 C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc:
 
 C:/msys64/mingw64/include/pybind11/options.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/version:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/concepts:
-
-C:/msys64/mingw64/include/c++/15.2.0/numbers:
-
-C:/msys64/mingw64/include/time.h:
-
-C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/alloc_traits.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/string_view.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tempbuf.h:
 
@@ -2002,10 +2042,6 @@ C:/msys64/mingw64/include/_mingw_secapi.h:
 C:/msys64/mingw64/include/c++/15.2.0/bits/basic_string.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/sstream:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_forced.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/ostream_insert.h:
 
@@ -2059,6 +2095,20 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/align.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/invoke.h:
 
+C:/msys64/home/lenna/vm/c++/src/vm/parser.hpp:
+
+C:/msys64/mingw64/include/python3.14/pystate.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/cxxabi.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/memoryfwd.h:
+
+C:/msys64/mingw64/include/corecrt_wstdlib.h:
+
+C:/msys64/mingw64/include/python3.14/pythread.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h:
+
 C:/msys64/mingw64/include/swprintf.inl:
 
 C:/msys64/mingw64/include/_mingw_stdarg.h:
@@ -2069,19 +2119,9 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/type_traits:
 
-C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tree.h:
+C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h:
 
-C:/msys64/mingw64/include/python3.14/pystrcmp.h:
-
-C:/msys64/mingw64/include/python3.14/cpython/pyhash.h:
-
-C:/msys64/home/lenna/vm/c++/src/vm/types.hpp:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_base.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/algorithm:
+C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_forced.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/std_function.h:
 
@@ -2116,14 +2156,6 @@ C:/msys64/mingw64/include/python3.14/import.h:
 C:/msys64/mingw64/include/c++/15.2.0/bits/cpp_type_traits.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/utility:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/memoryfwd.h:
-
-C:/msys64/mingw64/include/corecrt_wstdlib.h:
-
-C:/msys64/mingw64/include/python3.14/pythread.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/exception.h:
 
@@ -2211,10 +2243,6 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/nested_exception.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/ctime:
 
-C:/msys64/mingw64/include/python3.14/pystate.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/cxxabi.h:
-
 C:/msys64/mingw64/include/python3.14/Python.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/debug/debug.h:
@@ -2291,9 +2319,9 @@ C:/msys64/mingw64/include/c++/15.2.0/vector:
 
 C:/msys64/mingw64/include/c++/15.2.0/ranges:
 
-C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h:
-
 C:/msys64/mingw64/include/c++/15.2.0/bits/list.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/set:
 
@@ -2408,5 +2436,3 @@ C:/msys64/mingw64/include/errno.h:
 C:/msys64/mingw64/include/python3.14/cpython/longobject.h:
 
 C:/msys64/mingw64/include/getopt.h:
-
-C:/msys64/mingw64/include/io.h:
