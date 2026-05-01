@@ -3,8 +3,10 @@ from src.VM import VirtualMachine
 
 # with open("test.asm", "r") as f:
 #     code = f.read()
-code = """mov r3, [i9 + i2 + r0]
-mov r0, [i1 + i1]
+code = """mov r3, i9  
+
+mov r0, i1
+fibunacci:
     print i2, r2
     add r2, r0, r1
     mov r0, r1

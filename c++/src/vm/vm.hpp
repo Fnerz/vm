@@ -19,9 +19,10 @@ class VirtualMachine
     std::vector<std::vector<Token>> token_lines = {};
     std::vector<InstructionIr> ir_instructions = {};
 
-    std::vector<uint8_t> registers = {};
-    std::map<int, uint8_t> memory = {};
-    std::vector<uint8_t> stack = {};
+    const int REGISTER_COUNT = 33; 
+    std::vector<uint32_t> registers = {};
+    std::map<int, uint32_t> memory = {};
+    std::vector<uint32_t> stack = {};
     std::vector<int> call_stack = {};
     std::map<std::string, int> labels = {};
     
@@ -34,6 +35,7 @@ class VirtualMachine
     
     void tokenize(std::string code);
     void parse();
+    void resetFlags();
     
     public:
     void reset();

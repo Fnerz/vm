@@ -12,7 +12,7 @@
 
 enum TokenType
 {
-    null,
+    null, // not in caps cause of the actual NULL
     INST,
     REGISTER,
     IMMEDIATE,
@@ -63,6 +63,7 @@ enum InstructionType
     INPUT,
     TIME,
     HALT,
+    LABEL,
 };
 
 inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
@@ -97,6 +98,7 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"input", InstructionType::INPUT},
     {"time", InstructionType::TIME},
     {"halt", InstructionType::HALT},
+    {"label", InstructionType::LABEL},
 };
 
 inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
@@ -131,6 +133,7 @@ inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
     {InstructionType::INPUT ,"input"},
     {InstructionType::TIME ,"time"},
     {InstructionType::HALT, "halt"},
+    {InstructionType::LABEL, "label"},
 };
 std::string instructionTypeRepr(InstructionType inst_type);
 
@@ -166,9 +169,8 @@ std::string instructionIrRepr(InstructionIr inst_ir);
 struct Instruction
 {
     InstructionType type;
-    Token arg1;
-    Token arg2;
-    Token arg3;
+    uint32_t args[3];
+    bool is_reg[3];
 };
 
 inline std::string ALLOWED_SYMBOL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789_";

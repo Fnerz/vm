@@ -21,7 +21,9 @@ Token LineParser::advance()
     return this->cur;
 }
 
-
+/*
+Checks if this->cur.token_type is equal to the proivded value list, and throws an exception if not. it stores this->cur and advances. returns the stores this->cur. 
+*/
 Token LineParser::eat(TokenType type)
 {
     Token last = this->cur;
@@ -34,6 +36,9 @@ Token LineParser::eat(TokenType type)
     return last;
 }
 
+/*
+Checks if this->cur.token_type is in the provided list, and throws an exception if not. it stores this->cur and advances. returns the stores this->cur. 
+*/
 Token LineParser::eats(std::vector<TokenType> types)
 {
     Token last = this->cur;
@@ -47,7 +52,7 @@ Token LineParser::eats(std::vector<TokenType> types)
 }
 
 /*
-expects cur to be lparen. passes beyond rparen
+expects cur to be LPAREN. passes beyond RPAREN
 */
 Node LineParser::parsePointerArithmetic()
 {
@@ -352,6 +357,14 @@ std::vector<InstructionIr> LineParser::parse()
             inst.type = InstructionType::TIME;
             this->advance();
             inst.arg1 = this->getValue();
+            instructions.push_back(inst);
+        }
+        else if (this->cur.token_type == TokenType::SYMBOL)
+        {
+            inst.type = InstructionType::LABEL;
+            inst.arg1 = this->cur;
+            this->advance();
+            this->eat(TokenType::COLON);
             instructions.push_back(inst);
         }
         else

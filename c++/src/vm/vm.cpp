@@ -4,6 +4,30 @@
 #include "vm.hpp"
 
 
+void VirtualMachine::resetFlags()
+{
+    this->lesser_flag = false;
+    this->equal_flag = false;
+    this->greater_flag = false;
+}
+
+void VirtualMachine::reset()
+{
+    this->registers = {};
+    this->memory = {};
+    this->stack = {};
+    this->call_stack = {};
+    this->labels = {};
+
+    this->resetFlags();
+
+    for (int i = 0; i < this->REGISTER_COUNT; i++)
+    {
+        this->registers.push_back(0);
+    }
+    return;
+}
+
 std::vector<std::string> splitCodeToLines(std::string code)
 {
     std::vector<std::string> lines;
@@ -41,7 +65,7 @@ void VirtualMachine::parse()
     for (auto tok_line : this->token_lines)
     {
         LineParser parser(tok_line);
-        auto insts = parser.parse();
+        auto insts = parser.parse(); // parser is expected to return only one instructino atm, but i chose to go the safe rout.
         for (auto inst : insts)
             this->ir_instructions.push_back(inst);
     }
@@ -50,6 +74,7 @@ void VirtualMachine::parse()
 
 void VirtualMachine::loadCode(std::string code)
 {
+    this->reset();
     this->tokenize(code);
     for (auto tok_line : this->token_lines) // debug
     {
