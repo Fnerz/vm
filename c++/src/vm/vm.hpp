@@ -37,11 +37,17 @@ class VirtualMachine
     void tokenize(std::string code);
     void parse();
     void resetFlags();
+
+    uint32_t resolveAddress(uint32_t arg, ArgType arg_type);
+    uint32_t resolveValue(uint32_t arg, ArgType arg_type);
+
     
     public:
     void reset();
     void loadCode(std::string code);
     void testFunc();
+    bool step();
+    void run();
 
 
 };

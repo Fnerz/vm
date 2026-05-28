@@ -204,7 +204,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JMP;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -212,7 +212,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JE;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -220,14 +220,14 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JNE;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
         else if (this->cur.value == "jg")  
         {
             inst.type = InstructionType::JG;
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -235,7 +235,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JGE;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -243,7 +243,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JL;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -251,7 +251,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JLE;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -306,7 +306,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::CALL;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL);
+            inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
         }
@@ -355,7 +355,7 @@ std::vector<InstructionIr> LineParser::parse()
         else if (this->cur.type == TokenType::SYMBOL)
         {
             inst.type = InstructionType::LABEL;
-            inst.arg1 = this->cur;
+            inst.arg1 = this->cur.value;
             this->advance();
             this->eat(TokenType::COLON);
             instructions.push_back(inst);

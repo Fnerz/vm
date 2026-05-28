@@ -226,7 +226,6 @@ std::vector<Instruction> InstructionLowerer::lower()
             lower_inst.arg_types[0] = std::get<1>(arg1_bundle);
         }
         // instructions with a label
-        // 1 arg instructions
         else if (
             (inst.type == InstructionType::JMP) ||
             (inst.type == InstructionType::JE) ||
@@ -234,14 +233,37 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::JG) ||
             (inst.type == InstructionType::JL) ||
             (inst.type == InstructionType::JGE) ||
-            (inst.type == InstructionType::JLE))
+            (inst.type == InstructionType::JLE)||
+            (inst.type == InstructionType::CALL))
         {
-            std::cout << this-> << std::endl;
-
+            InstructionType inst_type = inst.type;
+            std::string label = std::get<std::string>(inst.arg1);
+            auto tup = std::make_tuple(inst_type, label);
+            this->unresolved_jmp_insts[tup] = this->lowerd_insts.size();
+            continue;
+        }
+        if (inst.type == InstructionType::LABEL)
+        {
+            std::string label = std::get<std::string>(inst.arg1);
+            this->label_indexes[label] = this->lowerd_insts.size();
+            continue;
         }
 
 
         this->lowerd_insts.push_back(lower_inst);
+    }
+    // insert jmp instructions
+    for (auto jmp_inst_bundle : this->unresolved_jmp_insts)
+    {
+        Instruction lowerd_jmp = {};
+        lowerd_jmp.type = std::get<InstructionType>(jmp_inst_bundle.first);
+
+        std::string label = std::get<std::string>(jmp_inst_bundle.first);
+        int idx = this->label_indexes[label];
+        lowerd_jmp.args[0] = idx;
+        lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
+        
+        this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.second, lowerd_jmp);
     }
 
     return this->lowerd_insts;

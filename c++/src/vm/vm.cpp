@@ -2,6 +2,7 @@
 #define VM_CPP
 
 #include "vm.hpp"
+#include <ctime>
 
 
 void VirtualMachine::resetFlags()
@@ -18,6 +19,7 @@ void VirtualMachine::reset()
     this->stack = {};
     this->call_stack = {};
     this->labels = {};
+    this->ic = 0;
 
     this->resetFlags();
 
@@ -102,35 +104,341 @@ void VirtualMachine::loadCode(std::string code)
     return;
 }
 
-void VirtualMachine::testFunc()
+uint32_t VirtualMachine::resolveAddress(uint32_t arg, ArgType arg_type)
 {
-    InstructionIr inst_ir;
-    inst_ir.type = InstructionType::MOV;
-    inst_ir.arg1 = Token{TokenType::REGISTER, "10"};
-
-    auto plus_expr = std::make_shared<BinOp>();
-    plus_expr->left = Token{TokenType::REGISTER, "10"};
-    plus_expr->op = Token{TokenType::PLUS, "+"};
-    plus_expr->right = Token{TokenType::IMMEDIATE, "2"};
-
-    auto full_expr = std::make_shared<BinOp>();
-    full_expr->left = plus_expr;
-    full_expr->op = Token{TokenType::MINUS, "-"};
-    full_expr->right = Token{TokenType::REGISTER, "1"};
-
-    inst_ir.arg2 = full_expr;
-    inst_ir.arg3 = full_expr;
-    // inst_ir.arg3 = Token{TokenType::REGISTER, "4"};
-
-    std::cout << instructionIrRepr(inst_ir) << std::endl;
-
-    InstructionLowerer lowerer(std::vector({inst_ir}));
-    
-    std::vector<Instruction> l_insts = lowerer.lower();
-    for (auto li: l_insts)
+    if (arg_type == ArgType::REGISTER)
     {
-        std::cout << instructionRepr(li) << std::endl;
+        return arg;
     }
-};
+    else if (arg_type == ArgType::POINTER)
+    {
+        return this->registers[arg];
+    }
+    else if (arg_type == ArgType::IMMEDIATE)
+    {
+        return arg;
+    }
+    else if (arg_type == ArgType::LABEL_INDEX)
+    {
+        std::cout << "Cannot resolve address of label index" << std::endl;
+        exit(1);
+    }
+}
+
+uint32_t VirtualMachine::resolveValue(uint32_t arg, ArgType arg_type)
+{
+    if (arg_type == ArgType::REGISTER)
+    {
+        return this->registers[arg];
+    }
+    else if (arg_type == ArgType::POINTER)
+    {
+        return this->registers[arg];
+    }
+    else if (arg_type == ArgType::IMMEDIATE)
+    {
+        return arg;
+    }
+    else if (arg_type == ArgType::LABEL_INDEX)
+    {
+        std::cout << "Cannot resolve value of label index" << std::endl;
+        exit(1);
+    }
+}
+
+bool VirtualMachine::step()
+{
+    if (this->ic < 0 || this->ic >= this->instructions.size())
+    {
+        return false;
+    }
+
+    Instruction inst = this->instructions[this->ic];
+    bool advance_ip = true;
+
+    switch (inst.type)
+    {
+        case InstructionType::MOV:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->registers[dest] = src;
+            break;
+        }
+        case InstructionType::ADD:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = left + right;
+            break;
+        }
+        case InstructionType::SUB:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = left - right;
+            break;
+        }
+        case InstructionType::MUL:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = left * right;
+            break;
+        }
+        case InstructionType::IDIV:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            if (right == 0)
+            {
+                std::cerr << "Integer division by zero" << std::endl;
+                exit(1);
+            }
+            this->registers[dest] = left / right;
+            break;
+        }
+        case InstructionType::FDIV:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            if (right == 0)
+            {
+                std::cerr << "Floating division by zero" << std::endl;
+                exit(1);
+            }
+            double result = static_cast<double>(left) / static_cast<double>(right);
+            this->registers[dest] = static_cast<uint32_t>(result);
+            break;
+        }
+        case InstructionType::MOD:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            if (right == 0)
+            {
+                std::cerr << "Modulo by zero" << std::endl;
+                exit(1);
+            }
+            this->registers[dest] = left % right;
+            break;
+        }
+        case InstructionType::ABS:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            int32_t src = static_cast<int32_t>(this->resolveValue(inst.args[1], inst.arg_types[1]));
+            this->registers[dest] = static_cast<uint32_t>(src < 0 ? -src : src);
+            break;
+        }
+        case InstructionType::CMP:
+        {
+            uint32_t left = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint32_t right = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->resetFlags();
+            if (left < right)
+            {
+                this->lesser_flag = true;
+            }
+            else if (left > right)
+            {
+                this->greater_flag = true;
+            }
+            else
+            {
+                this->equal_flag = true;
+            }
+            break;
+        }
+        case InstructionType::JMP:
+        {
+            this->ic = inst.args[0];
+            return true;
+        }
+        case InstructionType::JE:
+        {
+            if (this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JNE:
+        {
+            if (!this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JG:
+        {
+            if (this->greater_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JL:
+        {
+            if (this->lesser_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JGE:
+        {
+            if (this->greater_flag || this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JLE:
+        {
+            if (this->lesser_flag || this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::LOAD:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t src_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            auto it = this->memory.find(static_cast<int>(src_addr));
+            this->registers[dest] = (it != this->memory.end()) ? it->second : 0;
+            break;
+        }
+        case InstructionType::STORE:
+        {
+            uint32_t src = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint32_t dest = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            this->memory[static_cast<int>(dest)] = src;
+            break;
+        }
+        case InstructionType::PRINT:
+        {
+            uint32_t start = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint32_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            if (start == end)
+            {
+                std::cout << this->registers[start] << std::endl;
+            }
+            else
+            {
+                std::cout << "[";
+                for (uint32_t idx = start; idx < end; ++idx)
+                {
+                    std::cout << this->registers[idx];
+                    if (idx + 1 < end)
+                    {
+                        std::cout << ", ";
+                    }
+                }
+                std::cout << "]" << std::endl;
+            }
+            break;
+        }
+        case InstructionType::BREAKPOINT:
+        {
+            break;
+        }
+        case InstructionType::CALL:
+        {
+            this->call_stack.push_back(this->ic + 1);
+            this->ic = inst.args[0];
+            return true;
+        }
+        case InstructionType::RET:
+        {
+            if (this->call_stack.empty())
+            {
+                std::cerr << "Call stack underflow on RET" << std::endl;
+                exit(1);
+            }
+            this->ic = this->call_stack.back();
+            this->call_stack.pop_back();
+            return true;
+        }
+        case InstructionType::PUSH:
+        {
+            uint32_t src = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            this->stack.push_back(src);
+            break;
+        }
+        case InstructionType::POP:
+        {
+            if (this->stack.empty())
+            {
+                std::cerr << "Stack underflow on POP" << std::endl;
+                exit(1);
+            }
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] = this->stack.back();
+            this->stack.pop_back();
+            break;
+        }
+        case InstructionType::DEC:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] -= 1;
+            break;
+        }
+        case InstructionType::INC:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] += 1;
+            break;
+        }
+        case InstructionType::TIME:
+        {
+            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            std::time_t now = std::time(nullptr);
+            this->registers[dest] = static_cast<uint32_t>(now);
+            break;
+        }
+        case InstructionType::HALT:
+        {
+            return false;
+        }
+        default:
+        {
+            std::cerr << "Unsupported instruction at step " << this->ic << std::endl;
+            exit(1);
+        }
+    }
+
+    if (advance_ip)
+    {
+        this->ic += 1;
+    }
+    return true;
+}
+
+void VirtualMachine::run()
+{
+    bool res = true;
+
+    while (res)
+    {
+        res = this->step();
+    }
+    return;
+}
+
+
 
 #endif

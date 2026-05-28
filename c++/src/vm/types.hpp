@@ -12,7 +12,7 @@
 
 enum class TokenType
 {
-    null, // not in caps cause of the actual NULL
+    null, // not in caps cause of confilictions with the actual NULL
     INST,
     REGISTER,
     IMMEDIATE,
@@ -46,19 +46,19 @@ enum class InstructionType
     JG,//
     JL,//
     JGE,//
-    JLE,
+    JLE,//
     LOAD,//
     STORE,//
     PRINT,//
     BREAKPOINT,
     SCREEN,
     RENDER,
-    CALL,
+    CALL,//
     RET,
     PUSH,//
-    POP,
-    DEC,
-    INC,
+    POP,//
+    DEC,//
+    INC,//
     TIME,//
     HALT,
     LABEL,
@@ -166,7 +166,8 @@ enum class ArgType
 {
     REGISTER,
     IMMEDIATE,
-    POINTER
+    POINTER,
+    LABEL_INDEX,
 };
 
 struct Instruction

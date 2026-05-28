@@ -11,5 +11,6 @@ PYBIND11_MODULE(VM, handle) {
     py::class_<VirtualMachine>(handle, "VirtualMachine")
     .def(py::init<>())
     .def("loadCode", VirtualMachine::loadCode)
-    .def("testFunc", VirtualMachine::testFunc);
+    .def("step", VirtualMachine::step)
+    .def("run", VirtualMachine::run);
 }

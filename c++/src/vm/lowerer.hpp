@@ -21,6 +21,8 @@ class InstructionLowerer
                                     {31, RegisterState::FREE},
                                     {32, RegisterState::FREE},
                                     {33, RegisterState::FREE}};
+    std::map<std::string, int>  label_indexes = {};
+    std::map<std::tuple<InstructionType, std::string>, int> unresolved_jmp_insts = {};
 
     int getFreeTempReg();
     void freeTempReg(int reg);
