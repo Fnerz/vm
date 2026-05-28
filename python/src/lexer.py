@@ -1,4 +1,4 @@
-from src.types import *
+from python.src.vm_types import *
 
 class LineLexer:
     def __init__(self, line: str):

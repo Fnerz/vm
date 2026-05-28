@@ -10,5 +10,6 @@ PYBIND11_MODULE(VM, handle) {
     handle.doc() = "Vm doc string";
     py::class_<VirtualMachine>(handle, "VirtualMachine")
     .def(py::init<>())
-    .def("loadCode", VirtualMachine::loadCode);
+    .def("loadCode", VirtualMachine::loadCode)
+    .def("testFunc", VirtualMachine::testFunc);
 }

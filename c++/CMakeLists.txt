@@ -20,5 +20,5 @@ pybind11_add_module(VM
     src/vm/lexer.cpp
     src/vm/parser.cpp
     src/vm/types.cpp
-
+    src/vm/lowerer.cpp
 )

@@ -10,7 +10,7 @@
 #include <algorithm>
 
 
-enum TokenType
+enum class TokenType
 {
     null, // not in caps cause of the actual NULL
     INST,
@@ -29,39 +29,37 @@ std::string tokenTypesRepr(std::vector<TokenType> tok_type);
 bool inTokenTypes(TokenType tok_type, std::vector<TokenType> tok_types);
 
 
-enum InstructionType
+enum class InstructionType
 {
-    MOV,
-    ADD,
-    SUB,
-    MUL,
-    IDIV,
-    FDIV,
-    MOD,
-    ABS,
-    CMP,
-    JMP,
-    JE,
-    JNE,
-    JG,
-    JL,
-    JGE,
+    MOV,//
+    ADD,//
+    SUB,//
+    MUL,//
+    IDIV,//
+    FDIV,//
+    MOD,//
+    ABS,//
+    CMP,//
+    JMP,//
+    JE,//
+    JNE,//
+    JG,//
+    JL,//
+    JGE,//
     JLE,
-    LOAD,
-    STORE,
-    PRINT,
-    PRINTV,
+    LOAD,//
+    STORE,//
+    PRINT,//
     BREAKPOINT,
     SCREEN,
     RENDER,
     CALL,
     RET,
-    PUSH,
+    PUSH,//
     POP,
     DEC,
     INC,
-    INPUT,
-    TIME,
+    TIME,//
     HALT,
     LABEL,
 };
@@ -95,7 +93,6 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"pop" ,InstructionType::POP},
     {"dec" ,InstructionType::DEC},
     {"inc" ,InstructionType::INC},
-    {"input", InstructionType::INPUT},
     {"time", InstructionType::TIME},
     {"halt", InstructionType::HALT},
     {"label", InstructionType::LABEL},
@@ -130,7 +127,6 @@ inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
     {InstructionType::POP ,"pop"},
     {InstructionType::DEC ,"dec"},
     {InstructionType::INC ,"inc"},
-    {InstructionType::INPUT ,"input"},
     {InstructionType::TIME ,"time"},
     {InstructionType::HALT, "halt"},
     {InstructionType::LABEL, "label"},
@@ -139,7 +135,7 @@ std::string instructionTypeRepr(InstructionType inst_type);
 
 struct Token
 {
-    TokenType token_type;
+    TokenType type;
     std::string value;
 };
 std::string tokenRepr(Token tok);
@@ -166,12 +162,20 @@ struct InstructionIr
 };
 std::string instructionIrRepr(InstructionIr inst_ir);
 
+enum class ArgType
+{
+    REGISTER,
+    IMMEDIATE,
+    POINTER
+};
+
 struct Instruction
 {
     InstructionType type;
     uint32_t args[3];
-    bool is_reg[3];
+    ArgType arg_types[3];
 };
+std::string instructionRepr(Instruction inst);
 
 inline std::string ALLOWED_SYMBOL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789_";
 

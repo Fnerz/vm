@@ -10,6 +10,7 @@
 #include "types.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "lowerer.hpp"
 
 namespace py = pybind11;
 
@@ -19,7 +20,7 @@ class VirtualMachine
     std::vector<std::vector<Token>> token_lines = {};
     std::vector<InstructionIr> ir_instructions = {};
 
-    const int REGISTER_COUNT = 33; 
+    const int REGISTER_COUNT = 34; // r30 - r33 reserved for temp storage. r30 is used for the pointer arithmetic accumulator. r31-r33 are just chilling for now.
     std::vector<uint32_t> registers = {};
     std::map<int, uint32_t> memory = {};
     std::vector<uint32_t> stack = {};
@@ -40,6 +41,8 @@ class VirtualMachine
     public:
     void reset();
     void loadCode(std::string code);
+    void testFunc();
+
 
 };
 

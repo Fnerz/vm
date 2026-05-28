@@ -61,18 +61,18 @@ class Token:
         return f"{self.value}"
 
 class Instruction:
-    def __init__(self, type: InstructionType, args: dict[str, Token | BinOp]):
+    def __init__(self, type: InstructionType, args: list[Token | BinOp]):
         self.type = type
         self.args = args
         self.line_number: int = 0
 
     def __repr__(self):
         ret: str = f"{self.type.value} "
-        for i, a in enumerate(self.args):
-            ret += f"{self.args[a].__repr__()}"
-            if i != len(self.args)-1:
+        for i, arg in enumerate(self.args):
+            ret += f"{arg.__repr__()}"
+            if i != len(self.args) - 1:
                 ret += ","
-            ret += f" "
+            ret += " "
 
         return ret
 

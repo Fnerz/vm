@@ -177,6 +177,30 @@ src/vm/lexer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lexer.cpp.s
 .PHONY : src/vm/lexer.cpp.s
 
+src/vm/lowerer.obj: src/vm/lowerer.cpp.obj
+.PHONY : src/vm/lowerer.obj
+
+# target to build an object file
+src/vm/lowerer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj
+.PHONY : src/vm/lowerer.cpp.obj
+
+src/vm/lowerer.i: src/vm/lowerer.cpp.i
+.PHONY : src/vm/lowerer.i
+
+# target to preprocess a source file
+src/vm/lowerer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lowerer.cpp.i
+.PHONY : src/vm/lowerer.cpp.i
+
+src/vm/lowerer.s: src/vm/lowerer.cpp.s
+.PHONY : src/vm/lowerer.s
+
+# target to generate assembly for a file
+src/vm/lowerer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lowerer.cpp.s
+.PHONY : src/vm/lowerer.cpp.s
+
 src/vm/parser.obj: src/vm/parser.cpp.obj
 .PHONY : src/vm/parser.obj
 
@@ -264,6 +288,9 @@ help:
 	@echo "... src/vm/lexer.obj"
 	@echo "... src/vm/lexer.i"
 	@echo "... src/vm/lexer.s"
+	@echo "... src/vm/lowerer.obj"
+	@echo "... src/vm/lowerer.i"
+	@echo "... src/vm/lowerer.s"
 	@echo "... src/vm/parser.obj"
 	@echo "... src/vm/parser.i"
 	@echo "... src/vm/parser.s"

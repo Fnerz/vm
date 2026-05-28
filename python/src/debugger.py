@@ -4,7 +4,7 @@ import string
 import tkinter as tk
 from tkinter import ttk
 
-from src.types import *
+from python.src.vm_types import *
 from src.vm import VirtualMachine
 
 class VmState:
@@ -220,7 +220,7 @@ class VmDebugger:
 
             inst_str = inst.__repr__()
             if inst_str[:2] in ["jm", "jn", "je", "jg", "jl"]:
-                inst_str += f"({self.vm.labels[inst.args["label"].__repr__().strip()]})"
+                inst_str += f"({self.vm.labels[inst.args[0].__repr__().strip()]})"
             
             if i == self.vm.ic:
                 current_line_idx = len(self.instruction_tree.get_children()) 

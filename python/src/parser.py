@@ -1,4 +1,4 @@
-from src.types import *
+from python.src.vm_types import *
 
 class LineParser:
     def __init__(self, tokens: list[Token], ic_line: int, src_line: int, vm = None) -> None:
@@ -72,7 +72,7 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    mov_inst = Instruction(InstructionType.MOV, {"dest": left, "src": right})
+                    mov_inst = Instruction(InstructionType.MOV, [left, right])
                     self.instructions.append(mov_inst)
 
                 elif inst.value == "add":
@@ -81,7 +81,7 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    add_inst = Instruction(InstructionType.ADD, {"dest": dest, "left": left, "right": right})
+                    add_inst = Instruction(InstructionType.ADD, [dest, left, right])
                     self.instructions.append(add_inst)
                 
                 elif inst.value == "sub":
@@ -90,7 +90,7 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    sub_inst = Instruction(InstructionType.SUB, {"dest": dest, "left": left, "right": right})
+                    sub_inst = Instruction(InstructionType.SUB, [dest, left, right])
                     self.instructions.append(sub_inst)
 
                 elif inst.value == "mul":
@@ -99,7 +99,7 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    mul_inst = Instruction(InstructionType.MUL, {"dest": dest, "left": left, "right": right})
+                    mul_inst = Instruction(InstructionType.MUL, [dest, left, right])
                     self.instructions.append(mul_inst)
 
                 elif inst.value == "idiv":
@@ -108,7 +108,7 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    idiv_inst = Instruction(InstructionType.IDIV, {"dest": dest, "left": left, "right": right})
+                    idiv_inst = Instruction(InstructionType.IDIV, [dest, left, right])
                     self.instructions.append(idiv_inst)
 
                 elif inst.value == "fdiv":
@@ -117,7 +117,7 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    fdiv_inst = Instruction(InstructionType.FDIV, {"dest": dest, "left": left, "right": right})
+                    fdiv_inst = Instruction(InstructionType.FDIV, [dest, left, right])
                     self.instructions.append(fdiv_inst)
 
                 elif inst.value == "mod":
@@ -126,58 +126,58 @@ class LineParser:
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    fdiv_inst = Instruction(InstructionType.MOD, {"dest": dest, "left": left, "right": right})
-                    self.instructions.append(fdiv_inst)
+                    mod_inst = Instruction(InstructionType.MOD, [dest, left, right])
+                    self.instructions.append(mod_inst)
 
                 elif inst.value == "abs":
                     dest = self.getValue()
                     self.eat(TokenType.COMMA)
                     src = self.getValue()
-                    abs_inst = Instruction(InstructionType.ABS, {"dest": dest, "src": src})
+                    abs_inst = Instruction(InstructionType.ABS, [dest, src])
                     self.instructions.append(abs_inst)
 
                 elif inst.value in ["jmp", "je", "jne", "jg", "jl", "jge", "jle"]:
                     label = self.eat(TokenType.SYMBOL)
-                    jmp_inst = Instruction(InstructionType(inst.value), {"label": label})
+                    jmp_inst = Instruction(InstructionType(inst.value), [label])
                     self.instructions.append(jmp_inst)
                
                 elif inst.value == "cmp":
                     left = self.getValue()
                     self.eat(TokenType.COMMA)
                     right = self.getValue()
-                    cmp_inst = Instruction(InstructionType.CMP, {"left": left, "right": right})
+                    cmp_inst = Instruction(InstructionType.CMP, [left, right])
                     self.instructions.append(cmp_inst)
 
                 elif inst.value == "load":
                     dest = self.getValue()
                     self.eat(TokenType.COMMA)
                     src = self.parsePointerArithmetic()
-                    load_inst = Instruction(InstructionType.LOAD, {"dest": dest, "src": src})
+                    load_inst = Instruction(InstructionType.LOAD, [dest, src])
                     self.instructions.append(load_inst)
                 
                 elif inst.value == "store":
                     src = self.getValue()
                     self.eat(TokenType.COMMA)
                     dest = self.parsePointerArithmetic()
-                    store_inst = Instruction(InstructionType.STORE, {"dest": dest, "src": src})
+                    store_inst = Instruction(InstructionType.STORE, [dest, src])
                     self.instructions.append(store_inst)
 
                 elif inst.value == "print":
                     start = self.getValue()
                     self.eat(TokenType.COMMA)
                     end = self.getValue()
-                    self.instructions.append(Instruction(InstructionType.PRINT, {"start": start, "end": end}))
+                    self.instructions.append(Instruction(InstructionType.PRINT, [start, end]))
 
                 elif inst.value == "bp":
-                    self.instructions.append(Instruction(InstructionType.BREAKPOINT, {}))
+                    self.instructions.append(Instruction(InstructionType.BREAKPOINT, []))
 
                 elif inst.value == "call":
                     label = self.eat(TokenType.SYMBOL)
-                    call_inst = Instruction(InstructionType.CALL, {"label": label})
+                    call_inst = Instruction(InstructionType.CALL, [label])
                     self.instructions.append(call_inst)
 
                 elif inst.value == "ret":
-                    self.instructions.append(Instruction(InstructionType.RET, {}))
+                    self.instructions.append(Instruction(InstructionType.RET, []))
 
                 elif inst.value == "screen":
                     rows = self.getValue()
@@ -185,39 +185,39 @@ class LineParser:
                     cols = self.getValue()
                     self.eat(TokenType.COMMA)
                     memory_addr = self.getValue()
-                    self.instructions.append(Instruction(InstructionType.SCREEN, {"rows": rows, "cols": cols, "memory_addr": memory_addr}))
+                    self.instructions.append(Instruction(InstructionType.SCREEN, [rows, cols, memory_addr]))
 
                 elif inst.value == "render":
-                    self.instructions.append(Instruction(InstructionType.RENDER, {}))
+                    self.instructions.append(Instruction(InstructionType.RENDER, []))
 
                 elif inst.value == "push":
                     src = self.getValue()
-                    push_inst = Instruction(InstructionType.PUSH, {"src": src})
+                    push_inst = Instruction(InstructionType.PUSH, [src])
                     self.instructions.append(push_inst)
 
                 elif inst.value == "pop":
                     dest = self.getValue()
-                    pop_inst = Instruction(InstructionType.POP, {"dest": dest})
+                    pop_inst = Instruction(InstructionType.POP, [dest])
                     self.instructions.append(pop_inst)
 
                 elif inst.value == "dec":
                     dest = self.getValue()
-                    dec_inst = Instruction(InstructionType.DEC, {"dest": dest})
+                    dec_inst = Instruction(InstructionType.DEC, [dest])
                     self.instructions.append(dec_inst)
                 
                 elif inst.value == "inc":
                     dest = self.getValue()
-                    inc_inst = Instruction(InstructionType.INC, {"dest": dest})
+                    inc_inst = Instruction(InstructionType.INC, [dest])
                     self.instructions.append(inc_inst)
 
                 elif inst.value == "input":
                     dest = self.getValue()
-                    input_inst = Instruction(InstructionType.INPUT, {"dest": dest})
+                    input_inst = Instruction(InstructionType.INPUT, [dest])
                     self.instructions.append(input_inst)
 
                 elif inst.value == "time":
                     dest = self.getValue()
-                    time_inst = Instruction(InstructionType.TIME, {"dest": dest})
+                    time_inst = Instruction(InstructionType.TIME, [dest])
                     self.instructions.append(time_inst)
 
             elif self.cur and self.cur.type == TokenType.SYMBOL and self.next and self.next.type == TokenType.COLON:

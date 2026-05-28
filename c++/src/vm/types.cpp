@@ -25,11 +25,11 @@ std::string tokenTypeRepr(TokenType tok_type)
 std::string tokenRepr(Token tok)
 {
     std::string prefix = "";
-    if (tok.token_type == TokenType::IMMEDIATE)
+    if (tok.type == TokenType::IMMEDIATE)
     {
         prefix = "i";
     }
-    else if (tok.token_type == TokenType::REGISTER)
+    else if (tok.type == TokenType::REGISTER)
     {
         prefix = "r";
     }
@@ -67,7 +67,7 @@ std::string nodeRepr(Node node)
     }
     else if (std::holds_alternative<Token>(node))
     {
-        return tokenTypeRepr(std::get<Token>(node).token_type) + " " + tokenRepr(std::get<Token>(node));
+        return tokenTypeRepr(std::get<Token>(node).type) + " " + tokenRepr(std::get<Token>(node));
     }
     else if (std::holds_alternative<std::shared_ptr<BinOp>>(node))
     {
@@ -97,12 +97,42 @@ std::string instructionIrRepr(InstructionIr inst_ir)
 {
     std::string ret = "";
     ret += instructionTypeRepr(inst_ir.type);
-    ret += ", Arg1: ";
+    ret += " Arg1: ";
     ret += nodeRepr(inst_ir.arg1);
     ret += ", Arg2: ";
     ret += nodeRepr(inst_ir.arg2);
     ret += ", Arg3: ";
     ret += nodeRepr(inst_ir.arg3);
+    return ret;
+}
+
+std::string instructionRepr(Instruction inst)
+{
+    std::string ret = instructionTypeRepr(inst.type);
+    ret += " ";
+
+    size_t count = sizeof(inst.args) / sizeof(inst.args[0]);
+    for (size_t i = 0; i < count; ++i)
+    {
+        if (inst.arg_types[i] == ArgType::REGISTER)
+        {
+            ret += "r";
+        }
+        if (inst.arg_types[i] == ArgType::IMMEDIATE)
+        {
+            ret += "i";
+        }
+        if (inst.arg_types[i] == ArgType::POINTER)
+        {
+            ret += "p";
+        }
+        ret += std::to_string(inst.args[i]);
+
+        if (i+1 != count)
+        {
+            ret += ", ";
+        }
+    }
     return ret;
 }
 

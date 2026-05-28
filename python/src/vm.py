@@ -2,7 +2,7 @@ import string
 import time
 import math
 import pygame
-from src.types import *
+from python.src.vm_types import *
 from src.lexer import LineLexer
 from src.parser import LineParser
 from src.screen import Screen
@@ -129,17 +129,17 @@ class VirtualMachine:
         
         inst = self.instructions[self.ic]
         if inst.type == InstructionType.MOV:
-            dest = inst.args["dest"]
-            src = inst.args["src"]
+            dest = inst.args[0]
+            src = inst.args[1]
             
             src_val = self.resolveValue(src)
             dest_addr = self.resolveAddress(dest)
             self.registers[dest_addr] = src_val
 
         elif inst.type == InstructionType.ADD:
-            dest = inst.args["dest"]
-            left = inst.args["left"]
-            right = inst.args["right"]
+            dest = inst.args[0]
+            left = inst.args[1]
+            right = inst.args[2]
 
             left_val = self.resolveValue(left)
             right_val = self.resolveValue(right)
@@ -147,9 +147,9 @@ class VirtualMachine:
             self.registers[dest_addr] = left_val + right_val
 
         elif inst.type == InstructionType.SUB:
-            dest = inst.args["dest"]
-            left = inst.args["left"]
-            right = inst.args["right"]
+            dest = inst.args[0]
+            left = inst.args[1]
+            right = inst.args[2]
 
             left_val = self.resolveValue(left)
             right_val = self.resolveValue(right)
@@ -157,9 +157,9 @@ class VirtualMachine:
             self.registers[dest_addr] = left_val - right_val
 
         elif inst.type == InstructionType.MUL:
-            dest = inst.args["dest"]
-            left = inst.args["left"]
-            right = inst.args["right"]
+            dest = inst.args[0]
+            left = inst.args[1]
+            right = inst.args[2]
 
             left_val = self.resolveValue(left)
             right_val = self.resolveValue(right)
@@ -167,9 +167,9 @@ class VirtualMachine:
             self.registers[dest_addr] = left_val * right_val
 
         elif inst.type == InstructionType.IDIV:
-            dest = inst.args["dest"]
-            left = inst.args["left"]
-            right = inst.args["right"]
+            dest = inst.args[0]
+            left = inst.args[1]
+            right = inst.args[2]
 
             left_val = self.resolveValue(left)
             right_val = self.resolveValue(right)
@@ -179,9 +179,9 @@ class VirtualMachine:
             self.registers[dest_addr] = left_val // right_val
 
         elif inst.type == InstructionType.FDIV:
-            dest = inst.args["dest"]
-            left = inst.args["left"]
-            right = inst.args["right"]
+            dest = inst.args[0]
+            left = inst.args[1]
+            right = inst.args[2]
 
             left_val = self.resolveValue(left)
             right_val = self.resolveValue(right)
@@ -191,21 +191,21 @@ class VirtualMachine:
             self.registers[dest_addr] = left_val / right_val
 
         elif inst.type == InstructionType.MOD:
-            dest = inst.args["dest"]
-            left = inst.args["left"]
-            right = inst.args["right"]
+            dest = inst.args[0]
+            left = inst.args[1]
+            right = inst.args[2]
 
             left_val = self.resolveAddress(left)
             right_val = self.resolveAddress(right)
-            dest_addr = self.resolveAddress(self.resolveAddress)
+            dest_addr = self.resolveAddress(dest)
 
             if right_val == 0:
                 raise Exception("Division by zero")
             self.registers[dest_addr] = left_val % right_val 
 
         elif inst.type == InstructionType.ABS:
-            dest = inst.args["dest"]
-            src = inst.args["src"]
+            dest = inst.args[0]
+            src = inst.args[1]
             
             src_val = self.resolveValue(src)
             dest_addr = self.resolveAddress(dest)
@@ -213,8 +213,8 @@ class VirtualMachine:
             self.registers[dest_addr] = abs(src_val)
 
         elif inst.type == InstructionType.CMP:
-            left = inst.args["left"]
-            right = inst.args["right"]
+            left = inst.args[0]
+            right = inst.args[1]
 
             left_val = self.resolveValue(left)
             right_val = self.resolveValue(right)
@@ -228,7 +228,7 @@ class VirtualMachine:
                 self.equal_flag = True
 
         elif inst.type == InstructionType.JMP:
-            label = inst.args["label"].value
+            label = inst.args[0].value
             if label not in self.labels:
                 raise Exception(f"Undefined label: {label}")
             self.ic = self.labels[label]
@@ -236,7 +236,7 @@ class VirtualMachine:
 
         elif inst.type == InstructionType.JE:
             if self.equal_flag:
-                label = inst.args["label"].value
+                label = inst.args[0].value
                 if label not in self.labels:
                     raise Exception(f"Undefined label: {label}")
                 self.ic = self.labels[label]
@@ -244,7 +244,7 @@ class VirtualMachine:
             
         elif inst.type == InstructionType.JNE:
             if not self.equal_flag:
-                label = inst.args["label"].value
+                label = inst.args[0].value
                 if label not in self.labels:
                     raise Exception(f"Undefined label: {label}")
                 self.ic = self.labels[label]
@@ -252,7 +252,7 @@ class VirtualMachine:
 
         elif inst.type == InstructionType.JG:
             if self.greater_flag:
-                label = inst.args["label"].value
+                label = inst.args[0].value
                 if label not in self.labels:
                     raise Exception(f"Undefined label: {label}")
                 self.ic = self.labels[label]
@@ -260,7 +260,7 @@ class VirtualMachine:
 
         elif inst.type == InstructionType.JL:
             if self.lesser_flag:
-                label = inst.args["label"].value
+                label = inst.args[0].value
                 if label not in self.labels:
                     raise Exception(f"Undefined label: {label}")
                 self.ic = self.labels[label]
@@ -268,7 +268,7 @@ class VirtualMachine:
 
         elif inst.type == InstructionType.JGE:
             if self.greater_flag or self.equal_flag:
-                label = inst.args["label"].value
+                label = inst.args[0].value
                 if label not in self.labels:
                     raise Exception(f"Undefined label: {label}")
                 self.ic = self.labels[label]
@@ -276,23 +276,23 @@ class VirtualMachine:
 
         elif inst.type == InstructionType.JLE:
             if self.lesser_flag or self.equal_flag:
-                label = inst.args["label"].value
+                label = inst.args[0].value
                 if label not in self.labels:
                     raise Exception(f"Undefined label: {label}")
                 self.ic = self.labels[label]
                 return True
             
         elif inst.type == InstructionType.LOAD:
-            dest = inst.args["dest"]
-            src = inst.args["src"]
+            dest = inst.args[0]
+            src = inst.args[1]
 
             src_addr = self.resolveValue(src)
             dest_addr = self.resolveAddress(dest)
             self.registers[dest_addr] = self.memory.get(src_addr, 0)
 
         elif inst.type == InstructionType.STORE:
-            src = inst.args["src"]
-            dest = inst.args["dest"]
+            src = inst.args[1]
+            dest = inst.args[0]
 
             src_val = self.resolveValue(src)
             dest_addr = self.resolveAddress(dest)
@@ -301,8 +301,8 @@ class VirtualMachine:
             pass
 
         elif inst.type == InstructionType.PRINT:
-            start = inst.args["start"]
-            end = inst.args["end"]
+            start = inst.args[0]
+            end = inst.args[1]
             
             start_val = self.resolveAddress(start)
             end_val = self.resolveAddress(end)
@@ -321,9 +321,9 @@ class VirtualMachine:
             pass
 
         elif inst.type == InstructionType.SCREEN:
-            rows = inst.args["rows"]
-            cols = inst.args["cols"]
-            memory_addr = inst.args["memory_addr"]
+            rows = inst.args[0]
+            cols = inst.args[1]
+            memory_addr = inst.args[2]
             self.screen = Screen(self.resolveValue(rows), self.resolveValue(cols), 20, "Grid", self, self.resolveValue(memory_addr))
             self.screen.setup_pygame_window()
 
@@ -337,7 +337,7 @@ class VirtualMachine:
                 self.screen.render()
 
         elif inst.type == InstructionType.CALL:
-            label = inst.args["label"].value
+            label = inst.args[0].value
             if label not in self.labels:
                 raise Exception(f"Undefined label: {label}")
             self.call_stack.append(self.ic+1)
@@ -351,29 +351,29 @@ class VirtualMachine:
             return True
         
         elif inst.type == InstructionType.PUSH:
-            src = inst.args["src"]
+            src = inst.args[0]
             src_val = self.resolveValue(src)
             self.stack.append(src_val)
 
         elif inst.type == InstructionType.POP:
-            dest = inst.args["dest"]
+            dest = inst.args[0]
             if not self.stack:
                 raise Exception(f"Call stack underflow on inst {self.ic}: {self.instructions[self.ic]}")
             dest_addr = self.resolveAddress(dest)
             self.registers[dest_addr] = self.stack.pop()
 
         elif inst.type == InstructionType.DEC:
-            dest = inst.args["dest"]
+            dest = inst.args[0]
             dest_addr = self.resolveAddress(dest)
             self.registers[dest_addr] -= 1
         
         elif inst.type == InstructionType.INC:
-            dest = inst.args["dest"]
+            dest = inst.args[0]
             dest_addr = self.resolveAddress(dest)
             self.registers[dest_addr] += 1
 
         elif inst.type == InstructionType.INPUT:
-            dest = inst.args["dest"]
+            dest = inst.args[0]
             dest_addr = self.resolveAddress(dest)
             user_input = input("Input: ")
             try:
@@ -383,7 +383,7 @@ class VirtualMachine:
             self.registers[dest_addr] = val
 
         elif inst.type == InstructionType.TIME:
-            dest = inst.args["dest"]
+            dest = inst.args[0]
 
             t = time.time()
             dest_addr = self.resolveAddress(dest)

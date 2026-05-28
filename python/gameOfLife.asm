@@ -30,9 +30,9 @@ boardInit:
 ; store i1, [r20+r41+r41+i3]
 ; store i1, [r20+r41+i8]
 ; store i1, [r20+r41+r41+i8]
-store i1, [r20+r41+r41+i9]
-store i1, [r20+r41+r41+i7]
-store i1, [r20+r41+r41+r41+i8]
+; store i1, [r20+r41+r41+i9]
+; store i1, [r20+r41+r41+i7]
+; store i1, [r20+r41+r41+r41+i8]
 
 ; store i1, [r0]
 
@@ -256,16 +256,19 @@ mainLoop:
     je end
     dec r39
 
+    time r10
     mov r0, i0 ; reset pointer
     mov r1, i0
     call update
     mov r0, i0 ; again
     mov r1, i0
     call movBoard
+    time r11
+    sub r11, r11, r10
+    print r11, r11
 
     render
     bp
-    sub r30, r31, r30
     jmp mainLoop
 
 

@@ -14,7 +14,7 @@ LineParser::LineParser(std::vector<Token> tokens)
 Token LineParser::advance()
 {
     Token null_token;
-    null_token.token_type = TokenType::null;
+    null_token.type = TokenType::null;
     this->i++;
     this->cur = (this->i < this->tokens.size()) ? this->tokens[this->i] : null_token;
     this->next = (this->i+1 < this->tokens.size()) ? this->tokens[this->i+1] : null_token;
@@ -27,9 +27,9 @@ Checks if this->cur.token_type is equal to the proivded value list, and throws a
 Token LineParser::eat(TokenType type)
 {
     Token last = this->cur;
-    if (this->cur.token_type != type)
+    if (this->cur.type != type)
     {
-        std::cout << "Expected token of type " << tokenTypeRepr(type) << ", received " << tokenTypeRepr(this->cur.token_type) << std::endl;
+        std::cout << "Expected token of type " << tokenTypeRepr(type) << ", received " << tokenTypeRepr(this->cur.type) << std::endl;
         exit(0);
     }
     this->advance();
@@ -42,9 +42,9 @@ Checks if this->cur.token_type is in the provided list, and throws an exception 
 Token LineParser::eats(std::vector<TokenType> types)
 {
     Token last = this->cur;
-    if (! inTokenTypes(this->cur.token_type, types))
+    if (! inTokenTypes(this->cur.type, types))
     {
-        std::cout << "Expected token of type " << tokenTypesRepr(types) << ", received " << tokenTypeRepr(this->cur.token_type) << std::endl;
+        std::cout << "Expected token of type " << tokenTypesRepr(types) << ", received " << tokenTypeRepr(this->cur.type) << std::endl;
         exit(0);
     }
     this->advance();
@@ -62,7 +62,7 @@ Node LineParser::parsePointerArithmetic()
     this->eats({TokenType::REGISTER, TokenType::IMMEDIATE});
 
 
-    while (inTokenTypes(this->cur.token_type, {TokenType::PLUS, TokenType::MINUS}))
+    while (inTokenTypes(this->cur.type, {TokenType::PLUS, TokenType::MINUS}))
     {
         BinOp bin_op;
         bin_op.left = left;
@@ -85,19 +85,19 @@ Expects to be on either a value token (i.e. register or imm) or on LPAREN. It pa
 */
 Node LineParser::getValue()
 {
-    if (inTokenTypes(this->cur.token_type, {TokenType::REGISTER, TokenType::IMMEDIATE}))
+    if (inTokenTypes(this->cur.type, {TokenType::REGISTER, TokenType::IMMEDIATE}))
     {
         Token last = this->cur;
         this->advance();
         return last;
     }
-    else if (this->cur.token_type == TokenType::LPAREN)
+    else if (this->cur.type == TokenType::LPAREN)
     {
         return this->parsePointerArithmetic();
     }
     else
     {
-        std::cout << "Expected value token, received " << tokenTypeRepr(this->cur.token_type) << " " << tokenRepr(this->cur) << std::endl;
+        std::cout << "Expected value token, received " << tokenTypeRepr(this->cur.type) << " " << tokenRepr(this->cur) << std::endl;
         exit(1);
     }
 }
@@ -105,7 +105,7 @@ Node LineParser::getValue()
 std::vector<InstructionIr> LineParser::parse()
 {
     std::vector<InstructionIr> instructions = {};
-    while (this->cur.token_type != TokenType::null)
+    while (this->cur.type != TokenType::null)
     {
         InstructionIr inst;
         if (this->cur.value == "mov")
@@ -345,13 +345,6 @@ std::vector<InstructionIr> LineParser::parse()
             inst.arg1 = this->getValue();
             instructions.push_back(inst);
         }
-        else if (this->cur.value == "input")
-        {
-            inst.type = InstructionType::INPUT;
-            this->advance();
-            inst.arg1 = this->getValue();
-            instructions.push_back(inst);
-        }
         else if (this->cur.value == "time")
         {
             inst.type = InstructionType::TIME;
@@ -359,7 +352,7 @@ std::vector<InstructionIr> LineParser::parse()
             inst.arg1 = this->getValue();
             instructions.push_back(inst);
         }
-        else if (this->cur.token_type == TokenType::SYMBOL)
+        else if (this->cur.type == TokenType::SYMBOL)
         {
             inst.type = InstructionType::LABEL;
             inst.arg1 = this->cur;
@@ -369,7 +362,7 @@ std::vector<InstructionIr> LineParser::parse()
         }
         else
         {
-            std::cout << "Unexpected token: " << tokenTypeRepr(this->cur.token_type) << " " << tokenRepr(this->cur) << std::endl;
+            std::cout << "Unexpected token: " << tokenTypeRepr(this->cur.type) << " " << tokenRepr(this->cur) << std::endl;
             exit(0);
         }
     }

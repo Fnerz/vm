@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/VM.dir/src/main.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/lexer.cpp.obj"
   "CMakeFiles/VM.dir/src/vm/lexer.cpp.obj.d"
+  "CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj"
+  "CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/parser.cpp.obj"
   "CMakeFiles/VM.dir/src/vm/parser.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/types.cpp.obj"

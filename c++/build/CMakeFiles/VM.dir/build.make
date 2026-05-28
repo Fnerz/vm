@@ -142,13 +142,28 @@ CMakeFiles/VM.dir/src/vm/types.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/types.cpp.s"
 	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/types.cpp -o CMakeFiles/VM.dir/src/vm/types.cpp.s
 
+CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj: CMakeFiles/VM.dir/flags.make
+CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp
+CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj -MF CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp
+
+CMakeFiles/VM.dir/src/vm/lowerer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/lowerer.cpp.i"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp > CMakeFiles/VM.dir/src/vm/lowerer.cpp.i
+
+CMakeFiles/VM.dir/src/vm/lowerer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/lowerer.cpp.s"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp -o CMakeFiles/VM.dir/src/vm/lowerer.cpp.s
+
 # Object files for target VM
 VM_OBJECTS = \
 "CMakeFiles/VM.dir/src/main.cpp.obj" \
 "CMakeFiles/VM.dir/src/vm/vm.cpp.obj" \
 "CMakeFiles/VM.dir/src/vm/lexer.cpp.obj" \
 "CMakeFiles/VM.dir/src/vm/parser.cpp.obj" \
-"CMakeFiles/VM.dir/src/vm/types.cpp.obj"
+"CMakeFiles/VM.dir/src/vm/types.cpp.obj" \
+"CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj"
 
 # External object files for target VM
 VM_EXTERNAL_OBJECTS =
@@ -158,9 +173,10 @@ C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_m
 C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd: CMakeFiles/VM.dir/src/vm/lexer.cpp.obj
 C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd: CMakeFiles/VM.dir/src/vm/parser.cpp.obj
 C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd: CMakeFiles/VM.dir/src/vm/types.cpp.obj
+C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd: CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj
 C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd: CMakeFiles/VM.dir/build.make
 C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd: C:/msys64/mingw64/lib/libpython3.14.dll.a
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared module /C/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared module /C/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd"
 	/C/msys64/mingw64/bin/cmake.exe -E rm -f CMakeFiles/VM.dir/objects.a
 	/C/msys64/mingw64/bin/ar.exe qc CMakeFiles/VM.dir/objects.a $(VM_OBJECTS) $(VM_EXTERNAL_OBJECTS)
 	/C/msys64/mingw64/bin/c++.exe  -O3 -shared -o /C/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles/VM.dir/objects.a -Wl,--no-whole-archive  /C/msys64/mingw64/lib/libpython3.14.dll.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

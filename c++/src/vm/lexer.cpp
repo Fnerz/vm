@@ -41,13 +41,13 @@ Token symbolToToken(std::string symbol)
     Token tok;
     if (symbol.length() <= 1)
     {
-        tok.token_type = TokenType::null;
+        tok.type = TokenType::null;
         return tok;
     }
     
     if (STR_TO_INSTRUCTION_TYPE.contains(symbol))
     {
-        tok.token_type = TokenType::INST;
+        tok.type = TokenType::INST;
         tok.value = symbol;
         return tok;
     }
@@ -59,7 +59,7 @@ Token symbolToToken(std::string symbol)
         {
             shortend_symbol = symbol.substr(1);
             std::stoi(shortend_symbol);
-            tok.token_type = TokenType::REGISTER;
+            tok.type = TokenType::REGISTER;
             tok.value = shortend_symbol;
             return tok;
         }
@@ -73,7 +73,7 @@ Token symbolToToken(std::string symbol)
         {
             shortend_symbol = symbol.substr(1);
             std::stoi(shortend_symbol);
-            tok.token_type = TokenType::IMMEDIATE;
+            tok.type = TokenType::IMMEDIATE;
             tok.value = shortend_symbol;
             return tok;
         }
@@ -85,7 +85,7 @@ Token symbolToToken(std::string symbol)
                 {
                     shortend_symbol = symbol.substr(2);
                     std::stoi(shortend_symbol);
-                    tok.token_type = TokenType::IMMEDIATE;
+                    tok.type = TokenType::IMMEDIATE;
                     tok.value = "-";
                     tok.value += shortend_symbol;
                     return tok;
@@ -97,7 +97,7 @@ Token symbolToToken(std::string symbol)
         }
     }
 
-    tok.token_type = TokenType::SYMBOL;
+    tok.type = TokenType::SYMBOL;
     tok.value = symbol;
 
     return tok;
@@ -123,49 +123,49 @@ std::vector<Token> LineLexer::tokenize()
         else if (this->cur == '[')
         {
             Token tok;
-            tok.token_type = TokenType::LPAREN;
+            tok.type = TokenType::LPAREN;
             tok.value = "[";
             tokens.push_back(tok);
         }
         else if (this->cur == ']')
         {
             Token tok;
-            tok.token_type = TokenType::RPAREN;
+            tok.type = TokenType::RPAREN;
             tok.value = "]";
             tokens.push_back(tok);
         }
         else if (this->cur == '+')
         {
             Token tok;
-            tok.token_type = TokenType::PLUS;
+            tok.type = TokenType::PLUS;
             tok.value = "+";
             tokens.push_back(tok);
         }
         else if (this->cur == '-')
         {
             Token tok;
-            tok.token_type = TokenType::MINUS;
+            tok.type = TokenType::MINUS;
             tok.value = "-";
             tokens.push_back(tok);
         }
         else if (this->cur == ':')
         {
             Token tok;
-            tok.token_type = TokenType::COLON;
+            tok.type = TokenType::COLON;
             tok.value = ":";
             tokens.push_back(tok);
         }
         else if (this->cur == ',')
         {
             Token tok;
-            tok.token_type = TokenType::COMMA;
+            tok.type = TokenType::COMMA;
             tok.value = ",";
             tokens.push_back(tok);
         }
         else if (this->cur == ',')
         {
             Token tok;
-            tok.token_type = TokenType::COMMA;
+            tok.type = TokenType::COMMA;
             tok.value = ",";
             tokens.push_back(tok);
         }
@@ -173,7 +173,7 @@ std::vector<Token> LineLexer::tokenize()
         {
             std::string symbol = this->getSymbol();
             Token tok = symbolToToken(symbol);
-            if (tok.token_type == TokenType::null)
+            if (tok.type == TokenType::null)
             {
                 std::cout << "Invalid symbol: " << symbol << std::endl;
                 exit(1);
