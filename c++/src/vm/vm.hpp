@@ -5,14 +5,10 @@
 #include <vector>
 #include <map>
 #include <string>
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
 #include "types.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
 #include "lowerer.hpp"
-
-namespace py = pybind11;
 
 class VirtualMachine
 {
@@ -33,6 +29,8 @@ class VirtualMachine
     
     int ic = 0;
     std::vector<Instruction> instructions;
+
+    int run_time_counter = 0;
     
     void tokenize(std::string code);
     void parse();
@@ -48,6 +46,8 @@ class VirtualMachine
     void testFunc();
     bool step();
     void run();
+    std::vector<uint32_t> getRegisters();
+    std::map<int, uint32_t> getMemory();
 
 
 };

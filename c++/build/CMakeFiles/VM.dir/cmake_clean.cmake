@@ -1,7 +1,4 @@
 file(REMOVE_RECURSE
-  "C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd"
-  "C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.cp314-mingw_x86_64_msvcrt_gnu.pyd.manifest"
-  "C:/msys64/home/lenna/vm/c++/pythonIntegrationTesting/src/VM.pdb"
   "CMakeFiles/VM.dir/src/main.cpp.obj"
   "CMakeFiles/VM.dir/src/main.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/lexer.cpp.obj"
@@ -14,6 +11,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/VM.dir/src/vm/types.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/vm.cpp.obj"
   "CMakeFiles/VM.dir/src/vm/vm.cpp.obj.d"
+  "VM.exe"
+  "VM.exe.manifest"
+  "VM.pdb"
   "libVM.dll.a"
 )
 

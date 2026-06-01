@@ -20,6 +20,7 @@ void VirtualMachine::reset()
     this->call_stack = {};
     this->labels = {};
     this->ic = 0;
+    this->run_time_counter = 0;
 
     this->resetFlags();
 
@@ -76,25 +77,18 @@ void VirtualMachine::parse()
 
 void VirtualMachine::loadCode(std::string code)
 {
+    std::transform(code.begin(), code.end(), code.begin(),[](unsigned char c){ return std::tolower(c); });
     this->reset();
     this->tokenize(code);
-    // for (auto tok_line : this->token_lines) // debug
-    // {
-    //     for (auto tok : tok_line)
-    //     {
-    //         std::cout << tokenRepr(tok) << std::endl;
-    //     }
-    //     std::cout << "+++++" << std::endl;
-    // }
-    // std::cout << "===============" << std::endl;
     this->parse();
     for (auto inst : this->ir_instructions)
     {
         std::cout << instructionIrRepr(inst) << std::endl;
     }
-    
+    std::cout << "==========================================" << std::endl;
     InstructionLowerer lowerer(this->ir_instructions);
     this->instructions = lowerer.lower();
+    std::cout << "==========================================" << std::endl;
 
     for (auto inst : this->instructions)
     {
@@ -123,6 +117,7 @@ uint32_t VirtualMachine::resolveAddress(uint32_t arg, ArgType arg_type)
         std::cout << "Cannot resolve address of label index" << std::endl;
         exit(1);
     }
+    exit(1); // useless as its never gonna reach this, but g++ is complaining.
 }
 
 uint32_t VirtualMachine::resolveValue(uint32_t arg, ArgType arg_type)
@@ -144,6 +139,7 @@ uint32_t VirtualMachine::resolveValue(uint32_t arg, ArgType arg_type)
         std::cout << "Cannot resolve value of label index" << std::endl;
         exit(1);
     }
+    exit(1); // useless as its never gonna reach this, but g++ is complaining.
 }
 
 bool VirtualMachine::step()
@@ -152,6 +148,7 @@ bool VirtualMachine::step()
     {
         return false;
     }
+    this->run_time_counter++;
 
     Instruction inst = this->instructions[this->ic];
     bool advance_ip = true;
@@ -436,9 +433,18 @@ void VirtualMachine::run()
     {
         res = this->step();
     }
+    std::cout << "Execution has finished after " << this->run_time_counter << " steps\n";
     return;
 }
 
+std::vector<uint32_t> VirtualMachine::getRegisters()
+{
+    return this->registers;
+}
 
+std::map<int, uint32_t> VirtualMachine::getMemory()
+{
+    return this->memory;
+}
 
 #endif

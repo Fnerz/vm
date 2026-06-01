@@ -6,15 +6,21 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../pythonIntegrationTesting/src)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../pythonIntegrationTesting/src)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-find_package(pybind11 REQUIRED)
-pybind11_add_module(VM
+set(SDL3_DIR "${CMAKE_SOURCE_DIR}/src/SDL3-3.2.16/cmake")
+find_package(SDL3 REQUIRED CONFIG PATHS ${SDL3_DIR})
+
+set(VM_SOURCES
     src/main.cpp
     src/vm/vm.cpp
     src/vm/lexer.cpp
@@ -22,3 +28,6 @@ pybind11_add_module(VM
     src/vm/types.cpp
     src/vm/lowerer.cpp
 )
+add_executable(VM ${VM_SOURCES})
+target_link_libraries(VM PRIVATE SDL3::SDL3)
+

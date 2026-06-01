@@ -30,7 +30,12 @@ Token LineParser::eat(TokenType type)
     if (this->cur.type != type)
     {
         std::cout << "Expected token of type " << tokenTypeRepr(type) << ", received " << tokenTypeRepr(this->cur.type) << std::endl;
-        exit(0);
+        for (auto tok : this->tokens)
+        {
+            std::cout << tokenRepr(tok) << "(" << tokenTypeRepr(tok.type) << ")" << " ";
+        }
+        std::cout << std::endl;
+        exit(1);
     }
     this->advance();
     return last;
@@ -227,6 +232,7 @@ std::vector<InstructionIr> LineParser::parse()
         else if (this->cur.value == "jg")  
         {
             inst.type = InstructionType::JG;
+            this->advance();
             inst.arg1 = this->eat(TokenType::SYMBOL).value;
             instructions.push_back(inst);
             continue;
@@ -363,6 +369,11 @@ std::vector<InstructionIr> LineParser::parse()
         else
         {
             std::cout << "Unexpected token: " << tokenTypeRepr(this->cur.type) << " " << tokenRepr(this->cur) << std::endl;
+            for (auto tok : this->tokens)
+            {
+                std::cout << tokenRepr(tok) << " ";
+            }
+            std::cout << std::endl;
             exit(0);
         }
     }

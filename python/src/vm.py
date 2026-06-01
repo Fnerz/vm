@@ -2,7 +2,7 @@ import string
 import time
 import math
 import pygame
-from python.src.vm_types import *
+from src.vm_types import *
 from src.lexer import LineLexer
 from src.parser import LineParser
 from src.screen import Screen

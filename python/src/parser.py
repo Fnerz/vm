@@ -1,4 +1,4 @@
-from python.src.vm_types import *
+from src.vm_types import *
 
 class LineParser:
     def __init__(self, tokens: list[Token], ic_line: int, src_line: int, vm = None) -> None:

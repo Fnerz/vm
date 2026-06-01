@@ -4,7 +4,7 @@ import string
 import tkinter as tk
 from tkinter import ttk
 
-from python.src.vm_types import *
+from src.vm_types import *
 from src.vm import VirtualMachine
 
 class VmState:

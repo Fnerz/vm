@@ -36,6 +36,46 @@ std::string LineLexer::getSymbol()
     return buffer;
 }
 
+void userEndChoice()
+{
+    std::cout << "using this register can result in undefined and/or unwanted behavior" << std::endl;
+    std::cout << "do you want to continue? y/n" << std::endl;
+    char choice;
+    while (true)
+    {
+        std::cin >> choice;
+        if (choice == 'y')
+        {
+            break;
+        }
+        if (choice == 'n')
+        {
+            exit(1);
+        }
+    }
+    return;
+}
+
+void checkRegisterSafety(Token tok)
+{
+    int reg = std::stoi(tok.value);
+    if (reg == 29)
+    {
+        std::cout << "r29 is reserved for keyboard input" << std::endl;
+        userEndChoice();
+    }
+    if (reg >= 30 && reg <= 33)
+    {
+        std::cout << "r30-r33 are reserved for temp values" << std::endl;
+        userEndChoice();
+    }
+    if (reg > 33)
+    {
+        std::cout << "no such register r" << reg << ". Safe registers are r0-r28" << std::endl;
+        exit(1);
+    }
+}
+
 Token symbolToToken(std::string symbol)
 {
     Token tok;
@@ -61,6 +101,7 @@ Token symbolToToken(std::string symbol)
             std::stoi(shortend_symbol);
             tok.type = TokenType::REGISTER;
             tok.value = shortend_symbol;
+            checkRegisterSafety(tok);
             return tok;
         }
         catch(const std::exception& e)
@@ -72,7 +113,7 @@ Token symbolToToken(std::string symbol)
         try
         {
             shortend_symbol = symbol.substr(1);
-            std::stoi(shortend_symbol);
+            std::stoi(shortend_symbol); 
             tok.type = TokenType::IMMEDIATE;
             tok.value = shortend_symbol;
             return tok;

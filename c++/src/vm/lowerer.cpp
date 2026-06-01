@@ -83,6 +83,7 @@ std::tuple<int, ArgType> tokenToArgBundle(Token tok)
 
 int InstructionLowerer::binOpToInst(std::shared_ptr<BinOp> bin_op)
 {
+
     Instruction lowerd_inst;
     lowerd_inst.type = opTokenToInstType(bin_op->op);
 
@@ -167,9 +168,11 @@ std::tuple<int, ArgType> InstructionLowerer::nodeToArgBundle(Node node)
 
 std::vector<Instruction> InstructionLowerer::lower()
 {
-
-    for (auto inst : this->ir_insts)
+    int jmp_inst_correction = 0; /* since the jmp insts are inserted later on, when all labels are resolved,
+    and the labels use this->lower_insts.size() for their index we need to account for the missing jmp insts.*/
+    for (int i = 0; i < this->ir_insts.size(); i++)
     {
+        InstructionIr inst = this->ir_insts[i];
         this->freeAllTempRegs();
         Instruction lower_inst = {};
         lower_inst.type = inst.type;
@@ -239,13 +242,16 @@ std::vector<Instruction> InstructionLowerer::lower()
             InstructionType inst_type = inst.type;
             std::string label = std::get<std::string>(inst.arg1);
             auto tup = std::make_tuple(inst_type, label);
-            this->unresolved_jmp_insts[tup] = this->lowerd_insts.size();
+            this->unresolved_jmp_insts[tup] = this->lowerd_insts.size() + jmp_inst_correction;
+
+            jmp_inst_correction++;
             continue;
         }
         if (inst.type == InstructionType::LABEL)
         {
+            // std::cout << "Label: " << std::get<std::string>(inst.arg1) << " " << this->lowerd_insts.size() << std::endl;
             std::string label = std::get<std::string>(inst.arg1);
-            this->label_indexes[label] = this->lowerd_insts.size();
+            this->label_indexes[label] = this->lowerd_insts.size() + jmp_inst_correction;
             continue;
         }
 
@@ -255,6 +261,7 @@ std::vector<Instruction> InstructionLowerer::lower()
     // insert jmp instructions
     for (auto jmp_inst_bundle : this->unresolved_jmp_insts)
     {
+        // std::cout << std::get<std::string>(jmp_inst_bundle.first) << " : " << jmp_inst_bundle.second << std::endl;
         Instruction lowerd_jmp = {};
         lowerd_jmp.type = std::get<InstructionType>(jmp_inst_bundle.first);
 
