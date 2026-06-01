@@ -242,7 +242,7 @@ std::vector<Instruction> InstructionLowerer::lower()
             InstructionType inst_type = inst.type;
             std::string label = std::get<std::string>(inst.arg1);
             auto tup = std::make_tuple(inst_type, label);
-            this->unresolved_jmp_insts[tup] = this->lowerd_insts.size() + jmp_inst_correction;
+            this->unresolved_jmp_insts[tup] = this->lowerd_insts.size();
 
             jmp_inst_correction++;
             continue;

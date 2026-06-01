@@ -216,7 +216,7 @@ std::vector<Token> LineLexer::tokenize()
             Token tok = symbolToToken(symbol);
             if (tok.type == TokenType::null)
             {
-                std::cout << "Invalid symbol: " << symbol << std::endl;
+                std::cout << "Invalid symbol in line " << this->i << ":" << symbol << std::endl;
                 exit(1);
             }
             tokens.push_back(tok);
