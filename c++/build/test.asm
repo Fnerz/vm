@@ -1,3 +1,22 @@
+; jmp main
+
+; func0:
+; mov r0, i1
+; ret
+
+; func1:
+; mov r1, i2
+; ret
+
+; func2:
+; mov r2, i3
+; ret
+
+; main:
+; call func0
+; call func1
+; call func2
+; print r0, r0
 ; =========================
 ; INIT
 ; =========================

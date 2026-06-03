@@ -3,6 +3,20 @@
 
 #include "lowerer.hpp"
 
+
+std::string jmpInstBundleRepr(JmpInstBundle bundle)
+{
+    std::string ret = "";
+    ret += "type: ";
+    ret += instructionTypeRepr(bundle.type);
+    ret += "\nlabel: ";
+    ret += bundle.label;
+    ret += "\nindex: ";
+    ret += std::to_string(bundle.index);
+    ret += "\n";
+    return ret;
+}
+
 InstructionLowerer::InstructionLowerer(std::vector<InstructionIr> ir_insts)
 {
     this->ir_insts = ir_insts;
@@ -239,42 +253,48 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::JLE)||
             (inst.type == InstructionType::CALL))
         {
-            InstructionType inst_type = inst.type;
-            std::string label = std::get<std::string>(inst.arg1);
-            auto tup = std::make_tuple(inst_type, label);
-            this->unresolved_jmp_insts[tup] = this->lowerd_insts.size();
-
+            JmpInstBundle jmp_inst_bundle = {};
+            jmp_inst_bundle.type = inst.type;
+            jmp_inst_bundle.label = std::get<std::string>(inst.arg1);
+            jmp_inst_bundle.index = this->lowerd_insts.size() + jmp_inst_correction;
+            
+            this->unresolved_jmp_insts.push_back(jmp_inst_bundle);
+            
             jmp_inst_correction++;
             continue;
         }
         if (inst.type == InstructionType::LABEL)
         {
-            // std::cout << "Label: " << std::get<std::string>(inst.arg1) << " " << this->lowerd_insts.size() << std::endl;
             std::string label = std::get<std::string>(inst.arg1);
-            this->label_indexes[label] = this->lowerd_insts.size() + jmp_inst_correction;
+            int idx = this->lowerd_insts.size()+jmp_inst_correction;
+            this->label_indexes[label] = idx;
+            // std::cout << "Label: " << std::get<std::string>(inst.arg1) << " " << this->lowerd_insts.size() << "+" << jmp_inst_correction << "=" << idx << std::endl;
             continue;
         }
 
-
         this->lowerd_insts.push_back(lower_inst);
     }
-    // insert jmp instructions
-    for (auto jmp_inst_bundle : this->unresolved_jmp_insts)
-    {
-        // std::cout << std::get<std::string>(jmp_inst_bundle.first) << " : " << jmp_inst_bundle.second << std::endl;
-        Instruction lowerd_jmp = {};
-        lowerd_jmp.type = std::get<InstructionType>(jmp_inst_bundle.first);
 
-        std::string label = std::get<std::string>(jmp_inst_bundle.first);
+    // insert jmp instructions
+    for (auto& jmp_inst_bundle : this->unresolved_jmp_insts)
+    {
+        // std::cout << jmpInstBundleRepr(jmp_inst_bundle);
+        Instruction lowerd_jmp = {};
+
+        lowerd_jmp.type = jmp_inst_bundle.type;
+        std::string label = jmp_inst_bundle.label;
+
         int idx = this->label_indexes[label];
         lowerd_jmp.args[0] = idx;
+        // std::cout << "label: " << label << " = " << idx << "\n========\n";
         lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
         
-        this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.second, lowerd_jmp);
+        this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.index, lowerd_jmp);
     }
 
     return this->lowerd_insts;
 }
+
 
 
 

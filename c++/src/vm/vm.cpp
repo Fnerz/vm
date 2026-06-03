@@ -90,9 +90,10 @@ void VirtualMachine::loadCode(std::string code)
     this->instructions = lowerer.lower();
     std::cout << "==========================================" << std::endl;
 
-    for (auto inst : this->instructions)
+    for (int i = 0; i < this->instructions.size(); i++)
     {
-        std::cout << instructionRepr(inst) << std::endl;
+        auto inst = this->instructions[i];
+        std::cout << i << "\t" << instructionRepr(inst) << std::endl;
     }
 
     return;

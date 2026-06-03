@@ -2,3 +2,5 @@ partical simulation
 pathfinding
 snake
 basic interpreter
+python esque lang compiled to vm
+os

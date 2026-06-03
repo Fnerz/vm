@@ -11,6 +11,15 @@ enum RegisterState
     RESERVED
 };
 
+struct JmpInstBundle
+{
+    InstructionType type;
+    std::string label;
+    int index;
+};
+std::string jmpInstBundleRepr(JmpInstBundle bundle);
+
+
 class InstructionLowerer
 {
     private:
@@ -22,7 +31,7 @@ class InstructionLowerer
                                     {32, RegisterState::FREE},
                                     {33, RegisterState::FREE}};
     std::map<std::string, int>  label_indexes = {};
-    std::map<std::tuple<InstructionType, std::string>, int> unresolved_jmp_insts = {};
+    std::vector<JmpInstBundle> unresolved_jmp_insts = {};
 
     int getFreeTempReg();
     void freeTempReg(int reg);

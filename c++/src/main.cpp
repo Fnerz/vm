@@ -23,8 +23,6 @@ int main(int argc, char *argv[])
     }
     file_reader.close();
 
-    std::cout << code << std::endl;
-
     VirtualMachine vm;
     vm.loadCode(code);
     vm.run();
