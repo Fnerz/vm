@@ -10,7 +10,9 @@ std::string tokenTypeRepr(TokenType tok_type)
     {TokenType::null, "null"},
     {TokenType::INST, "INST"},
     {TokenType::REGISTER, "REGISTER"},
-    {TokenType::IMMEDIATE, "IMMEDIATE"},
+    {TokenType::IMMEDIATE_I, "IMMEDIATE_I"},
+    {TokenType::IMMEDIATE_F, "IMMEDIATE_F"},
+    {TokenType::IMMEDIATE_C, "IMMEDIATE_C"},
     {TokenType::SYMBOL, "SYMBOL"},
     {TokenType::PLUS, "PLUS"},
     {TokenType::MINUS, "MINUS"},
@@ -25,15 +27,25 @@ std::string tokenTypeRepr(TokenType tok_type)
 std::string tokenRepr(Token tok)
 {
     std::string prefix = "";
-    if (tok.type == TokenType::IMMEDIATE)
+    std::string suffix = "";
+    if (tok.type == TokenType::IMMEDIATE_I)
     {
         prefix = "i";
+    }
+    if (tok.type == TokenType::IMMEDIATE_F)
+    {
+        prefix = "i";
+    }
+    if (tok.type == TokenType::IMMEDIATE_C)
+    {
+        prefix = "'";
+        suffix = "'";
     }
     else if (tok.type == TokenType::REGISTER)
     {
         prefix = "r";
     }
-    return prefix + tok.value;
+    return prefix + tok.value + suffix;
 }
 
 std::string tokenTypesRepr(std::vector<TokenType> tok_types)
@@ -111,6 +123,7 @@ std::string instructionRepr(Instruction inst)
     std::string ret = instructionTypeRepr(inst.type);
     ret += " ";
 
+
     size_t count = sizeof(inst.args) / sizeof(inst.args[0]);
     for (size_t i = 0; i < count; ++i)
     {
@@ -118,9 +131,14 @@ std::string instructionRepr(Instruction inst)
         {
             ret += "r";
         }
-        if (inst.arg_types[i] == ArgType::IMMEDIATE)
+        if (inst.arg_types[i] == ArgType::IMMEDIATE_I)
         {
             ret += "i";
+            
+        }
+        if (inst.arg_types[i] == ArgType::IMMEDIATE_F)
+        {
+            ret += "f";
         }
         if (inst.arg_types[i] == ArgType::POINTER)
         {

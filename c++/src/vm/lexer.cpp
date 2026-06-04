@@ -114,7 +114,7 @@ Token symbolToToken(std::string symbol)
         {
             shortend_symbol = symbol.substr(1);
             std::stoi(shortend_symbol); 
-            tok.type = TokenType::IMMEDIATE;
+            tok.type = TokenType::IMMEDIATE_I;
             tok.value = shortend_symbol;
             return tok;
         }
@@ -126,7 +126,36 @@ Token symbolToToken(std::string symbol)
                 {
                     shortend_symbol = symbol.substr(2);
                     std::stoi(shortend_symbol);
-                    tok.type = TokenType::IMMEDIATE;
+                    tok.type = TokenType::IMMEDIATE_I;
+                    tok.value = "-";
+                    tok.value += shortend_symbol;
+                    return tok;
+                }
+                catch(const std::exception& e)
+                {
+                }
+            }
+        }
+    }
+    else if (symbol[0] == 'f')
+    {
+        try
+        {
+            shortend_symbol = symbol.substr(1);
+            std::stof(shortend_symbol); 
+            tok.type = TokenType::IMMEDIATE_F;
+            tok.value = shortend_symbol;
+            return tok;
+        }
+        catch(const std::exception& e)
+        {
+            if (symbol[1] == 'n')
+            {
+                try
+                {
+                    shortend_symbol = symbol.substr(2);
+                    std::stof(shortend_symbol);
+                    tok.type = TokenType::IMMEDIATE_F;
                     tok.value = "-";
                     tok.value += shortend_symbol;
                     return tok;

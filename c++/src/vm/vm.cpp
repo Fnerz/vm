@@ -115,10 +115,18 @@ uint64_t VirtualMachine::resolveAddress(uint64_t arg, ArgType arg_type)
     {
         return this->registers[arg];
     }
-    else if (arg_type == ArgType::IMMEDIATE)
+    else if (arg_type == ArgType::IMMEDIATE_I)
     {
         return arg;
     }
+    else if (arg_type == ArgType::IMMEDIATE_F)
+    {
+        return arg;
+    }
+    else if (arg_type == ArgType::IMMEDIATE_C)
+    {
+        return arg;
+    }  
     else if (arg_type == ArgType::LABEL_INDEX)
     {
         std::cout << "Cannot resolve address of label index" << std::endl;
@@ -137,7 +145,15 @@ uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
     {
         return this->registers[arg];
     }
-    else if (arg_type == ArgType::IMMEDIATE)
+    else if (arg_type == ArgType::IMMEDIATE_I)
+    {
+        return arg;
+    }
+    else if (arg_type == ArgType::IMMEDIATE_F)
+    {
+        return arg;
+    }
+    else if (arg_type == ArgType::IMMEDIATE_C)
     {
         return arg;
     }
@@ -158,6 +174,10 @@ bool VirtualMachine::step()
     this->run_time_counter++;
 
     char input = this->getKeyboardInput();
+    if (input != '\0')
+    {
+        std::cout << input;
+    }
     // std::cout << input << std::endl;
 
     Instruction inst = this->instructions[this->ic];

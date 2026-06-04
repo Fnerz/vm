@@ -15,7 +15,9 @@ enum class TokenType
     null, // not in caps cause of confilictions with the actual NULL
     INST,
     REGISTER,
-    IMMEDIATE,
+    IMMEDIATE_I,
+    IMMEDIATE_F,
+    IMMEDIATE_C,
     SYMBOL,
     PLUS,
     MINUS,
@@ -235,7 +237,9 @@ std::string instructionIrRepr(InstructionIr inst_ir);
 enum class ArgType
 {
     REGISTER,
-    IMMEDIATE,
+    IMMEDIATE_I,
+    IMMEDIATE_F,
+    IMMEDIATE_C,
     POINTER,
     LABEL_INDEX,
 };

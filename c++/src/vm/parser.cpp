@@ -64,7 +64,7 @@ Node LineParser::parsePointerArithmetic()
     this->eat(TokenType::LPAREN);
     
     Node left = this->cur;
-    this->eats({TokenType::REGISTER, TokenType::IMMEDIATE});
+    this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I, TokenType::IMMEDIATE_F});
 
 
     while (inTokenTypes(this->cur.type, {TokenType::PLUS, TokenType::MINUS}))
@@ -76,7 +76,7 @@ Node LineParser::parsePointerArithmetic()
         this->eats({TokenType::PLUS, TokenType::MINUS});
         
         bin_op.right = this->cur;
-        this->eats({TokenType::REGISTER, TokenType::IMMEDIATE});
+        this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I, TokenType::IMMEDIATE_I});
         
         left = std::make_shared<BinOp>(bin_op);
     }
@@ -90,7 +90,7 @@ Expects to be on either a value token (i.e. register or imm) or on LPAREN. It pa
 */
 Node LineParser::getValue()
 {
-    if (inTokenTypes(this->cur.type, {TokenType::REGISTER, TokenType::IMMEDIATE}))
+    if (inTokenTypes(this->cur.type, {TokenType::REGISTER, TokenType::IMMEDIATE_I, TokenType::IMMEDIATE_F}))
     {
         Token last = this->cur;
         this->advance();

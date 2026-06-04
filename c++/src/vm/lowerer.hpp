@@ -37,7 +37,7 @@ class InstructionLowerer
     void freeTempReg(int reg);
     void freeAllTempRegs();
     int binOpToInst(std::shared_ptr<BinOp> bin_op);
-    std::tuple<int, ArgType> nodeToArgBundle(Node node);
+    std::tuple<uint64_t, ArgType> nodeToArgBundle(Node node);
 
     public:
     InstructionLowerer(std::vector<InstructionIr> ir_insts);

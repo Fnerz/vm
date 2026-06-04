@@ -3,23 +3,17 @@
 
 ; mov r0, i1
 ; fibunacci:
-;     print i2, r2
-;     add r2, r0, r1
+;     addi r2, r0, r1
 ;     mov r0, r1
 ;     mov r1, r2
 ;     bp
-;     inc r4
-;     cmp r3, r4
+;     inci r4
+;     cmpi r3, r4
 ;     jge fibunacci
-; sub r22, r21, r20
-; print r22, r22
+; subf r22, r21, r20
+; printf r22, r22
 
-loop:
 mov r0, i10
-.l:
-deci r0
-cmpi r0, i0
-jg .l
-
-func:
-jmp loop
+mov r1, f10.0
+printf r1, r1
+printi r0, r0

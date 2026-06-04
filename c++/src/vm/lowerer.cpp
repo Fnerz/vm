@@ -78,11 +78,20 @@ InstructionType opTokenToInstType(Token tok)
     exit(1);    
 }
 
-std::tuple<int, ArgType> tokenToArgBundle(Token tok)
+std::tuple<uint64_t, ArgType> tokenToArgBundle(Token tok)
 {
-    if (tok.type == TokenType::IMMEDIATE)
+    if (tok.type == TokenType::IMMEDIATE_I)
     {
-        return std::make_tuple(std::stoi(tok.value), ArgType::IMMEDIATE);
+        return std::make_tuple(std::stoi(tok.value), ArgType::IMMEDIATE_I);
+    }
+    if (tok.type == TokenType::IMMEDIATE_F)
+    {
+        return std::make_tuple(std::bit_cast<uint64_t>(static_cast<double>(std::stof(tok.value))), ArgType::IMMEDIATE_F);
+    }
+    if (tok.type == TokenType::IMMEDIATE_C)
+    {
+        uint64_t value = static_cast<uint64_t>(static_cast<unsigned char>(tok.value[0]));
+        return std::make_tuple(value, ArgType::IMMEDIATE_C);
     }
     else if (tok.type == TokenType::REGISTER)
     {
@@ -102,7 +111,7 @@ int InstructionLowerer::binOpToInst(std::shared_ptr<BinOp> bin_op)
     lowerd_inst.type = opTokenToInstType(bin_op->op);
 
     bool left_is_BinOp = false;
-    std::tuple<int, ArgType> left_arg_bundle;
+    std::tuple<uint64_t, ArgType> left_arg_bundle;
     if (std::holds_alternative<std::shared_ptr<BinOp>>(bin_op->left))
     {
         left_is_BinOp = true;
@@ -120,7 +129,7 @@ int InstructionLowerer::binOpToInst(std::shared_ptr<BinOp> bin_op)
     }
 
     bool right_is_BinOp = false;
-    std::tuple<int, ArgType> right_arg_bundle;
+    std::tuple<uint64_t, ArgType> right_arg_bundle;
     if (std::holds_alternative<std::shared_ptr<BinOp>>(bin_op->right))
     {
         right_is_BinOp = true;
@@ -161,11 +170,11 @@ int InstructionLowerer::binOpToInst(std::shared_ptr<BinOp> bin_op)
 }
 
 
-std::tuple<int, ArgType> InstructionLowerer::nodeToArgBundle(Node node)
+std::tuple<uint64_t, ArgType> InstructionLowerer::nodeToArgBundle(Node node)
 {
     if (std::holds_alternative<std::shared_ptr<BinOp>>(node))
     {
-        int ret_reg = this->binOpToInst(std::get<std::shared_ptr<BinOp>>(node));
+        uint64_t ret_reg = this->binOpToInst(std::get<std::shared_ptr<BinOp>>(node));
         return std::make_tuple(ret_reg, ArgType::POINTER);
     }
     else if (std::holds_alternative<Token>(node))
@@ -209,9 +218,9 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::MODI) ||
             (inst.type == InstructionType::MODF))
         {
-            std::tuple<int, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
-            std::tuple<int, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
-            std::tuple<int, ArgType> arg3_bundle = this->nodeToArgBundle(inst.arg3);
+            std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
+            std::tuple<uint64_t, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
+            std::tuple<uint64_t, ArgType> arg3_bundle = this->nodeToArgBundle(inst.arg3);
 
             lower_inst.args[0] = std::get<0>(arg1_bundle);
             lower_inst.arg_types[0] = std::get<1>(arg1_bundle);
@@ -238,8 +247,8 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::UTOF)||
             (inst.type == InstructionType::UTOI))
         {
-            std::tuple<int, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
-            std::tuple<int, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
+            std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
+            std::tuple<uint64_t, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
 
             lower_inst.args[0] = std::get<0>(arg1_bundle);
             lower_inst.arg_types[0] = std::get<1>(arg1_bundle);
@@ -254,7 +263,7 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::INCI) ||
             (inst.type == InstructionType::TIME))
         {
-            std::tuple<int, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
+            std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
 
             lower_inst.args[0] = std::get<0>(arg1_bundle);
             lower_inst.arg_types[0] = std::get<1>(arg1_bundle);
