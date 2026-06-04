@@ -118,7 +118,22 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/cerrno \
  C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/basic_string.tcc \
- C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
+ C:/msys64/mingw64/include/c++/15.2.0/cmath \
+ C:/msys64/mingw64/include/math.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
+ C:/msys64/mingw64/include/c++/15.2.0/limits \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/gamma.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/special_function_util.h \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/bessel_function.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/beta_function.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/ell_integral.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/exp_integral.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/hypergeometric.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/legendre_function.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/modified_bessel_func.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/iostream \
  C:/msys64/mingw64/include/c++/15.2.0/ostream \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.h \
@@ -165,6 +180,7 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/istream \
  C:/msys64/mingw64/include/c++/15.2.0/bits/istream.tcc \
+ C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/variant \
  C:/msys64/mingw64/include/c++/15.2.0/bits/enable_special_members.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/monostate.h \

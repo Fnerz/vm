@@ -31,49 +31,84 @@ bool inTokenTypes(TokenType tok_type, std::vector<TokenType> tok_types);
 
 enum class InstructionType
 {
-    MOV,//
-    ADD,//
-    SUB,//
-    MUL,//
-    IDIV,//
-    FDIV,//
-    MOD,//
-    ABS,//
-    CMP,//
-    JMP,//
-    JE,//
-    JNE,//
-    JG,//
-    JL,//
-    JGE,//
-    JLE,//
-    LOAD,//
-    STORE,//
-    PRINT,//
+    MOV,
+    ADDI,
+    ADDF,
+    ADDU,
+    SUBI,
+    SUBF,
+    SUBU,
+    MULI,
+    MULF,
+    MULU,
+    DIVI,
+    DIVF,
+    DIVU,
+    MODI,
+    MODF,
+    ABSI,
+    ABSF,
+    CMP,
+    CMPI,
+    CMPU,
+    CMPF,
+    JMP,
+    JE,
+    JNE,
+    JG,
+    JL,
+    JGE,
+    JLE,
+    LOAD,
+    STORE,
+    PRINTI,
+    PRINTF,
+    PRINTU,
     BREAKPOINT,
     SCREEN,
     RENDER,
-    CALL,//
+    CALL,
     RET,
-    PUSH,//
-    POP,//
-    DEC,//
-    INC,//
-    TIME,//
+    PUSH,
+    POP,
+    DECI,
+    DECF,
+    DECU,
+    INCI,
+    INCF,
+    INCU,
+    TIME,
     HALT,
     LABEL,
+    ITOF,
+    ITOU,
+    FTOI,
+    FTOU,
+    UTOF,
+    UTOI,
 };
 
 inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"mov", InstructionType::MOV},
-    {"add", InstructionType::ADD},
-    {"sub", InstructionType::SUB},
-    {"mul", InstructionType::MUL},
-    {"idiv", InstructionType::IDIV},
-    {"fdiv", InstructionType::FDIV},
-    {"MOD", InstructionType::MOD},
-    {"ABS", InstructionType::ABS},
+    {"addi", InstructionType::ADDI},
+    {"addf", InstructionType::ADDF},
+    {"addu", InstructionType::ADDU},
+    {"subi", InstructionType::SUBI},
+    {"subf", InstructionType::SUBF},
+    {"subu", InstructionType::SUBU},
+    {"muli", InstructionType::MULI},
+    {"mulf", InstructionType::MULF},
+    {"mulu", InstructionType::MULU},
+    {"div", InstructionType::DIVI},
+    {"divf", InstructionType::DIVF},
+    {"modi", InstructionType::MODI},
+    {"modf", InstructionType::MODF},
+    {"ABSI", InstructionType::ABSI},
+    {"ABSF", InstructionType::ABSF},
     {"cmp", InstructionType::CMP},
+    {"cmpi", InstructionType::CMPI},
+    {"cmpu", InstructionType::CMPU},
+    {"cmpf", InstructionType::CMPF},
     {"jmp" ,InstructionType::JMP},
     {"je" ,InstructionType::JE},
     {"jne" ,InstructionType::JNE},
@@ -83,7 +118,9 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"jle" ,InstructionType::JLE},
     {"load" ,InstructionType::LOAD},
     {"store" ,InstructionType::STORE},
-    {"print" ,InstructionType::PRINT},
+    {"printi" ,InstructionType::PRINTI},
+    {"printf" ,InstructionType::PRINTF},
+    {"printu" ,InstructionType::PRINTU},
     {"bp" ,InstructionType::BREAKPOINT},
     {"screen" ,InstructionType::SCREEN},
     {"render" ,InstructionType::RENDER},
@@ -91,45 +128,78 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"ret" ,InstructionType::RET},
     {"push" ,InstructionType::PUSH},
     {"pop" ,InstructionType::POP},
-    {"dec" ,InstructionType::DEC},
-    {"inc" ,InstructionType::INC},
+    {"deci" ,InstructionType::DECI},
+    {"decf" ,InstructionType::DECF},
+    {"decu" ,InstructionType::DECU},
+    {"inci" ,InstructionType::INCI},
+    {"incf" ,InstructionType::INCF},
+    {"incu" ,InstructionType::INCU},
     {"time", InstructionType::TIME},
     {"halt", InstructionType::HALT},
     {"label", InstructionType::LABEL},
+    {"itof", InstructionType::ITOF},
+    {"itou", InstructionType::ITOU},
+    {"foti", InstructionType::FTOI},
+    {"ftou", InstructionType::FTOU},
+    {"utof", InstructionType::UTOF},
+    {"utoi", InstructionType::UTOI},
 };
 
 inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
-    {InstructionType::MOV ,"mov"},
-    {InstructionType::ADD ,"add"},
-    {InstructionType::SUB ,"sub"},
-    {InstructionType::MUL ,"mul"},
-    {InstructionType::IDIV ,"idiv"},
-    {InstructionType::FDIV ,"fdiv"},
-    {InstructionType::MOD ,"MOD"},
-    {InstructionType::ABS ,"ABS"},
-    {InstructionType::CMP ,"cmp"},
-    {InstructionType::JMP ,"jmp"},
-    {InstructionType::JE ,"je"},
-    {InstructionType::JNE ,"jne"},
-    {InstructionType::JG ,"jg"},
-    {InstructionType::JL ,"jl"},
-    {InstructionType::JGE ,"jge"},
-    {InstructionType::JLE ,"jle"},
-    {InstructionType::LOAD ,"load"},
-    {InstructionType::STORE ,"store"},
-    {InstructionType::PRINT ,"print"},
-    {InstructionType::BREAKPOINT ,"bp"},
+    {InstructionType::MOV, "mov"},
+    {InstructionType::ADDI, "addi"},
+    {InstructionType::ADDF, "addf"},
+    {InstructionType::ADDU, "addu"},
+    {InstructionType::SUBI, "subi"},
+    {InstructionType::SUBF, "subf"},
+    {InstructionType::SUBU, "subu"},
+    {InstructionType::MULI, "muli"},
+    {InstructionType::MULF, "mulf"},
+    {InstructionType::MULU, "mulu"},
+    {InstructionType::DIVI, "idiv"},
+    {InstructionType::DIVF, "fdiv"},
+    {InstructionType::MODI, "modi"},
+    {InstructionType::MODF, "modf"},
+    {InstructionType::ABSI, "ABSI"},
+    {InstructionType::ABSF, "ABSF"},
+    {InstructionType::CMP, "cmp"},
+    {InstructionType::CMPI, "cmpi"},
+    {InstructionType::CMPU, "cmpu"},
+    {InstructionType::CMPF, "cmpf"},
+    {InstructionType::JMP  ,"jmp"},
+    {InstructionType::JE  ,"je"},
+    {InstructionType::JNE  ,"jne"},
+    {InstructionType::JG  ,"jg"},
+    {InstructionType::JL  ,"jl"},
+    {InstructionType::JGE  ,"jge"},
+    {InstructionType::JLE  ,"jle"},
+    {InstructionType::LOAD, "load"},
+    {InstructionType::STORE, "store"},
+    {InstructionType::PRINTI, "printi"},
+    {InstructionType::PRINTF, "printf"},
+    {InstructionType::PRINTU, "printu"},
+    {InstructionType::BREAKPOINT  ,"bp"},
     {InstructionType::SCREEN ,"screen"},
     {InstructionType::RENDER ,"render"},
-    {InstructionType::CALL ,"call"},
-    {InstructionType::RET ,"ret"},
-    {InstructionType::PUSH ,"push"},
-    {InstructionType::POP ,"pop"},
-    {InstructionType::DEC ,"dec"},
-    {InstructionType::INC ,"inc"},
-    {InstructionType::TIME ,"time"},
+    {InstructionType::CALL, "call"},
+    {InstructionType::RET  ,"ret"},
+    {InstructionType::PUSH, "push"},
+    {InstructionType::POP, "pop"},
+    {InstructionType::DECI, "deci"},
+    {InstructionType::DECF, "decf"},
+    {InstructionType::DECU, "decu"},
+    {InstructionType::INCI, "inci"},
+    {InstructionType::INCF, "incf"},
+    {InstructionType::INCU, "incu"},
+    {InstructionType::TIME, "time"},
     {InstructionType::HALT, "halt"},
     {InstructionType::LABEL, "label"},
+    {InstructionType::ITOF, "itof"},
+    {InstructionType::ITOU, "itou"},
+    {InstructionType::FTOI, "ftoi"},
+    {InstructionType::FTOU, "ftou"},
+    {InstructionType::UTOF, "utof"},
+    {InstructionType::UTOI, "utoi"},
 };
 std::string instructionTypeRepr(InstructionType inst_type);
 
@@ -173,12 +243,11 @@ enum class ArgType
 struct Instruction
 {
     InstructionType type;
-    uint32_t args[3];
+    uint64_t args[3];
     ArgType arg_types[3];
 };
 std::string instructionRepr(Instruction inst);
 
 inline std::string ALLOWED_SYMBOL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789_";
-
 
 #endif

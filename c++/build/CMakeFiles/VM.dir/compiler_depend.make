@@ -81,6 +81,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_atomic.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_abs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
@@ -114,6 +115,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/cctype \
   C:/msys64/mingw64/include/c++/15.2.0/cerrno \
   C:/msys64/mingw64/include/c++/15.2.0/clocale \
+  C:/msys64/mingw64/include/c++/15.2.0/cmath \
   C:/msys64/mingw64/include/c++/15.2.0/compare \
   C:/msys64/mingw64/include/c++/15.2.0/concepts \
   C:/msys64/mingw64/include/c++/15.2.0/cstddef \
@@ -138,6 +140,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
   C:/msys64/mingw64/include/c++/15.2.0/iostream \
   C:/msys64/mingw64/include/c++/15.2.0/istream \
+  C:/msys64/mingw64/include/c++/15.2.0/limits \
   C:/msys64/mingw64/include/c++/15.2.0/map \
   C:/msys64/mingw64/include/c++/15.2.0/memory \
   C:/msys64/mingw64/include/c++/15.2.0/new \
@@ -153,6 +156,18 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/string \
   C:/msys64/mingw64/include/c++/15.2.0/string_view \
   C:/msys64/mingw64/include/c++/15.2.0/system_error \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/bessel_function.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/beta_function.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/ell_integral.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/exp_integral.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/gamma.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/hypergeometric.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/legendre_function.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/modified_bessel_func.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/special_function_util.h \
   C:/msys64/mingw64/include/c++/15.2.0/tuple \
   C:/msys64/mingw64/include/c++/15.2.0/type_traits \
   C:/msys64/mingw64/include/c++/15.2.0/typeinfo \
@@ -183,6 +198,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/include/limits.h \
   C:/msys64/mingw64/include/locale.h \
   C:/msys64/mingw64/include/malloc.h \
+  C:/msys64/mingw64/include/math.h \
   C:/msys64/mingw64/include/process.h \
   C:/msys64/mingw64/include/pthread.h \
   C:/msys64/mingw64/include/pthread_compat.h \
@@ -1106,6 +1122,7 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_atomic.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_abs.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/stl_algo.h \
@@ -1139,6 +1156,7 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/cctype \
   C:/msys64/mingw64/include/c++/15.2.0/cerrno \
   C:/msys64/mingw64/include/c++/15.2.0/clocale \
+  C:/msys64/mingw64/include/c++/15.2.0/cmath \
   C:/msys64/mingw64/include/c++/15.2.0/compare \
   C:/msys64/mingw64/include/c++/15.2.0/concepts \
   C:/msys64/mingw64/include/c++/15.2.0/cstddef \
@@ -1163,6 +1181,7 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
   C:/msys64/mingw64/include/c++/15.2.0/iostream \
   C:/msys64/mingw64/include/c++/15.2.0/istream \
+  C:/msys64/mingw64/include/c++/15.2.0/limits \
   C:/msys64/mingw64/include/c++/15.2.0/map \
   C:/msys64/mingw64/include/c++/15.2.0/memory \
   C:/msys64/mingw64/include/c++/15.2.0/new \
@@ -1178,6 +1197,18 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/string \
   C:/msys64/mingw64/include/c++/15.2.0/string_view \
   C:/msys64/mingw64/include/c++/15.2.0/system_error \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/bessel_function.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/beta_function.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/ell_integral.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/exp_integral.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/gamma.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/hypergeometric.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/legendre_function.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/modified_bessel_func.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
+  C:/msys64/mingw64/include/c++/15.2.0/tr1/special_function_util.h \
   C:/msys64/mingw64/include/c++/15.2.0/tuple \
   C:/msys64/mingw64/include/c++/15.2.0/type_traits \
   C:/msys64/mingw64/include/c++/15.2.0/typeinfo \
@@ -1206,6 +1237,7 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp \
   C:/msys64/mingw64/include/limits.h \
   C:/msys64/mingw64/include/locale.h \
   C:/msys64/mingw64/include/malloc.h \
+  C:/msys64/mingw64/include/math.h \
   C:/msys64/mingw64/include/process.h \
   C:/msys64/mingw64/include/pthread.h \
   C:/msys64/mingw64/include/pthread_compat.h \
@@ -1253,8 +1285,6 @@ C:/msys64/mingw64/include/time.h:
 
 C:/msys64/mingw64/include/sys/timeb.h:
 
-C:/msys64/mingw64/include/stddef.h:
-
 C:/msys64/mingw64/include/signal.h:
 
 C:/msys64/mingw64/include/sec_api/wconio_s.h:
@@ -1273,7 +1303,7 @@ C:/msys64/home/lenna/vm/c++/src/vm/lexer.cpp:
 
 C:/msys64/mingw64/include/pthread_compat.h:
 
-C:/msys64/mingw64/include/malloc.h:
+C:/msys64/mingw64/include/math.h:
 
 C:/msys64/mingw64/include/locale.h:
 
@@ -1305,21 +1335,47 @@ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/error_constants.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_inline.h:
 
-C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_base.h:
-
 C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++allocator.h:
 
-C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h:
-
 C:/msys64/mingw64/include/c++/15.2.0/typeinfo:
 
 C:/msys64/mingw64/include/c++/15.2.0/type_traits:
 
 C:/msys64/mingw64/include/c++/15.2.0/tuple:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/special_function_util.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_base.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/legendre_function.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/hypergeometric.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/gamma.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/exp_integral.tcc:
+
+C:/msys64/mingw64/include/stddef.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/ell_integral.tcc:
+
+C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/beta_function.tcc:
+
+C:/msys64/mingw64/include/malloc.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/tr1/bessel_function.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/string:
 
@@ -1343,6 +1399,8 @@ C:/msys64/mingw64/include/c++/15.2.0/memory:
 
 C:/msys64/mingw64/include/c++/15.2.0/map:
 
+C:/msys64/mingw64/include/c++/15.2.0/limits:
+
 C:/msys64/mingw64/include/c++/15.2.0/iosfwd:
 
 C:/msys64/mingw64/include/c++/15.2.0/ios:
@@ -1356,6 +1414,8 @@ C:/msys64/mingw64/include/c++/15.2.0/ext/numeric_traits.h:
 C:/msys64/home/lenna/vm/c++/src/vm/Lexer.hpp:
 
 C:/msys64/mingw64/include/c++/15.2.0/ext/concurrence.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/ext/atomicity.h:
 
 C:/msys64/mingw64/include/corecrt_wstdlib.h:
 
@@ -1384,6 +1444,8 @@ C:/msys64/mingw64/include/sec_api/wchar_s.h:
 C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algobase.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/stl_uninitialized.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/cmath:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/locale_classes.tcc:
 
@@ -1523,6 +1585,10 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/cwctype:
 
+C:/msys64/mingw64/include/c++/15.2.0/ext/alloc_traits.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h:
+
 C:/msys64/mingw64/include/c++/15.2.0/debug/debug.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/algorithmfwd.h:
@@ -1595,6 +1661,8 @@ C:/msys64/mingw64/include/sec_api/sys/timeb_s.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_uninitialized.h:
 
+C:/msys64/mingw64/include/c++/15.2.0/tr1/modified_bessel_func.tcc:
+
 C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/system_error:
@@ -1612,6 +1680,8 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/iterator_concepts.h:
 C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_atomic.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/backward/binders.h:
 
@@ -1666,9 +1736,3 @@ C:/msys64/mingw64/include/c++/15.2.0/concepts:
 C:/msys64/mingw64/include/c++/15.2.0/initializer_list:
 
 C:/msys64/mingw64/include/c++/15.2.0/cstdlib:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/ext/alloc_traits.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/ext/atomicity.h:

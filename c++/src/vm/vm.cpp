@@ -3,6 +3,7 @@
 
 #include "vm.hpp"
 #include <ctime>
+#include <bit>
 
 
 void VirtualMachine::resetFlags()
@@ -18,7 +19,6 @@ void VirtualMachine::reset()
     this->memory = {};
     this->stack = {};
     this->call_stack = {};
-    this->labels = {};
     this->ic = 0;
     this->run_time_counter = 0;
 
@@ -75,31 +75,37 @@ void VirtualMachine::parse()
     return;
 }
 
-void VirtualMachine::loadCode(std::string code)
+void VirtualMachine::loadCode(std::string code, bool debug)
 {
     std::transform(code.begin(), code.end(), code.begin(),[](unsigned char c){ return std::tolower(c); });
     this->reset();
     this->tokenize(code);
     this->parse();
-    for (auto inst : this->ir_instructions)
+    if  (debug)
     {
-        std::cout << instructionIrRepr(inst) << std::endl;
+        for (auto inst : this->ir_instructions)
+        {
+            std::cout << instructionIrRepr(inst) << std::endl;
+        }
+        std::cout << "==========================================" << std::endl;
     }
-    std::cout << "==========================================" << std::endl;
     InstructionLowerer lowerer(this->ir_instructions);
     this->instructions = lowerer.lower();
-    std::cout << "==========================================" << std::endl;
-
-    for (int i = 0; i < this->instructions.size(); i++)
+    if (debug)
     {
-        auto inst = this->instructions[i];
-        std::cout << i << "\t" << instructionRepr(inst) << std::endl;
+        for (int i = 0; i < this->instructions.size(); i++)
+        {
+            auto inst = this->instructions[i];
+            std::cout << i << "\t" << instructionRepr(inst) << std::endl;
+        }
+        std::cout << "==========================================" << std::endl;
     }
+
 
     return;
 }
 
-uint32_t VirtualMachine::resolveAddress(uint32_t arg, ArgType arg_type)
+uint64_t VirtualMachine::resolveAddress(uint64_t arg, ArgType arg_type)
 {
     if (arg_type == ArgType::REGISTER)
     {
@@ -121,7 +127,7 @@ uint32_t VirtualMachine::resolveAddress(uint32_t arg, ArgType arg_type)
     exit(1); // useless as its never gonna reach this, but g++ is complaining.
 }
 
-uint32_t VirtualMachine::resolveValue(uint32_t arg, ArgType arg_type)
+uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
 {
     if (arg_type == ArgType::REGISTER)
     {
@@ -158,86 +164,151 @@ bool VirtualMachine::step()
     {
         case InstructionType::MOV:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
             this->registers[dest] = src;
             break;
         }
-        case InstructionType::ADD:
+        case InstructionType::ADDI:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = left + right;
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = add<int64_t>(left, right);
             break;
         }
-        case InstructionType::SUB:
+        case InstructionType::ADDF:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = left - right;
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = std::bit_cast<uint64_t>(add<double>(left, right));
             break;
         }
-        case InstructionType::MUL:
+        case InstructionType::ADDU:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = left * right;
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = add<uint64_t>(left, right);
             break;
         }
-        case InstructionType::IDIV:
+        case InstructionType::SUBI:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = sub<int64_t>(left, right);
+            break;
+        }
+        case InstructionType::SUBF:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = std::bit_cast<uint64_t>(sub<double>(left, right));
+            break;
+        }
+        case InstructionType::SUBU:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = sub<uint64_t>(left, right);
+            break;
+        }
+        case InstructionType::MULI:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = mul<int64_t>(left, right);
+            break;
+        }
+        case InstructionType::MULF:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = std::bit_cast<uint64_t>(mul<double>(left, right));
+            break;
+        }
+        case InstructionType::MULU:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            this->registers[dest] = mul<uint64_t>(left, right);
+            break;
+        }
+        case InstructionType::DIVI:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
             if (right == 0)
             {
                 std::cerr << "Integer division by zero" << std::endl;
                 exit(1);
             }
-            this->registers[dest] = left / right;
+            this->registers[dest] = div<int64_t>(left, right);
             break;
         }
-        case InstructionType::FDIV:
+        case InstructionType::DIVF:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
             if (right == 0)
             {
                 std::cerr << "Floating division by zero" << std::endl;
                 exit(1);
             }
-            double result = static_cast<double>(left) / static_cast<double>(right);
-            this->registers[dest] = static_cast<uint32_t>(result);
+            this->registers[dest] = std::bit_cast<uint64_t>(div<double>(left, right));
             break;
         }
-        case InstructionType::MOD:
+        case InstructionType::DIVU:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint32_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            if (right == 0)
+            {
+                std::cerr << "Floating division by zero" << std::endl;
+                exit(1);
+            }
+            this->registers[dest] = div<uint64_t>(left, right);
+            break;
+        }
+        case InstructionType::MODI:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
             if (right == 0)
             {
                 std::cerr << "Modulo by zero" << std::endl;
                 exit(1);
             }
-            this->registers[dest] = left % right;
+            this->registers[dest] = mod<int64_t>(left, right);
             break;
         }
-        case InstructionType::ABS:
+        case InstructionType::ABSI:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            int32_t src = static_cast<int32_t>(this->resolveValue(inst.args[1], inst.arg_types[1]));
-            this->registers[dest] = static_cast<uint32_t>(src < 0 ? -src : src);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] = abs<int64_t>(this->registers[dest]);
+            break;
+        }
+            case InstructionType::ABSF:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] = std::bit_cast<uint64_t>(abs<double>(this->registers[dest]));
             break;
         }
         case InstructionType::CMP:
         {
-            uint32_t left = this->resolveValue(inst.args[0], inst.arg_types[0]);
-            uint32_t right = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t left = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint64_t right = this->resolveValue(inst.args[1], inst.arg_types[1]);
             this->resetFlags();
             if (left < right)
             {
@@ -251,6 +322,36 @@ bool VirtualMachine::step()
             {
                 this->equal_flag = true;
             }
+            break;
+        }
+        case InstructionType::CMPI:
+        {
+            int64_t left = static_cast<int64_t>(this->resolveValue(inst.args[0], inst.arg_types[0]));
+            int64_t right = static_cast<int64_t>(this->resolveValue(inst.args[1], inst.arg_types[1]));
+            this->resetFlags();
+            if (left < right) this->lesser_flag = true;
+            else if (left > right) this->greater_flag = true;
+            else this->equal_flag = true;
+            break;
+        }
+        case InstructionType::CMPU:
+        {
+            uint64_t left = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint64_t right = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->resetFlags();
+            if (left < right) this->lesser_flag = true;
+            else if (left > right) this->greater_flag = true;
+            else this->equal_flag = true;
+            break;
+        }
+        case InstructionType::CMPF:
+        {
+            double left = std::bit_cast<double>(this->resolveValue(inst.args[0], inst.arg_types[0]));
+            double right = std::bit_cast<double>(this->resolveValue(inst.args[1], inst.arg_types[1]));
+            this->resetFlags();
+            if (left < right) this->lesser_flag = true;
+            else if (left > right) this->greater_flag = true;
+            else this->equal_flag = true;
             break;
         }
         case InstructionType::JMP:
@@ -314,40 +415,39 @@ bool VirtualMachine::step()
         }
         case InstructionType::LOAD:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t src_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
             auto it = this->memory.find(static_cast<int>(src_addr));
             this->registers[dest] = (it != this->memory.end()) ? it->second : 0;
             break;
         }
         case InstructionType::STORE:
         {
-            uint32_t src = this->resolveValue(inst.args[0], inst.arg_types[0]);
-            uint32_t dest = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            uint64_t src = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint64_t dest = this->resolveAddress(inst.args[1], inst.arg_types[1]);
             this->memory[static_cast<int>(dest)] = src;
             break;
         }
-        case InstructionType::PRINT:
+        case InstructionType::PRINTI:
         {
-            uint32_t start = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            uint32_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
-            if (start == end)
-            {
-                std::cout << this->registers[start] << std::endl;
-            }
-            else
-            {
-                std::cout << "[";
-                for (uint32_t idx = start; idx < end; ++idx)
-                {
-                    std::cout << this->registers[idx];
-                    if (idx + 1 < end)
-                    {
-                        std::cout << ", ";
-                    }
-                }
-                std::cout << "]" << std::endl;
-            }
+            uint64_t start = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            print<int64_t>(start, end);
+            break;
+        }
+        case InstructionType::PRINTF:
+        {
+            uint64_t start = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            print<double>(start, end);
+            break;
+        }
+
+        case InstructionType::PRINTU:
+        {
+            uint64_t start = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            print<uint64_t>(start, end);
             break;
         }
         case InstructionType::BREAKPOINT:
@@ -373,7 +473,7 @@ bool VirtualMachine::step()
         }
         case InstructionType::PUSH:
         {
-            uint32_t src = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[0], inst.arg_types[0]);
             this->stack.push_back(src);
             break;
         }
@@ -384,33 +484,101 @@ bool VirtualMachine::step()
                 std::cerr << "Stack underflow on POP" << std::endl;
                 exit(1);
             }
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             this->registers[dest] = this->stack.back();
             this->stack.pop_back();
             break;
         }
-        case InstructionType::DEC:
+        case InstructionType::DECI:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] -= 1;
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] -= dec<int64_t>(this->registers[dest]);
             break;
         }
-        case InstructionType::INC:
+        case InstructionType::DECF:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] += 1;
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] = std::bit_cast<uint64_t>(dec<double>(this->registers[dest]));
+            break;
+        }
+        case InstructionType::DECU:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] -= dec<uint64_t>(this->registers[dest]);
+            break;
+        }
+        case InstructionType::INCI:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] += inc<int64_t>(this->registers[dest]);
+            break;
+        }
+        case InstructionType::INCF:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] = std::bit_cast<uint64_t>(inc<double>(this->registers[dest]));
+            break;
+        }
+        case InstructionType::INCU:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            this->registers[dest] += inc<uint64_t>(this->registers[dest]);
             break;
         }
         case InstructionType::TIME:
         {
-            uint32_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             std::time_t now = std::time(nullptr);
-            this->registers[dest] = static_cast<uint32_t>(now);
+            this->registers[dest] = std::bit_cast<uint64_t>(now);
             break;
         }
         case InstructionType::HALT:
         {
             return false;
+        }
+        case InstructionType::ITOF:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            double dv = static_cast<double>(static_cast<int64_t>(src));
+            this->registers[dest] = std::bit_cast<uint64_t>(dv);
+            break;
+        }
+        case InstructionType::ITOU:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->registers[dest] = static_cast<uint64_t>(static_cast<int64_t>(std::bit_cast<int64_t>(src)));
+            break;
+        }
+        case InstructionType::FTOI:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->registers[dest] = static_cast<uint64_t>(static_cast<int64_t>(std::bit_cast<double>(src)));
+            break;
+        }
+        case InstructionType::FTOU:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->registers[dest] = static_cast<uint64_t>(static_cast<uint64_t>(std::bit_cast<double>(src)));
+            break;
+        }
+        case InstructionType::UTOF:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            double dv = static_cast<double>(src);
+            this->registers[dest] = std::bit_cast<uint64_t>(dv);
+            break;
+        }
+        case InstructionType::UTOI:
+        {
+            uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            this->registers[dest] = static_cast<uint64_t>(static_cast<int64_t>(src));
+            break;
         }
         default:
         {
@@ -438,12 +606,12 @@ void VirtualMachine::run()
     return;
 }
 
-std::vector<uint32_t> VirtualMachine::getRegisters()
+std::vector<uint64_t> VirtualMachine::getRegisters()
 {
     return this->registers;
 }
 
-std::map<int, uint32_t> VirtualMachine::getMemory()
+std::map<int, uint64_t> VirtualMachine::getMemory()
 {
     return this->memory;
 }

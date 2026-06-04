@@ -203,13 +203,6 @@ std::vector<Token> LineLexer::tokenize()
             tok.value = ",";
             tokens.push_back(tok);
         }
-        else if (this->cur == ',')
-        {
-            Token tok;
-            tok.type = TokenType::COMMA;
-            tok.value = ",";
-            tokens.push_back(tok);
-        }
         else if (ALLOWED_SYMBOL_CHARS.find(this->cur) != std::string::npos)
         {
             std::string symbol = this->getSymbol();

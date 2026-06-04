@@ -123,85 +123,269 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "add")
+        else if (this->cur.value == "addi")
         {
-            inst.type = InstructionType::ADD;
+            inst.type = InstructionType::ADDI;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg3  = this->getValue();
+            inst.arg3 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "sub")
+        else if (this->cur.value == "addf")
         {
-            inst.type = InstructionType::SUB;
+            inst.type = InstructionType::ADDF;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg3  = this->getValue();
+            inst.arg3 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "mul")
+        else if (this->cur.value == "addu")
         {
-            inst.type = InstructionType::MUL;
+            inst.type = InstructionType::ADDU;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg3  = this->getValue();
+            inst.arg3 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "idiv")
+        else if (this->cur.value == "subi")
         {
-            inst.type = InstructionType::IDIV;
+            inst.type = InstructionType::SUBI;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg3  = this->getValue();
+            inst.arg3 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "fdiv")
+        else if (this->cur.value == "subf")
         {
-            inst.type = InstructionType::FDIV;
+            inst.type = InstructionType::SUBF;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg3  = this->getValue();
+            inst.arg3 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "mod")
+        else if (this->cur.value == "subu")
         {
-            inst.type = InstructionType::MOD;
+            inst.type = InstructionType::SUBU;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg3  = this->getValue();
+            inst.arg3 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "abs")
+        else if (this->cur.value == "muli")
         {
-            inst.type = InstructionType::MUL;
+            inst.type = InstructionType::MULI;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "mulf")
+        {
+            inst.type = InstructionType::MULF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "mulu")
+        {
+            inst.type = InstructionType::MULU;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "divi")
+        {
+            inst.type = InstructionType::DIVI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "divf")
+        {
+            inst.type = InstructionType::DIVF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "divu")
+        {
+            inst.type = InstructionType::DIVU;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "modi")
+        {
+            inst.type = InstructionType::MODI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "modf")
+        {
+            inst.type = InstructionType::MODF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg3 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "absi")
+        {
+            inst.type = InstructionType::ABSI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "absf")
+        {
+            inst.type = InstructionType::ABSF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "printi")
+        {
+            inst.type = InstructionType::PRINTI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "printf")
+        {
+            inst.type = InstructionType::PRINTF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "printu")
+        {
+            inst.type = InstructionType::PRINTU;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "deci")
+        {
+            inst.type = InstructionType::DECI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "decf")
+        {
+            inst.type = InstructionType::DECF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "decu")
+        {
+            inst.type = InstructionType::DECU;
+            this->advance();
+            inst.arg1 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "inci")
+        {
+            inst.type = InstructionType::INCI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "incf")
+        {
+            inst.type = InstructionType::INCF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "incu")
+        {
+            inst.type = InstructionType::INCU;
+            this->advance();
+            inst.arg1 = this->getValue();
             instructions.push_back(inst);
             continue;
         }
@@ -291,16 +475,6 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "print")
-        {
-            inst.type = InstructionType::PRINT;
-            this->advance();
-            inst.arg1 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg2  = this->getValue();
-            instructions.push_back(inst);
-            continue;
-        }
         else if (this->cur.value == "bp")
         {
             inst.type = InstructionType::BREAKPOINT;
@@ -337,26 +511,72 @@ std::vector<InstructionIr> LineParser::parse()
             inst.arg1 = this->getValue();
             instructions.push_back(inst);
         }
-        else if (this->cur.value == "dec")
-        {
-            inst.type = InstructionType::DEC;
-            this->advance();
-            inst.arg1 = this->getValue();
-            instructions.push_back(inst);
-        }
-        else if (this->cur.value == "inc")
-        {
-            inst.type = InstructionType::INC;
-            this->advance();
-            inst.arg1 = this->getValue();
-            instructions.push_back(inst);
-        }
         else if (this->cur.value == "time")
         {
             inst.type = InstructionType::TIME;
             this->advance();
             inst.arg1 = this->getValue();
             instructions.push_back(inst);
+        }
+        else if (this->cur.value == "itof")
+        {
+            inst.type = InstructionType::ITOF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "itou")
+        {
+            inst.type = InstructionType::ITOU;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "ftoi")
+        {
+            inst.type = InstructionType::FTOI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "ftou")
+        {
+            inst.type = InstructionType::FTOU;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "utof")
+        {
+            inst.type = InstructionType::UTOF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "utoi")
+        {
+            inst.type = InstructionType::UTOI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
         }
         else if (this->cur.type == TokenType::SYMBOL)
         {

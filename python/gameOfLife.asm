@@ -251,7 +251,7 @@ render
 bp
 mov r39, i1000
 mainLoop:
-    ; max 20 steps
+    ; max teps
     cmp r39, i0
     je end
     dec r39

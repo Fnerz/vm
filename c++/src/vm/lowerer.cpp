@@ -68,11 +68,11 @@ InstructionType opTokenToInstType(Token tok)
 {
     if (tok.type == TokenType::PLUS)
     {
-        return InstructionType::ADD;
+        return InstructionType::ADDI;
     }
     else if (tok.type == TokenType::MINUS)
     {
-        return InstructionType::SUB;
+        return InstructionType::SUBI;
     }
     std::cout << "Cannot convert " << tokenRepr(tok) << " to InstructionType" << std::endl;
     exit(1);    
@@ -193,13 +193,20 @@ std::vector<Instruction> InstructionLowerer::lower()
         
         // 3 arg instructions
         if (
-            (inst.type == InstructionType::ADD) ||
-            (inst.type == InstructionType::SUB) ||
-            (inst.type == InstructionType::MUL) ||
-            (inst.type == InstructionType::IDIV) ||
-            (inst.type == InstructionType::FDIV) ||
-            (inst.type == InstructionType::MOD)
-        )
+            (inst.type == InstructionType::ADDI) ||
+            (inst.type == InstructionType::ADDF) ||
+            (inst.type == InstructionType::ADDU) ||
+            (inst.type == InstructionType::SUBI) ||
+            (inst.type == InstructionType::SUBF) ||
+            (inst.type == InstructionType::SUBU) ||
+            (inst.type == InstructionType::MULI) ||
+            (inst.type == InstructionType::MULF) ||
+            (inst.type == InstructionType::MULU) ||
+            (inst.type == InstructionType::DIVI) ||
+            (inst.type == InstructionType::DIVF) ||
+            (inst.type == InstructionType::DIVU) ||
+            (inst.type == InstructionType::MODI) ||
+            (inst.type == InstructionType::MODF))
         {
             std::tuple<int, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
             std::tuple<int, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
@@ -215,11 +222,20 @@ std::vector<Instruction> InstructionLowerer::lower()
         // 2 arg instructions
         else if (
             (inst.type == InstructionType::MOV) ||
-            (inst.type == InstructionType::ABS) ||
+            (inst.type == InstructionType::ABSI) ||
+            (inst.type == InstructionType::ABSF) ||
             (inst.type == InstructionType::CMP) ||
             (inst.type == InstructionType::LOAD) ||
             (inst.type == InstructionType::STORE) ||
-            (inst.type == InstructionType::PRINT))
+            (inst.type == InstructionType::PRINTI)||
+            (inst.type == InstructionType::PRINTF)||
+            (inst.type == InstructionType::PRINTU)||
+            (inst.type == InstructionType::ITOF)||
+            (inst.type == InstructionType::ITOU)||
+            (inst.type == InstructionType::FTOI)||
+            (inst.type == InstructionType::FTOU)||
+            (inst.type == InstructionType::UTOF)||
+            (inst.type == InstructionType::UTOI))
         {
             std::tuple<int, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
             std::tuple<int, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
@@ -233,8 +249,8 @@ std::vector<Instruction> InstructionLowerer::lower()
         else if (
             (inst.type == InstructionType::PUSH) ||
             (inst.type == InstructionType::POP) ||
-            (inst.type == InstructionType::DEC) ||
-            (inst.type == InstructionType::INC) ||
+            (inst.type == InstructionType::DECI) ||
+            (inst.type == InstructionType::INCI) ||
             (inst.type == InstructionType::TIME))
         {
             std::tuple<int, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
