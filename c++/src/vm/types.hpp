@@ -248,6 +248,6 @@ struct Instruction
 };
 std::string instructionRepr(Instruction inst);
 
-inline std::string ALLOWED_SYMBOL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789_";
+inline std::string ALLOWED_SYMBOL_CHARS = ".abcdefghijklmnopqrstuvwxyz0123456789_";
 
 #endif

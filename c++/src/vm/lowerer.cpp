@@ -184,6 +184,7 @@ std::vector<Instruction> InstructionLowerer::lower()
 {
     int jmp_inst_correction = 0; /* since the jmp insts are inserted later on, when all labels are resolved,
     and the labels use this->lower_insts.size() for their index we need to account for the missing jmp insts.*/
+    std::string current_scope = "";
     for (int i = 0; i < this->ir_insts.size(); i++)
     {
         InstructionIr inst = this->ir_insts[i];
@@ -269,9 +270,20 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::JLE)||
             (inst.type == InstructionType::CALL))
         {
+            std::string raw_label = std::get<std::string>(inst.arg1);
+            if (!raw_label.empty() && raw_label[0] == '.')
+            {
+                if (current_scope.empty())
+                {
+                    std::cerr << "Local label '" << raw_label << "' used outside of a scope" << std::endl;
+                    exit(1);
+                }
+                raw_label = current_scope + raw_label;
+            }
+
             JmpInstBundle jmp_inst_bundle = {};
             jmp_inst_bundle.type = inst.type;
-            jmp_inst_bundle.label = std::get<std::string>(inst.arg1);
+            jmp_inst_bundle.label = raw_label;
             jmp_inst_bundle.index = this->lowerd_insts.size() + jmp_inst_correction;
             
             this->unresolved_jmp_insts.push_back(jmp_inst_bundle);
@@ -281,10 +293,24 @@ std::vector<Instruction> InstructionLowerer::lower()
         }
         if (inst.type == InstructionType::LABEL)
         {
-            std::string label = std::get<std::string>(inst.arg1);
+            std::string raw_label = std::get<std::string>(inst.arg1);
+            std::string scoped_label = raw_label;
+            if (!raw_label.empty() && raw_label[0] == '.')
+            {
+                if (current_scope.empty())
+                {
+                    std::cerr << "Local label '" << raw_label << "' declared outside of a scope" << std::endl;
+                    exit(1);
+                }
+                scoped_label = current_scope + raw_label;
+            }
+            else
+            {
+                current_scope = raw_label;
+            }
+
             int idx = this->lowerd_insts.size()+jmp_inst_correction;
-            this->label_indexes[label] = idx;
-            // std::cout << "Label: " << std::get<std::string>(inst.arg1) << " " << this->lowerd_insts.size() << "+" << jmp_inst_correction << "=" << idx << std::endl;
+            this->label_indexes[scoped_label] = idx;
             continue;
         }
 
@@ -300,6 +326,12 @@ std::vector<Instruction> InstructionLowerer::lower()
         lowerd_jmp.type = jmp_inst_bundle.type;
         std::string label = jmp_inst_bundle.label;
 
+        auto it = this->label_indexes.find(label);
+        if (it == this->label_indexes.end())
+        {
+            std::cout << "Cannot resolve address of label " << label << std::endl;
+            exit(1);
+        }
         int idx = this->label_indexes[label];
         lowerd_jmp.args[0] = idx;
         // std::cout << "label: " << label << " = " << idx << "\n========\n";

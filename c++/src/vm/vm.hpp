@@ -8,6 +8,7 @@
 #include <bit>
 #include <cmath>
 #include <iostream>
+#include <SDL3/SDL.h>
 #include "types.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -40,6 +41,8 @@ class VirtualMachine
 
     uint64_t resolveAddress(uint64_t arg, ArgType arg_type);
     uint64_t resolveValue(uint64_t arg, ArgType arg_type);
+
+    char getKeyboardInput();
 
 
     template<typename T>

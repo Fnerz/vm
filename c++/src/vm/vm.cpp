@@ -157,6 +157,9 @@ bool VirtualMachine::step()
     }
     this->run_time_counter++;
 
+    char input = this->getKeyboardInput();
+    // std::cout << input << std::endl;
+
     Instruction inst = this->instructions[this->ic];
     bool advance_ip = true;
 
@@ -529,7 +532,7 @@ bool VirtualMachine::step()
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             std::time_t now = std::time(nullptr);
-            this->registers[dest] = std::bit_cast<uint64_t>(now);
+            this->registers[dest] = std::bit_cast<uint64_t>(static_cast<double>(now));
             break;
         }
         case InstructionType::HALT:
@@ -615,5 +618,49 @@ std::map<int, uint64_t> VirtualMachine::getMemory()
 {
     return this->memory;
 }
+
+char VirtualMachine::getKeyboardInput()
+{
+    SDL_Event e;
+    while (SDL_PollEvent(&e))
+    {
+        switch (e.type)
+        {
+            case SDL_EVENT_QUIT:
+                exit(1);
+            case SDL_EVENT_KEY_DOWN:
+            {
+                SDL_Keycode key = e.key.key;
+                if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
+                {
+                    return '\n';
+                }
+                if (key == SDLK_BACKSPACE)
+                {
+                    return '\b';
+                }
+                if (key == SDLK_TAB)
+                {
+                    return '\t';
+                }
+                if (key >= SDLK_SPACE && key <= SDLK_Z)
+                {
+                    return static_cast<char>(key);
+                }
+                break;
+            }
+            case SDL_EVENT_TEXT_INPUT:
+                if (e.text.text[0] != '\0')
+                {
+                    return e.text.text[0];
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return '\0';
+}
+
 
 #endif

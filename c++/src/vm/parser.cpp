@@ -445,9 +445,29 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "cmp")
+        else if (this->cur.value == "cmpi")
         {
-            inst.type = InstructionType::CMP;
+            inst.type = InstructionType::CMPI;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "cmpf")
+        {
+            inst.type = InstructionType::CMPF;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2  = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "cmpu")
+        {
+            inst.type = InstructionType::CMPU;
             this->advance();
             inst.arg1 = this->getValue();
             this->eat(TokenType::COMMA);
