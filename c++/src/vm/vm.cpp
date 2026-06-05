@@ -174,10 +174,8 @@ bool VirtualMachine::step()
     this->run_time_counter++;
 
     char input = this->getKeyboardInput();
-    if (input != '\0')
-    {
-        std::cout << input;
-    }
+    this->registers[29] = static_cast<uint64_t>(static_cast<unsigned char>(input));
+
     // std::cout << input << std::endl;
 
     Instruction inst = this->instructions[this->ic];
@@ -473,6 +471,23 @@ bool VirtualMachine::step()
             print<uint64_t>(start, end);
             break;
         }
+        case InstructionType::PRINTC:
+        {
+            uint64_t start = this->resolveAddress(inst.args[0], inst.arg_types[0]);
+            uint64_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
+            if (start == end)
+            {
+                std::cout << static_cast<char>(this->registers[start]);
+            }
+            else
+            {
+                for (uint64_t idx = start; idx < end; ++idx)
+                {
+                    std::cout << static_cast<char>(this->registers[idx]);
+                }
+            }
+            break;
+        }
         case InstructionType::BREAKPOINT:
         {
             break;
@@ -515,7 +530,7 @@ bool VirtualMachine::step()
         case InstructionType::DECI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] -= dec<int64_t>(this->registers[dest]);
+            this->registers[dest] = dec<int64_t>(this->registers[dest]);
             break;
         }
         case InstructionType::DECF:
@@ -527,13 +542,13 @@ bool VirtualMachine::step()
         case InstructionType::DECU:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] -= dec<uint64_t>(this->registers[dest]);
+            this->registers[dest] = dec<uint64_t>(this->registers[dest]);
             break;
         }
         case InstructionType::INCI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] += inc<int64_t>(this->registers[dest]);
+            this->registers[dest] = inc<int64_t>(this->registers[dest]);
             break;
         }
         case InstructionType::INCF:
@@ -545,13 +560,14 @@ bool VirtualMachine::step()
         case InstructionType::INCU:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] += inc<uint64_t>(this->registers[dest]);
+            this->registers[dest] = inc<uint64_t>(this->registers[dest]);
             break;
         }
         case InstructionType::TIME:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             std::time_t now = std::time(nullptr);
+            std::cout << static_cast<double>(now) << std::endl;
             this->registers[dest] = std::bit_cast<uint64_t>(static_cast<double>(now));
             break;
         }

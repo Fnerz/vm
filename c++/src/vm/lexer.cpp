@@ -59,11 +59,11 @@ void userEndChoice()
 void checkRegisterSafety(Token tok)
 {
     int reg = std::stoi(tok.value);
-    if (reg == 29)
-    {
-        std::cout << "r29 is reserved for keyboard input" << std::endl;
-        userEndChoice();
-    }
+    // if (reg == 29)
+    // {
+    //     std::cout << "r29 is reserved for keyboard input" << std::endl;
+    //     userEndChoice();
+    // }
     if (reg >= 30 && reg <= 33)
     {
         std::cout << "r30-r33 are reserved for temp values" << std::endl;

@@ -39,9 +39,9 @@ int main(int argc, char *argv[])
     }
 
     SDL_Window *window = SDL_CreateWindow(
-        "VM Keyboard Input",
+        "VM Display",
         640,
-        120,
+        640,
         0);
     if (!window)
     {

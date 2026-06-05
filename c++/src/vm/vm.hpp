@@ -100,12 +100,12 @@ class VirtualMachine
     template<typename T>
     T inc(uint64_t a)
     {
-        return std::bit_cast<T>(a)+1;
+        return std::bit_cast<T>(a)+static_cast<T>(1);
     }
     template<typename T>
     T dec(uint64_t a)
     {
-        return std::bit_cast<T>(a)-1;
+        return std::bit_cast<T>(a)-static_cast<T>(1);
     }
 
 
@@ -117,7 +117,6 @@ class VirtualMachine
     void run();
     std::vector<uint64_t> getRegisters();
     std::map<int, uint64_t> getMemory();
-
 
 };
 

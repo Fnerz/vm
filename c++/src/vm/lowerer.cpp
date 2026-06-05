@@ -234,11 +234,14 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::MOV) ||
             (inst.type == InstructionType::ABSI) ||
             (inst.type == InstructionType::ABSF) ||
-            (inst.type == InstructionType::CMP) ||
+            (inst.type == InstructionType::CMPI) ||
+            (inst.type == InstructionType::CMPU) ||
+            (inst.type == InstructionType::CMPF) ||
             (inst.type == InstructionType::LOAD) ||
             (inst.type == InstructionType::STORE) ||
             (inst.type == InstructionType::PRINTI)||
             (inst.type == InstructionType::PRINTF)||
+            (inst.type == InstructionType::PRINTC)||
             (inst.type == InstructionType::PRINTU)||
             (inst.type == InstructionType::ITOF)||
             (inst.type == InstructionType::ITOU)||

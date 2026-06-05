@@ -1,19 +1,27 @@
 ; time r20
-; mov r3, i9000
 
+
+; mov r10, i100
 ; mov r0, i1
-; fibunacci:
-;     addi r2, r0, r1
+; itou r0, r0
+; itou r1, r1
+; itou r2, r2
+; fibu:
+;     addu r2, r0, r1
 ;     mov r0, r1
 ;     mov r1, r2
-;     bp
-;     inci r4
-;     cmpi r3, r4
-;     jge fibunacci
+
+;     deci r10
+;     cmpi r10, i0
+;     jg fibu
+
+; time r21
 ; subf r22, r21, r20
 ; printf r22, r22
 
-mov r0, i10
-mov r1, f10.0
-printf r1, r1
-printi r0, r0
+loop:
+mov r0, r29
+cmpi r0, i0
+je loop
+printc r0, r0
+jmp loop

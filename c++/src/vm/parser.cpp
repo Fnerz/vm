@@ -331,6 +331,16 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
+        else if (this->cur.value == "printc")
+        {
+            inst.type = InstructionType::PRINTC;
+            this->advance();
+            inst.arg1 = this->getValue();
+            this->eat(TokenType::COMMA);
+            inst.arg2 = this->getValue();
+            instructions.push_back(inst);
+            continue;
+        }
         else if (this->cur.value == "printu")
         {
             inst.type = InstructionType::PRINTU;
