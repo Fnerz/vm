@@ -153,101 +153,101 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/vm/assembler.obj: src/vm/assembler.cpp.obj
-.PHONY : src/vm/assembler.obj
+src/vm/assembler/assembler.obj: src/vm/assembler/assembler.cpp.obj
+.PHONY : src/vm/assembler/assembler.obj
 
 # target to build an object file
-src/vm/assembler.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler.cpp.obj
-.PHONY : src/vm/assembler.cpp.obj
+src/vm/assembler/assembler.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj
+.PHONY : src/vm/assembler/assembler.cpp.obj
 
-src/vm/assembler.i: src/vm/assembler.cpp.i
-.PHONY : src/vm/assembler.i
+src/vm/assembler/assembler.i: src/vm/assembler/assembler.cpp.i
+.PHONY : src/vm/assembler/assembler.i
 
 # target to preprocess a source file
-src/vm/assembler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler.cpp.i
-.PHONY : src/vm/assembler.cpp.i
+src/vm/assembler/assembler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.i
+.PHONY : src/vm/assembler/assembler.cpp.i
 
-src/vm/assembler.s: src/vm/assembler.cpp.s
-.PHONY : src/vm/assembler.s
+src/vm/assembler/assembler.s: src/vm/assembler/assembler.cpp.s
+.PHONY : src/vm/assembler/assembler.s
 
 # target to generate assembly for a file
-src/vm/assembler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler.cpp.s
-.PHONY : src/vm/assembler.cpp.s
+src/vm/assembler/assembler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.s
+.PHONY : src/vm/assembler/assembler.cpp.s
 
-src/vm/lexer.obj: src/vm/lexer.cpp.obj
-.PHONY : src/vm/lexer.obj
+src/vm/assembler/lexer.obj: src/vm/assembler/lexer.cpp.obj
+.PHONY : src/vm/assembler/lexer.obj
 
 # target to build an object file
-src/vm/lexer.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lexer.cpp.obj
-.PHONY : src/vm/lexer.cpp.obj
+src/vm/assembler/lexer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj
+.PHONY : src/vm/assembler/lexer.cpp.obj
 
-src/vm/lexer.i: src/vm/lexer.cpp.i
-.PHONY : src/vm/lexer.i
+src/vm/assembler/lexer.i: src/vm/assembler/lexer.cpp.i
+.PHONY : src/vm/assembler/lexer.i
 
 # target to preprocess a source file
-src/vm/lexer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lexer.cpp.i
-.PHONY : src/vm/lexer.cpp.i
+src/vm/assembler/lexer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.i
+.PHONY : src/vm/assembler/lexer.cpp.i
 
-src/vm/lexer.s: src/vm/lexer.cpp.s
-.PHONY : src/vm/lexer.s
+src/vm/assembler/lexer.s: src/vm/assembler/lexer.cpp.s
+.PHONY : src/vm/assembler/lexer.s
 
 # target to generate assembly for a file
-src/vm/lexer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lexer.cpp.s
-.PHONY : src/vm/lexer.cpp.s
+src/vm/assembler/lexer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.s
+.PHONY : src/vm/assembler/lexer.cpp.s
 
-src/vm/lowerer.obj: src/vm/lowerer.cpp.obj
-.PHONY : src/vm/lowerer.obj
+src/vm/assembler/lowerer.obj: src/vm/assembler/lowerer.cpp.obj
+.PHONY : src/vm/assembler/lowerer.obj
 
 # target to build an object file
-src/vm/lowerer.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj
-.PHONY : src/vm/lowerer.cpp.obj
+src/vm/assembler/lowerer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj
+.PHONY : src/vm/assembler/lowerer.cpp.obj
 
-src/vm/lowerer.i: src/vm/lowerer.cpp.i
-.PHONY : src/vm/lowerer.i
+src/vm/assembler/lowerer.i: src/vm/assembler/lowerer.cpp.i
+.PHONY : src/vm/assembler/lowerer.i
 
 # target to preprocess a source file
-src/vm/lowerer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lowerer.cpp.i
-.PHONY : src/vm/lowerer.cpp.i
+src/vm/assembler/lowerer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.i
+.PHONY : src/vm/assembler/lowerer.cpp.i
 
-src/vm/lowerer.s: src/vm/lowerer.cpp.s
-.PHONY : src/vm/lowerer.s
+src/vm/assembler/lowerer.s: src/vm/assembler/lowerer.cpp.s
+.PHONY : src/vm/assembler/lowerer.s
 
 # target to generate assembly for a file
-src/vm/lowerer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/lowerer.cpp.s
-.PHONY : src/vm/lowerer.cpp.s
+src/vm/assembler/lowerer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.s
+.PHONY : src/vm/assembler/lowerer.cpp.s
 
-src/vm/parser.obj: src/vm/parser.cpp.obj
-.PHONY : src/vm/parser.obj
+src/vm/assembler/parser.obj: src/vm/assembler/parser.cpp.obj
+.PHONY : src/vm/assembler/parser.obj
 
 # target to build an object file
-src/vm/parser.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/parser.cpp.obj
-.PHONY : src/vm/parser.cpp.obj
+src/vm/assembler/parser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj
+.PHONY : src/vm/assembler/parser.cpp.obj
 
-src/vm/parser.i: src/vm/parser.cpp.i
-.PHONY : src/vm/parser.i
+src/vm/assembler/parser.i: src/vm/assembler/parser.cpp.i
+.PHONY : src/vm/assembler/parser.i
 
 # target to preprocess a source file
-src/vm/parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/parser.cpp.i
-.PHONY : src/vm/parser.cpp.i
+src/vm/assembler/parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.i
+.PHONY : src/vm/assembler/parser.cpp.i
 
-src/vm/parser.s: src/vm/parser.cpp.s
-.PHONY : src/vm/parser.s
+src/vm/assembler/parser.s: src/vm/assembler/parser.cpp.s
+.PHONY : src/vm/assembler/parser.s
 
 # target to generate assembly for a file
-src/vm/parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/parser.cpp.s
-.PHONY : src/vm/parser.cpp.s
+src/vm/assembler/parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.s
+.PHONY : src/vm/assembler/parser.cpp.s
 
 src/vm/types.obj: src/vm/types.cpp.obj
 .PHONY : src/vm/types.obj
@@ -309,18 +309,18 @@ help:
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/vm/assembler.obj"
-	@echo "... src/vm/assembler.i"
-	@echo "... src/vm/assembler.s"
-	@echo "... src/vm/lexer.obj"
-	@echo "... src/vm/lexer.i"
-	@echo "... src/vm/lexer.s"
-	@echo "... src/vm/lowerer.obj"
-	@echo "... src/vm/lowerer.i"
-	@echo "... src/vm/lowerer.s"
-	@echo "... src/vm/parser.obj"
-	@echo "... src/vm/parser.i"
-	@echo "... src/vm/parser.s"
+	@echo "... src/vm/assembler/assembler.obj"
+	@echo "... src/vm/assembler/assembler.i"
+	@echo "... src/vm/assembler/assembler.s"
+	@echo "... src/vm/assembler/lexer.obj"
+	@echo "... src/vm/assembler/lexer.i"
+	@echo "... src/vm/assembler/lexer.s"
+	@echo "... src/vm/assembler/lowerer.obj"
+	@echo "... src/vm/assembler/lowerer.i"
+	@echo "... src/vm/assembler/lowerer.s"
+	@echo "... src/vm/assembler/parser.obj"
+	@echo "... src/vm/assembler/parser.i"
+	@echo "... src/vm/assembler/parser.s"
 	@echo "... src/vm/types.obj"
 	@echo "... src/vm/types.i"
 	@echo "... src/vm/types.s"

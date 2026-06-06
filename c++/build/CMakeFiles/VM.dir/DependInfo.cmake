@@ -9,10 +9,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/msys64/home/lenna/vm/c++/src/main.cpp" "CMakeFiles/VM.dir/src/main.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/main.cpp.obj.d"
-  "C:/msys64/home/lenna/vm/c++/src/vm/assembler.cpp" "CMakeFiles/VM.dir/src/vm/assembler.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler.cpp.obj.d"
-  "C:/msys64/home/lenna/vm/c++/src/vm/lexer.cpp" "CMakeFiles/VM.dir/src/vm/lexer.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/lexer.cpp.obj.d"
-  "C:/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp" "CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj.d"
-  "C:/msys64/home/lenna/vm/c++/src/vm/parser.cpp" "CMakeFiles/VM.dir/src/vm/parser.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/parser.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/assembler/assembler.cpp" "CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.cpp" "CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp" "CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp" "CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj.d"
   "C:/msys64/home/lenna/vm/c++/src/vm/types.cpp" "CMakeFiles/VM.dir/src/vm/types.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/types.cpp.obj.d"
   "C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp" "CMakeFiles/VM.dir/src/vm/vm.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/vm.cpp.obj.d"
   )

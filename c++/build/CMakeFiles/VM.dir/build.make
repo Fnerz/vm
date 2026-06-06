@@ -100,38 +100,10 @@ CMakeFiles/VM.dir/src/vm/vm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/vm.cpp.s"
 	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/vm.cpp -o CMakeFiles/VM.dir/src/vm/vm.cpp.s
 
-CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: CMakeFiles/VM.dir/flags.make
-CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lexer.cpp
-CMakeFiles/VM.dir/src/vm/lexer.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/VM.dir/src/vm/lexer.cpp.obj"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/lexer.cpp.obj -MF CMakeFiles/VM.dir/src/vm/lexer.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/lexer.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/lexer.cpp
-
-CMakeFiles/VM.dir/src/vm/lexer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/lexer.cpp.i"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/lexer.cpp > CMakeFiles/VM.dir/src/vm/lexer.cpp.i
-
-CMakeFiles/VM.dir/src/vm/lexer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/lexer.cpp.s"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/lexer.cpp -o CMakeFiles/VM.dir/src/vm/lexer.cpp.s
-
-CMakeFiles/VM.dir/src/vm/parser.cpp.obj: CMakeFiles/VM.dir/flags.make
-CMakeFiles/VM.dir/src/vm/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/parser.cpp
-CMakeFiles/VM.dir/src/vm/parser.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/VM.dir/src/vm/parser.cpp.obj"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/parser.cpp.obj -MF CMakeFiles/VM.dir/src/vm/parser.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/parser.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/parser.cpp
-
-CMakeFiles/VM.dir/src/vm/parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/parser.cpp.i"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/parser.cpp > CMakeFiles/VM.dir/src/vm/parser.cpp.i
-
-CMakeFiles/VM.dir/src/vm/parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/parser.cpp.s"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/parser.cpp -o CMakeFiles/VM.dir/src/vm/parser.cpp.s
-
 CMakeFiles/VM.dir/src/vm/types.cpp.obj: CMakeFiles/VM.dir/flags.make
 CMakeFiles/VM.dir/src/vm/types.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/types.cpp
 CMakeFiles/VM.dir/src/vm/types.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/VM.dir/src/vm/types.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/VM.dir/src/vm/types.cpp.obj"
 	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/types.cpp.obj -MF CMakeFiles/VM.dir/src/vm/types.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/types.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/types.cpp
 
 CMakeFiles/VM.dir/src/vm/types.cpp.i: cmake_force
@@ -142,54 +114,82 @@ CMakeFiles/VM.dir/src/vm/types.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/types.cpp.s"
 	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/types.cpp -o CMakeFiles/VM.dir/src/vm/types.cpp.s
 
-CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj: CMakeFiles/VM.dir/flags.make
-CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp
-CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj -MF CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp
+CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj: CMakeFiles/VM.dir/flags.make
+CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.cpp
+CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj -MF CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.cpp
 
-CMakeFiles/VM.dir/src/vm/lowerer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/lowerer.cpp.i"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp > CMakeFiles/VM.dir/src/vm/lowerer.cpp.i
+CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.i"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.cpp > CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.i
 
-CMakeFiles/VM.dir/src/vm/lowerer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/lowerer.cpp.s"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/lowerer.cpp -o CMakeFiles/VM.dir/src/vm/lowerer.cpp.s
+CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.s"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.cpp -o CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.s
 
-CMakeFiles/VM.dir/src/vm/assembler.cpp.obj: CMakeFiles/VM.dir/flags.make
-CMakeFiles/VM.dir/src/vm/assembler.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/assembler.cpp
-CMakeFiles/VM.dir/src/vm/assembler.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/VM.dir/src/vm/assembler.cpp.obj"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/assembler.cpp.obj -MF CMakeFiles/VM.dir/src/vm/assembler.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/assembler.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/assembler.cpp
+CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj: CMakeFiles/VM.dir/flags.make
+CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp
+CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj -MF CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp
 
-CMakeFiles/VM.dir/src/vm/assembler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/assembler.cpp.i"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/assembler.cpp > CMakeFiles/VM.dir/src/vm/assembler.cpp.i
+CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.i"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp > CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.i
 
-CMakeFiles/VM.dir/src/vm/assembler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/assembler.cpp.s"
-	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/assembler.cpp -o CMakeFiles/VM.dir/src/vm/assembler.cpp.s
+CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.s"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp -o CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.s
+
+CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj: CMakeFiles/VM.dir/flags.make
+CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp
+CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj -MF CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp
+
+CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.i"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp > CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.i
+
+CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.s"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp -o CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.s
+
+CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj: CMakeFiles/VM.dir/flags.make
+CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/assembler/assembler.cpp
+CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj: CMakeFiles/VM.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj -MF CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj.d -o CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj -c /C/msys64/home/lenna/vm/c++/src/vm/assembler/assembler.cpp
+
+CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.i"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /C/msys64/home/lenna/vm/c++/src/vm/assembler/assembler.cpp > CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.i
+
+CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.s"
+	/C/msys64/mingw64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /C/msys64/home/lenna/vm/c++/src/vm/assembler/assembler.cpp -o CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.s
 
 # Object files for target VM
 VM_OBJECTS = \
 "CMakeFiles/VM.dir/src/main.cpp.obj" \
 "CMakeFiles/VM.dir/src/vm/vm.cpp.obj" \
-"CMakeFiles/VM.dir/src/vm/lexer.cpp.obj" \
-"CMakeFiles/VM.dir/src/vm/parser.cpp.obj" \
 "CMakeFiles/VM.dir/src/vm/types.cpp.obj" \
-"CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj" \
-"CMakeFiles/VM.dir/src/vm/assembler.cpp.obj"
+"CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj" \
+"CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj" \
+"CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj" \
+"CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj"
 
 # External object files for target VM
 VM_EXTERNAL_OBJECTS =
 
 VM.exe: CMakeFiles/VM.dir/src/main.cpp.obj
 VM.exe: CMakeFiles/VM.dir/src/vm/vm.cpp.obj
-VM.exe: CMakeFiles/VM.dir/src/vm/lexer.cpp.obj
-VM.exe: CMakeFiles/VM.dir/src/vm/parser.cpp.obj
 VM.exe: CMakeFiles/VM.dir/src/vm/types.cpp.obj
-VM.exe: CMakeFiles/VM.dir/src/vm/lowerer.cpp.obj
-VM.exe: CMakeFiles/VM.dir/src/vm/assembler.cpp.obj
+VM.exe: CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj
+VM.exe: CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj
+VM.exe: CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj
+VM.exe: CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj
 VM.exe: CMakeFiles/VM.dir/build.make
 VM.exe: C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/lib/libSDL3.dll.a
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable VM.exe"

@@ -80,15 +80,14 @@ bool VirtualMachine::step()
     }
     this->run_time_counter++;
 
-    // char input = this->getKeyboardInput();
-    // this->registers[29] = static_cast<uint64_t>(static_cast<unsigned char>(input));
+    char input = this->getKeyboardInput();
+    this->registers[29] = static_cast<uint64_t>(static_cast<unsigned char>(input));
 
     // std::cout << input << std::endl;
 
     const Instruction* inst_ptr = reinterpret_cast<const Instruction*>(&this->memory[this->ic * INSTRUCTION_WORDS]);
     Instruction inst = *inst_ptr;
     bool advance_ip = true;
-    std::cout << "inst: " << instructionRepr(inst) << std::endl;
 
     switch (inst.type)
     {
@@ -534,48 +533,48 @@ void VirtualMachine::run()
     return;
 }
 
-// char VirtualMachine::getKeyboardInput()
-// {
-//     SDL_Event e;
-//     while (SDL_PollEvent(&e))
-//     {
-//         switch (e.type)
-//         {
-//             case SDL_EVENT_QUIT:
-//                 exit(1);
-//             case SDL_EVENT_KEY_DOWN:
-//             {
-//                 SDL_Keycode key = e.key.key;
-//                 if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
-//                 {
-//                     return '\n';
-//                 }
-//                 if (key == SDLK_BACKSPACE)
-//                 {
-//                     return '\b';
-//                 }
-//                 if (key == SDLK_TAB)
-//                 {
-//                     return '\t';
-//                 }
-//                 if (key >= SDLK_SPACE && key <= SDLK_Z)
-//                 {
-//                     return static_cast<char>(key);
-//                 }
-//                 break;
-//             }
-//             case SDL_EVENT_TEXT_INPUT:
-//                 if (e.text.text[0] != '\0')
-//                 {
-//                     return e.text.text[0];
-//                 }
-//                 break;
-//             default:
-//                 break;
-//         }
-//     }
-//     return '\0';
-// }
+char VirtualMachine::getKeyboardInput()
+{
+    SDL_Event e;
+    while (SDL_PollEvent(&e))
+    {
+        switch (e.type)
+        {
+            case SDL_EVENT_QUIT:
+                exit(1);
+            case SDL_EVENT_KEY_DOWN:
+            {
+                SDL_Keycode key = e.key.key;
+                if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
+                {
+                    return '\n';
+                }
+                if (key == SDLK_BACKSPACE)
+                {
+                    return '\b';
+                }
+                if (key == SDLK_TAB)
+                {
+                    return '\t';
+                }
+                if (key >= SDLK_SPACE && key <= SDLK_Z)
+                {
+                    return static_cast<char>(key);
+                }
+                break;
+            }
+            case SDL_EVENT_TEXT_INPUT:
+                if (e.text.text[0] != '\0')
+                {
+                    return e.text.text[0];
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return '\0';
+}
 
 void VirtualMachine::loadInstBinary(std::vector<uint64_t> words)
 {

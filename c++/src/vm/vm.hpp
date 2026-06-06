@@ -9,11 +9,8 @@
 #include <bit>
 #include <cmath>
 #include <iostream>
-// #include <SDL3/SDL.h>
+#include <SDL3/SDL.h>
 #include "types.hpp"
-#include "lexer.hpp"
-#include "parser.hpp"
-#include "lowerer.hpp"
 
 class VirtualMachine
 {

@@ -23,11 +23,11 @@ find_package(SDL3 REQUIRED CONFIG PATHS ${SDL3_DIR})
 set(VM_SOURCES
     src/main.cpp
     src/vm/vm.cpp
-    src/vm/lexer.cpp
-    src/vm/parser.cpp
     src/vm/types.cpp
-    src/vm/lowerer.cpp
-    src/vm/assembler.cpp
+    src/vm/assembler/lexer.cpp
+    src/vm/assembler/parser.cpp
+    src/vm/assembler/lowerer.cpp
+    src/vm/assembler/assembler.cpp
 )
 add_executable(VM ${VM_SOURCES})
 target_link_libraries(VM PRIVATE SDL3::SDL3)
