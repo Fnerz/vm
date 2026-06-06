@@ -27,6 +27,7 @@ set(VM_SOURCES
     src/vm/parser.cpp
     src/vm/types.cpp
     src/vm/lowerer.cpp
+    src/vm/assembler.cpp
 )
 add_executable(VM ${VM_SOURCES})
 target_link_libraries(VM PRIVATE SDL3::SDL3)

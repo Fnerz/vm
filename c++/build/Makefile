@@ -153,6 +153,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/vm/assembler.obj: src/vm/assembler.cpp.obj
+.PHONY : src/vm/assembler.obj
+
+# target to build an object file
+src/vm/assembler.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler.cpp.obj
+.PHONY : src/vm/assembler.cpp.obj
+
+src/vm/assembler.i: src/vm/assembler.cpp.i
+.PHONY : src/vm/assembler.i
+
+# target to preprocess a source file
+src/vm/assembler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler.cpp.i
+.PHONY : src/vm/assembler.cpp.i
+
+src/vm/assembler.s: src/vm/assembler.cpp.s
+.PHONY : src/vm/assembler.s
+
+# target to generate assembly for a file
+src/vm/assembler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler.cpp.s
+.PHONY : src/vm/assembler.cpp.s
+
 src/vm/lexer.obj: src/vm/lexer.cpp.obj
 .PHONY : src/vm/lexer.obj
 
@@ -285,6 +309,9 @@ help:
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/vm/assembler.obj"
+	@echo "... src/vm/assembler.i"
+	@echo "... src/vm/assembler.s"
 	@echo "... src/vm/lexer.obj"
 	@echo "... src/vm/lexer.i"
 	@echo "... src/vm/lexer.s"

@@ -85,12 +85,12 @@ clean: CMakeFiles/VM.dir/clean
 CMakeFiles/VM.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target VM"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target VM"
 .PHONY : CMakeFiles/VM.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/VM.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /C/msys64/home/lenna/vm/c++/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /C/msys64/home/lenna/vm/c++/build/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/VM.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /C/msys64/home/lenna/vm/c++/build/CMakeFiles 0
 .PHONY : CMakeFiles/VM.dir/rule
@@ -102,7 +102,7 @@ VM: CMakeFiles/VM.dir/rule
 # codegen rule for target.
 CMakeFiles/VM.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target VM"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/C/msys64/home/lenna/vm/c++/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Finished codegen for target VM"
 .PHONY : CMakeFiles/VM.dir/codegen
 
 # clean rule for target.

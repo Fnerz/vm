@@ -194,9 +194,14 @@ std::vector<Instruction> InstructionLowerer::lower()
     int jmp_inst_correction = 0; /* since the jmp insts are inserted later on, when all labels are resolved,
     and the labels use this->lower_insts.size() for their index we need to account for the missing jmp insts.*/
     std::string current_scope = "";
-    for (int i = 0; i < this->ir_insts.size(); i++)
+    std::vector<Instruction> lowerd_insts = {};
+    if (this->ir_insts.empty())
     {
-        InstructionIr inst = this->ir_insts[i];
+        return lowerd_insts;
+    }
+    for (size_t i = 0; i < this->ir_insts.size(); ++i)
+    {
+        const InstructionIr &inst = this->ir_insts[i];
         this->freeAllTempRegs();
         Instruction lower_inst = {};
         lower_inst.type = inst.type;

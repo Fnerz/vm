@@ -19,9 +19,8 @@
 ; subf r22, r21, r20
 ; printf r22, r22
 
-loop:
-mov r0, r29
-cmpi r0, i0
-je loop
-printc r0, r0
-jmp loop
+mov r0, i1
+printi r0, r0
+hlt
+printi r0, r0
+

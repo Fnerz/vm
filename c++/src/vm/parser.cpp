@@ -608,6 +608,13 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
+        else if (this->cur.value == "hlt")
+        {
+            inst.type = InstructionType::HALT;
+            this->advance();
+            instructions.push_back(inst);
+            continue;
+        }
         else if (this->cur.type == TokenType::SYMBOL)
         {
             inst.type = InstructionType::LABEL;

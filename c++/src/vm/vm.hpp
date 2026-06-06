@@ -5,10 +5,11 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <ctime>
 #include <bit>
 #include <cmath>
 #include <iostream>
-#include <SDL3/SDL.h>
+// #include <SDL3/SDL.h>
 #include "types.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -17,12 +18,13 @@
 class VirtualMachine
 {
     private:
-    std::vector<std::vector<Token>> token_lines = {};
-    std::vector<InstructionIr> ir_instructions = {};
 
-    const int REGISTER_COUNT = 34; // r30 - r33 reserved for temp storage. r30 is used for the pointer arithmetic accumulator. r31-r33 are just chilling for now.
-    std::vector<uint64_t> registers = {};
-    std::map<int, uint64_t> memory = {};
+
+    // r30 - r33 reserved for temp storage. r30 is used for the pointer arithmetic accumulator. r31-r33 are just chilling for now.
+    // 29 reserved for keyboard input
+    static constexpr int REGISTER_COUNT = 34; 
+    std::vector<uint64_t> registers = std::vector<uint64_t>(REGISTER_COUNT);
+    std::vector<uint64_t> memory = std::vector<uint64_t>(1000000);
     std::vector<uint64_t> stack = {};
     std::vector<int> call_stack = {};
     
@@ -31,12 +33,11 @@ class VirtualMachine
     bool greater_flag = false;
     
     int ic = 0;
-    std::vector<Instruction> instructions;
+    int instruction_count = 0;
+    static constexpr int INSTRUCTION_WORDS = sizeof(Instruction) / sizeof(uint64_t);
 
     int run_time_counter = 0;
     
-    void tokenize(std::string code);
-    void parse();
     void resetFlags();
 
     uint64_t resolveAddress(uint64_t arg, ArgType arg_type);
@@ -110,14 +111,10 @@ class VirtualMachine
 
 
     public:
-    void reset();
-    void loadCode(std::string code, bool debug);
     void testFunc();
     bool step();
     void run();
-    std::vector<uint64_t> getRegisters();
-    std::map<int, uint64_t> getMemory();
-
+    void loadInstBinary(std::vector<uint64_t> words);
 };
 
 #endif

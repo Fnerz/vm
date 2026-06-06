@@ -2,8 +2,6 @@
 #define VM_CPP
 
 #include "vm.hpp"
-#include <ctime>
-#include <bit>
 
 
 void VirtualMachine::resetFlags()
@@ -13,97 +11,6 @@ void VirtualMachine::resetFlags()
     this->greater_flag = false;
 }
 
-void VirtualMachine::reset()
-{
-    this->registers = {};
-    this->memory = {};
-    this->stack = {};
-    this->call_stack = {};
-    this->ic = 0;
-    this->run_time_counter = 0;
-
-    this->resetFlags();
-
-    for (int i = 0; i < this->REGISTER_COUNT; i++)
-    {
-        this->registers.push_back(0);
-    }
-    return;
-}
-
-std::vector<std::string> splitCodeToLines(std::string code)
-{
-    std::vector<std::string> lines;
-    std::string buffer = "";
-    for (auto c : code) 
-    {
-        if (c == '\n')
-        {
-            lines.push_back(buffer);
-            buffer = "";
-            continue;
-        }
-        buffer += c;
-    }
-    if (buffer.size() > 0)
-    {
-        lines.push_back(buffer);
-    }
-    return lines;
-}
-
-void VirtualMachine::tokenize(std::string code)
-{
-    std::vector<std::string> lines = splitCodeToLines(code);
-    for (auto line : lines)
-    {
-        LineLexer lexer(line);
-        this->token_lines.push_back(lexer.tokenize());
-    }
-    return;
-}
-
-void VirtualMachine::parse()
-{
-    for (auto tok_line : this->token_lines)
-    {
-        LineParser parser(tok_line);
-        auto insts = parser.parse(); // parser is expected to return only one instructino atm, but i chose to go the safe rout.
-        for (auto inst : insts)
-            this->ir_instructions.push_back(inst);
-    }
-    return;
-}
-
-void VirtualMachine::loadCode(std::string code, bool debug)
-{
-    std::transform(code.begin(), code.end(), code.begin(),[](unsigned char c){ return std::tolower(c); });
-    this->reset();
-    this->tokenize(code);
-    this->parse();
-    if  (debug)
-    {
-        for (auto inst : this->ir_instructions)
-        {
-            std::cout << instructionIrRepr(inst) << std::endl;
-        }
-        std::cout << "==========================================" << std::endl;
-    }
-    InstructionLowerer lowerer(this->ir_instructions);
-    this->instructions = lowerer.lower();
-    if (debug)
-    {
-        for (int i = 0; i < this->instructions.size(); i++)
-        {
-            auto inst = this->instructions[i];
-            std::cout << i << "\t" << instructionRepr(inst) << std::endl;
-        }
-        std::cout << "==========================================" << std::endl;
-    }
-
-
-    return;
-}
 
 uint64_t VirtualMachine::resolveAddress(uint64_t arg, ArgType arg_type)
 {
@@ -167,19 +74,21 @@ uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
 
 bool VirtualMachine::step()
 {
-    if (this->ic < 0 || this->ic >= this->instructions.size())
+    if (this->ic < 0 || this->ic >= this->instruction_count)
     {
         return false;
     }
     this->run_time_counter++;
 
-    char input = this->getKeyboardInput();
-    this->registers[29] = static_cast<uint64_t>(static_cast<unsigned char>(input));
+    // char input = this->getKeyboardInput();
+    // this->registers[29] = static_cast<uint64_t>(static_cast<unsigned char>(input));
 
     // std::cout << input << std::endl;
 
-    Instruction inst = this->instructions[this->ic];
+    const Instruction* inst_ptr = reinterpret_cast<const Instruction*>(&this->memory[this->ic * INSTRUCTION_WORDS]);
+    Instruction inst = *inst_ptr;
     bool advance_ip = true;
+    std::cout << "inst: " << instructionRepr(inst) << std::endl;
 
     switch (inst.type)
     {
@@ -326,25 +235,6 @@ bool VirtualMachine::step()
             this->registers[dest] = std::bit_cast<uint64_t>(abs<double>(this->registers[dest]));
             break;
         }
-        case InstructionType::CMP:
-        {
-            uint64_t left = this->resolveValue(inst.args[0], inst.arg_types[0]);
-            uint64_t right = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            this->resetFlags();
-            if (left < right)
-            {
-                this->lesser_flag = true;
-            }
-            else if (left > right)
-            {
-                this->greater_flag = true;
-            }
-            else
-            {
-                this->equal_flag = true;
-            }
-            break;
-        }
         case InstructionType::CMPI:
         {
             int64_t left = static_cast<int64_t>(this->resolveValue(inst.args[0], inst.arg_types[0]));
@@ -438,8 +328,7 @@ bool VirtualMachine::step()
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            auto it = this->memory.find(static_cast<int>(src_addr));
-            this->registers[dest] = (it != this->memory.end()) ? it->second : 0;
+            this->registers[dest] = this->memory[static_cast<int>(src_addr)];
             break;
         }
         case InstructionType::STORE:
@@ -645,58 +534,63 @@ void VirtualMachine::run()
     return;
 }
 
-std::vector<uint64_t> VirtualMachine::getRegisters()
-{
-    return this->registers;
-}
+// char VirtualMachine::getKeyboardInput()
+// {
+//     SDL_Event e;
+//     while (SDL_PollEvent(&e))
+//     {
+//         switch (e.type)
+//         {
+//             case SDL_EVENT_QUIT:
+//                 exit(1);
+//             case SDL_EVENT_KEY_DOWN:
+//             {
+//                 SDL_Keycode key = e.key.key;
+//                 if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
+//                 {
+//                     return '\n';
+//                 }
+//                 if (key == SDLK_BACKSPACE)
+//                 {
+//                     return '\b';
+//                 }
+//                 if (key == SDLK_TAB)
+//                 {
+//                     return '\t';
+//                 }
+//                 if (key >= SDLK_SPACE && key <= SDLK_Z)
+//                 {
+//                     return static_cast<char>(key);
+//                 }
+//                 break;
+//             }
+//             case SDL_EVENT_TEXT_INPUT:
+//                 if (e.text.text[0] != '\0')
+//                 {
+//                     return e.text.text[0];
+//                 }
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+//     return '\0';
+// }
 
-std::map<int, uint64_t> VirtualMachine::getMemory()
+void VirtualMachine::loadInstBinary(std::vector<uint64_t> words)
 {
-    return this->memory;
-}
-
-char VirtualMachine::getKeyboardInput()
-{
-    SDL_Event e;
-    while (SDL_PollEvent(&e))
+    if (words.size() % INSTRUCTION_WORDS != 0)
     {
-        switch (e.type)
-        {
-            case SDL_EVENT_QUIT:
-                exit(1);
-            case SDL_EVENT_KEY_DOWN:
-            {
-                SDL_Keycode key = e.key.key;
-                if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
-                {
-                    return '\n';
-                }
-                if (key == SDLK_BACKSPACE)
-                {
-                    return '\b';
-                }
-                if (key == SDLK_TAB)
-                {
-                    return '\t';
-                }
-                if (key >= SDLK_SPACE && key <= SDLK_Z)
-                {
-                    return static_cast<char>(key);
-                }
-                break;
-            }
-            case SDL_EVENT_TEXT_INPUT:
-                if (e.text.text[0] != '\0')
-                {
-                    return e.text.text[0];
-                }
-                break;
-            default:
-                break;
-        }
+        std::cerr << "Binary instruction stream size is not aligned to Instruction size" << std::endl;
+        exit(1);
     }
-    return '\0';
-}
 
+    this->instruction_count = static_cast<int>(words.size() / INSTRUCTION_WORDS);
+    for (int i = 0; i < static_cast<int>(words.size()); i++)
+    {
+        this->memory[i] = words[i];
+    }
+    return;
+}
 
 #endif

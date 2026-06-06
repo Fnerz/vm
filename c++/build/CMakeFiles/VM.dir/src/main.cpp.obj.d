@@ -154,71 +154,6 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_stdinc.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_platform_defines.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h \
- C:/msys64/mingw64/include/stdarg.h \
- C:/msys64/mingw64/include/_mingw_stdarg.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdint.h \
- C:/msys64/mingw64/include/stdint.h C:/msys64/mingw64/include/string.h \
- C:/msys64/mingw64/include/sec_api/string_s.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_begin_code.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_close_code.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_assert.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_asyncio.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_atomic.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_audio.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_endian.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_error.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_mutex.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_thread.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_properties.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_iostream.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_bits.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_blendmode.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_camera.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_pixels.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_surface.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_rect.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_clipboard.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_cpuinfo.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_dialog.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_video.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_events.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_gamepad.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_guid.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_joystick.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_power.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_sensor.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_keyboard.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_keycode.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_scancode.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_mouse.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_pen.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_touch.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_filesystem.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_gpu.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_haptic.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_hidapi.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_hints.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_init.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_loadso.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_locale.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_log.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_messagebox.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_metal.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_misc.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_platform.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_process.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_render.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_storage.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_system.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_time.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_timer.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_tray.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_version.h \
- C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_oldnames.h \
  C:/msys64/home/lenna/vm/c++/src/vm/vm.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/vector \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_uninitialized.h \
@@ -232,6 +167,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_map.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_multimap.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h \
+ C:/msys64/mingw64/include/c++/15.2.0/ctime \
  C:/msys64/mingw64/include/c++/15.2.0/cmath \
  C:/msys64/mingw64/include/math.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/specfun.h \
@@ -267,6 +203,8 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_lockfree_defines.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/atomic_wait.h \
  C:/msys64/mingw64/include/c++/15.2.0/cstdint \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdint.h \
+ C:/msys64/mingw64/include/stdint.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/std_mutex.h \
  C:/msys64/mingw64/include/c++/15.2.0/backward/auto_ptr.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_uninitialized.h \
@@ -282,4 +220,5 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
  C:/msys64/home/lenna/vm/c++/src/vm/lexer.hpp \
  C:/msys64/home/lenna/vm/c++/src/vm/parser.hpp \
- C:/msys64/home/lenna/vm/c++/src/vm/lowerer.hpp
+ C:/msys64/home/lenna/vm/c++/src/vm/lowerer.hpp \
+ C:/msys64/home/lenna/vm/c++/src/vm/assembler.hpp
