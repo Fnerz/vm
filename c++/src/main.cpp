@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
 
     SDL_Window *window = SDL_CreateWindow(
         "VM Display",
-        640,
-        640,
+        500,
+        350,
         0);
     if (!window)
     {

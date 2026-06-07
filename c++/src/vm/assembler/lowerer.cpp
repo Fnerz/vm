@@ -93,6 +93,10 @@ std::tuple<uint64_t, ArgType> tokenToArgBundle(Token tok)
         uint64_t value = static_cast<uint64_t>(static_cast<unsigned char>(tok.value[0]));
         return std::make_tuple(value, ArgType::IMMEDIATE_C);
     }
+    if (tok.type == TokenType::POINTER)
+    {
+        return std::make_tuple(std::stoi(tok.value), ArgType::POINTER);
+    }
     else if (tok.type == TokenType::REGISTER)
     {
         return std::make_tuple(std::stoi(tok.value), ArgType::REGISTER);
@@ -221,7 +225,9 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::DIVF) ||
             (inst.type == InstructionType::DIVU) ||
             (inst.type == InstructionType::MODI) ||
-            (inst.type == InstructionType::MODF))
+            (inst.type == InstructionType::MODF) ||
+            (inst.type == InstructionType::READ) ||
+            (inst.type == InstructionType::WRITE))
         {
             std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
             std::tuple<uint64_t, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
@@ -248,6 +254,7 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::PRINTF)||
             (inst.type == InstructionType::PRINTC)||
             (inst.type == InstructionType::PRINTU)||
+            (inst.type == InstructionType::OPEN)||
             (inst.type == InstructionType::ITOF)||
             (inst.type == InstructionType::ITOU)||
             (inst.type == InstructionType::FTOI)||
@@ -269,7 +276,8 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::POP) ||
             (inst.type == InstructionType::DECI) ||
             (inst.type == InstructionType::INCI) ||
-            (inst.type == InstructionType::TIME))
+            (inst.type == InstructionType::TIME) ||
+            (inst.type == InstructionType::CLOSE))
         {
             std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
 

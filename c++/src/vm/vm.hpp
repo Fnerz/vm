@@ -40,6 +40,11 @@ class VirtualMachine
     uint64_t resolveAddress(uint64_t arg, ArgType arg_type);
     uint64_t resolveValue(uint64_t arg, ArgType arg_type);
 
+    bool isValidMemoryRange(uint64_t addr, uint64_t count);
+    std::string readStringFromMemory(uint64_t addr);
+    void loadBytesFromMemory(uint64_t addr, char* buffer, uint64_t count);
+    void storeBytesToMemory(uint64_t addr, const char* buffer, uint64_t count);
+
     char getKeyboardInput();
 
 

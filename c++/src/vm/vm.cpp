@@ -2,7 +2,16 @@
 #define VM_CPP
 
 #include "vm.hpp"
+#include <fcntl.h>
+#ifdef _WIN32
+#include <io.h>
+#else
+#include <unistd.h>
+#endif
 
+#ifndef O_BINARY
+#define O_BINARY 0
+#endif
 
 void VirtualMachine::resetFlags()
 {
@@ -70,6 +79,63 @@ uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
         exit(1);
     }
     exit(1); // useless as its never gonna reach this, but g++ is complaining.
+}
+
+bool VirtualMachine::isValidMemoryRange(uint64_t addr, uint64_t count)
+{
+    return (addr < this->memory.size()) && (count <= this->memory.size() - addr);
+}
+
+std::string VirtualMachine::readStringFromMemory(uint64_t addr)
+{
+    if (!this->isValidMemoryRange(addr, 1))
+    {
+        std::cerr << "String pointer out of memory range: " << addr << std::endl;
+        exit(1);
+    }
+
+    std::string result;
+    while (addr < this->memory.size())
+    {
+        char c = static_cast<char>(this->memory[static_cast<size_t>(addr)] & 0xFFull);
+        if (c == '\0')
+        {
+            return result;
+        }
+        result.push_back(c);
+        addr += 1;
+    }
+
+    std::cerr << "Unterminated string read from memory" << std::endl;
+    exit(1);
+}
+
+void VirtualMachine::loadBytesFromMemory(uint64_t addr, char* buffer, uint64_t count)
+{
+    if (!this->isValidMemoryRange(addr, count))
+    {
+        std::cerr << "Read buffer out of memory range: " << addr << " + " << count << std::endl;
+        exit(1);
+    }
+
+    for (uint64_t i = 0; i < count; ++i)
+    {
+        buffer[i] = static_cast<char>(this->memory[static_cast<size_t>(addr + i)] & 0xFFull);
+    }
+}
+
+void VirtualMachine::storeBytesToMemory(uint64_t addr, const char* buffer, uint64_t count)
+{
+    if (!this->isValidMemoryRange(addr, count))
+    {
+        std::cerr << "Write buffer out of memory range: " << addr << " + " << count << std::endl;
+        exit(1);
+    }
+
+    for (uint64_t i = 0; i < count; ++i)
+    {
+        this->memory[static_cast<size_t>(addr + i)] = static_cast<unsigned char>(buffer[i]);
+    }
 }
 
 bool VirtualMachine::step()
@@ -376,6 +442,90 @@ bool VirtualMachine::step()
             }
             break;
         }
+        case InstructionType::OPEN:
+        {
+            uint64_t filename_addr = this->resolveValue(inst.args[0], inst.arg_types[0]);
+            uint64_t mode_code = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t ret_adress = this->resolveAddress(inst.args[2], inst.arg_types[2]);
+            std::string path = this->readStringFromMemory(filename_addr);
+            int flags = 0;
+            if (mode_code == 0)
+            {
+                flags = O_RDONLY | O_BINARY;
+            }
+            else if (mode_code == 1)
+            {
+                flags = O_WRONLY | O_CREAT | O_TRUNC | O_BINARY;
+            }
+            else if (mode_code == 2)
+            {
+                flags = O_RDWR | O_CREAT | O_BINARY;
+            }
+            else if (mode_code == 3)
+            {
+                flags = O_WRONLY | O_CREAT | O_APPEND | O_BINARY;
+            }
+            else
+            {
+                std::cerr << "Unsupported open mode: " << mode_code << std::endl;
+                this->registers[0] = static_cast<uint64_t>(-1);
+                break;
+            }
+            int fd = ::open(path.c_str(), flags, 0666);
+            this->registers[ret_adress] = static_cast<uint64_t>(fd);
+            break;
+        }
+        case InstructionType::READ:
+        {
+            int fd = static_cast<int>(this->resolveValue(inst.args[0], inst.arg_types[0]));
+            uint64_t buffer_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t count = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            if (!this->isValidMemoryRange(buffer_addr, count))
+            {
+                std::cerr << "Read buffer out of range: " << buffer_addr << " + " << count << std::endl;
+                this->registers[0] = static_cast<uint64_t>(-1);
+                break;
+            }
+            std::vector<char> scratch(count);
+            ssize_t bytes_read = ::read(fd, scratch.data(), static_cast<size_t>(count));
+            if (bytes_read < 0)
+            {
+                this->registers[0] = static_cast<uint64_t>(-1);
+                break;
+            }
+            this->storeBytesToMemory(buffer_addr, scratch.data(), static_cast<uint64_t>(bytes_read));
+            this->registers[0] = static_cast<uint64_t>(bytes_read);
+            break;
+        }
+        case InstructionType::WRITE:
+        {
+            int fd = static_cast<int>(this->resolveValue(inst.args[0], inst.arg_types[0]));
+            uint64_t buffer_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
+            uint64_t count = this->resolveValue(inst.args[2], inst.arg_types[2]);
+            if (!this->isValidMemoryRange(buffer_addr, count))
+            {
+                std::cerr << "Write buffer out of range: " << buffer_addr << " + " << count << std::endl;
+                this->registers[0] = static_cast<uint64_t>(-1);
+                break;
+            }
+            std::vector<char> scratch(count);
+            this->loadBytesFromMemory(buffer_addr, scratch.data(), count);
+            ssize_t bytes_written = ::write(fd, scratch.data(), static_cast<size_t>(count));
+            if (bytes_written < 0)
+            {
+                this->registers[0] = static_cast<uint64_t>(-1);
+                break;
+            }
+            this->registers[0] = static_cast<uint64_t>(bytes_written);
+            break;
+        }
+        case InstructionType::CLOSE:
+        {
+            int fd = static_cast<int>(this->resolveValue(inst.args[0], inst.arg_types[0]));
+            int result = ::close(fd);
+            this->registers[0] = static_cast<uint64_t>(result == 0 ? 0 : static_cast<uint64_t>(-1));
+            break;
+        }
         case InstructionType::BREAKPOINT:
         {
             break;
@@ -455,7 +605,6 @@ bool VirtualMachine::step()
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             std::time_t now = std::time(nullptr);
-            std::cout << static_cast<double>(now) << std::endl;
             this->registers[dest] = std::bit_cast<uint64_t>(static_cast<double>(now));
             break;
         }
