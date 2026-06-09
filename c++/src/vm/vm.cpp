@@ -27,7 +27,7 @@ uint64_t VirtualMachine::resolveAddress(uint64_t arg, ArgType arg_type)
     {
         return arg;
     }
-    else if (arg_type == ArgType::POINTER)
+    else if (arg_type == ArgType::POINTER_R)
     {
         return this->registers[arg];
     }
@@ -57,7 +57,7 @@ uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
     {
         return this->registers[arg];
     }
-    else if (arg_type == ArgType::POINTER)
+    else if (arg_type == ArgType::POINTER_R)
     {
         return this->registers[arg];
     }
@@ -79,6 +79,11 @@ uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
         exit(1);
     }
     exit(1); // useless as its never gonna reach this, but g++ is complaining.
+}
+
+void VirtualMachine::interrupt()
+{
+    this->ic = this->INTERRUPT_JMP_ADDR;
 }
 
 bool VirtualMachine::isValidMemoryRange(uint64_t addr, uint64_t count)
@@ -146,14 +151,36 @@ bool VirtualMachine::step()
     }
     this->run_time_counter++;
 
+    this->pollKeyboardEvents();
     char input = this->getKeyboardInput();
-    this->registers[29] = static_cast<uint64_t>(static_cast<unsigned char>(input));
+    if (input != '\0')
+    {
+        this->memory[this->KEYBOARD_INPUT_ADDR] = static_cast<uint64_t>(static_cast<unsigned char>(input));
+        this->memory[this->KEYDOWN_FLAG_ADDR] = 1;
+    }
+    else
+    {
+        this->memory[this->KEYDOWN_FLAG_ADDR] = 0;
+    }
+
+    if ((input != '\0') && (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint64_t>(InterruptType::KEYBOARD)))
+    {
+        this->interrupt();
+    }
+    else if (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint64_t>(InterruptType::TIMED))
+    {
+        if (this->interrupt_timer != 0 && this->interrupt_timer % this->INTERRUPT_FREQUENCY == 0)
+        {
+            this->interrupt();
+        }
+    }
 
     // std::cout << input << std::endl;
 
     const Instruction* inst_ptr = reinterpret_cast<const Instruction*>(&this->memory[this->ic * INSTRUCTION_WORDS]);
     Instruction inst = *inst_ptr;
     bool advance_ip = true;
+    // std::cout << this->ic << " " << instructionRepr(inst) << std::endl;
 
     switch (inst.type)
     {
@@ -448,6 +475,7 @@ bool VirtualMachine::step()
             uint64_t mode_code = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t ret_adress = this->resolveAddress(inst.args[2], inst.arg_types[2]);
             std::string path = this->readStringFromMemory(filename_addr);
+            std::cout << "\npath: " << path.c_str() << std::endl;
             int flags = 0;
             if (mode_code == 0)
             {
@@ -468,7 +496,7 @@ bool VirtualMachine::step()
             else
             {
                 std::cerr << "Unsupported open mode: " << mode_code << std::endl;
-                this->registers[0] = static_cast<uint64_t>(-1);
+                this->registers[ret_adress] = static_cast<uint64_t>(-1);
                 break;
             }
             int fd = ::open(path.c_str(), flags, 0666);
@@ -682,7 +710,7 @@ void VirtualMachine::run()
     return;
 }
 
-char VirtualMachine::getKeyboardInput()
+void VirtualMachine::pollKeyboardEvents()
 {
     SDL_Event e;
     while (SDL_PollEvent(&e))
@@ -694,35 +722,32 @@ char VirtualMachine::getKeyboardInput()
             case SDL_EVENT_KEY_DOWN:
             {
                 SDL_Keycode key = e.key.key;
-                if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
-                {
-                    return '\n';
-                }
-                if (key == SDLK_BACKSPACE)
-                {
-                    return '\b';
-                }
-                if (key == SDLK_TAB)
-                {
-                    return '\t';
-                }
-                if (key >= SDLK_SPACE && key <= SDLK_Z)
-                {
-                    return static_cast<char>(key);
-                }
+                this->keyboard_input_queue.push_back(static_cast<char>(key));
+                continue;
                 break;
             }
             case SDL_EVENT_TEXT_INPUT:
                 if (e.text.text[0] != '\0')
                 {
-                    return e.text.text[0];
+                    this->keyboard_input_queue.push_back(e.text.text[0]);
                 }
                 break;
             default:
                 break;
         }
     }
-    return '\0';
+}
+
+char VirtualMachine::getKeyboardInput()
+{
+    if (this->keyboard_input_queue.empty())
+    {
+        return '\0';
+    }
+
+    char input = this->keyboard_input_queue.front();
+    this->keyboard_input_queue.pop_front();
+    return input;
 }
 
 void VirtualMachine::loadInstBinary(std::vector<uint64_t> words)

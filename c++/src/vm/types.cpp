@@ -140,7 +140,7 @@ std::string instructionRepr(Instruction inst)
         {
             ret += "f";
         }
-        if (inst.arg_types[i] == ArgType::POINTER)
+        if (inst.arg_types[i] == ArgType::POINTER_R)
         {
             ret += "p";
         }

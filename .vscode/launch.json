@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug VM (GDB)",
+            "name": "Debug",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/c++/build/VM.exe",
-            "args": [],
+            "args": ["main.asm -o main -run -debug"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/c++",
+            "cwd": "${workspaceFolder}/c++/build",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
             "miDebuggerPath": "C:/mingw64/bin/gdb.exe",
-            "preLaunchTask": "Build VM (make)",
+            // "preLaunchTask": "Build VM (make)",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

@@ -14,6 +14,8 @@ class VmAssembler
     std::vector<std::vector<Token>> token_lines = {};
     std::vector<InstructionIr> ir_instructions = {};
     std::vector<Instruction> instructions = {};
+    std::map<std::string, int> symbol_table = {};  // label_name -> instruction_index
+    std::vector<RelocationEntry> relocation_table = {};
     bool debug;
 
     void tokenize();
@@ -25,6 +27,11 @@ class VmAssembler
     void assamble();
     void dumpToBinary(std::string name);
     std::vector<uint64_t> loadFromBinary(std::string name);
+    
+    // Expose symbols and instructions for linker
+    std::vector<Instruction> getInstructions() const;
+    std::map<std::string, int> getSymbolTable() const;
+    std::vector<RelocationEntry> getRelocationTable() const;
 };
 
 #endif 

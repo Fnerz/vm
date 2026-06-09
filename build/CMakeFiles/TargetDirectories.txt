@@ -1,0 +1,3 @@
+C:/msys64/home/lenna/vm/build/CMakeFiles/VM.dir
+C:/msys64/home/lenna/vm/build/CMakeFiles/edit_cache.dir
+C:/msys64/home/lenna/vm/build/CMakeFiles/rebuild_cache.dir

@@ -15,7 +15,8 @@ enum class TokenType
     null, // not in caps cause of confilictions with the actual NULL
     INST,
     REGISTER,
-    POINTER,
+    POINTER_R,
+    POINTER_I,
     IMMEDIATE_I,
     IMMEDIATE_F,
     IMMEDIATE_C,
@@ -247,13 +248,20 @@ struct InstructionIr
 };
 std::string instructionIrRepr(InstructionIr inst_ir);
 
+struct RelocationEntry
+{
+    int index;
+    std::string symbol;
+};
+
 enum class ArgType
 {
     REGISTER,
     IMMEDIATE_I,
     IMMEDIATE_F,
     IMMEDIATE_C,
-    POINTER,
+    POINTER_R,
+    POINTER_I,
     LABEL_INDEX,
 };
 
@@ -265,6 +273,6 @@ struct Instruction
 };
 std::string instructionRepr(Instruction inst);
 
-inline std::string ALLOWED_SYMBOL_CHARS = ".abcdefghijklmnopqrstuvwxyz0123456789_";
+inline std::string ALLOWED_SYMBOL_CHARS = "#.abcdefghijklmnopqrstuvwxyz0123456789_";
 
 #endif

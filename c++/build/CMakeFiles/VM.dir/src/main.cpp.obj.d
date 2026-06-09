@@ -225,6 +225,9 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_bvector.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/vector.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/deque \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_deque.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/deque.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/map \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tree.h \
  C:/msys64/mingw64/include/c++/15.2.0/ext/aligned_buffer.h \
@@ -285,4 +288,5 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
  C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.hpp \
  C:/msys64/home/lenna/vm/c++/src/vm/assembler/parser.hpp \
- C:/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.hpp
+ C:/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.hpp \
+ C:/msys64/home/lenna/vm/c++/src/vm/assembler/linker.hpp

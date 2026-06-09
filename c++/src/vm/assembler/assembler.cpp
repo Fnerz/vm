@@ -57,6 +57,17 @@ void VmAssembler::lower()
 {
     InstructionLowerer lowerer(this->ir_instructions);
     this->instructions = lowerer.lower();
+    this->symbol_table = lowerer.getSymbolTable();
+    this->relocation_table = lowerer.getRelocationEntries();
+}
+
+static std::string ensureBinaryPath(std::string name)
+{
+    if (name.size() >= 4 && name.substr(name.size() - 4) == ".bin")
+    {
+        return name;
+    }
+    return name + std::string(".bin");
 }
 
 void VmAssembler::assamble()
@@ -88,8 +99,12 @@ void VmAssembler::assamble()
 
 void VmAssembler::dumpToBinary(std::string name)
 {
-    std::string path = name + std::string(".bin");
+    std::string path = ensureBinaryPath(name);
     std::ofstream file(path, std::ios::binary);
+    if (!file)
+    {
+        throw std::runtime_error("Failed to create binary file: " + path);
+    }
     file.write(
         reinterpret_cast<const char*>(this->instructions.data()),
         this->instructions.size() * sizeof(Instruction)
@@ -100,7 +115,7 @@ void VmAssembler::dumpToBinary(std::string name)
 
 std::vector<uint64_t> VmAssembler::loadFromBinary(std::string name)
 {
-    std::string path = name + std::string(".bin");
+    std::string path = ensureBinaryPath(name);
     std::ifstream file(path, std::ios::binary | std::ios::ate);
     if (!file)
     {
@@ -128,5 +143,19 @@ std::vector<uint64_t> VmAssembler::loadFromBinary(std::string name)
     return words;
 }
 
+std::vector<Instruction> VmAssembler::getInstructions() const
+{
+    return this->instructions;
+}
+
+std::map<std::string, int> VmAssembler::getSymbolTable() const
+{
+    return this->symbol_table;
+}
+
+std::vector<RelocationEntry> VmAssembler::getRelocationTable() const
+{
+    return this->relocation_table;
+}
 
 #endif 

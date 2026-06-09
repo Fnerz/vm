@@ -93,9 +93,13 @@ std::tuple<uint64_t, ArgType> tokenToArgBundle(Token tok)
         uint64_t value = static_cast<uint64_t>(static_cast<unsigned char>(tok.value[0]));
         return std::make_tuple(value, ArgType::IMMEDIATE_C);
     }
-    if (tok.type == TokenType::POINTER)
+    if (tok.type == TokenType::POINTER_R)
     {
-        return std::make_tuple(std::stoi(tok.value), ArgType::POINTER);
+        return std::make_tuple(std::stoi(tok.value), ArgType::POINTER_R);
+    }
+    if (tok.type == TokenType::POINTER_I)
+    {
+        return std::make_tuple(std::stoi(tok.value), ArgType::IMMEDIATE_I);
     }
     else if (tok.type == TokenType::REGISTER)
     {
@@ -138,7 +142,7 @@ int InstructionLowerer::binOpToInst(std::shared_ptr<BinOp> bin_op)
     {
         right_is_BinOp = true;
         int right_reg = this->binOpToInst(std::get<std::shared_ptr<BinOp>>(bin_op->right));
-        right_arg_bundle = {right_reg, ArgType::POINTER};
+        right_arg_bundle = {right_reg, ArgType::POINTER_R};
     }
     else if (std::holds_alternative<Token>(bin_op->right))
     {
@@ -179,7 +183,7 @@ std::tuple<uint64_t, ArgType> InstructionLowerer::nodeToArgBundle(Node node)
     if (std::holds_alternative<std::shared_ptr<BinOp>>(node))
     {
         uint64_t ret_reg = this->binOpToInst(std::get<std::shared_ptr<BinOp>>(node));
-        return std::make_tuple(ret_reg, ArgType::POINTER);
+        return std::make_tuple(ret_reg, ArgType::POINTER_R);
     }
     else if (std::holds_alternative<Token>(node))
     {
@@ -295,21 +299,34 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::JLE)||
             (inst.type == InstructionType::CALL))
         {
-            Token arg = std::get<Token>(inst.arg1);
-            if (arg.type == TokenType::IMMEDIATE_I)
+            std::string raw_label;
+            if (std::holds_alternative<Token>(inst.arg1))
             {
-                JmpInstBundle jmp_inst_bundle = {};
-                jmp_inst_bundle.type = inst.type;
-                jmp_inst_bundle.label = arg.value;
-                jmp_inst_bundle.index = this->lowerd_insts.size() + jmp_inst_correction;
+                Token arg = std::get<Token>(inst.arg1);
+                if (arg.type == TokenType::IMMEDIATE_I)
+                {
+                    JmpInstBundle jmp_inst_bundle = {};
+                    jmp_inst_bundle.type = inst.type;
+                    jmp_inst_bundle.label = arg.value;
+                    jmp_inst_bundle.index = this->lowerd_insts.size() + jmp_inst_correction;
 
-                this->label_indexes[arg.value] = std::stoi(arg.value);
-                this->unresolved_jmp_insts.push_back(jmp_inst_bundle);
-                jmp_inst_correction++;
-                continue;
+                    this->label_indexes[arg.value] = std::stoi(arg.value);
+                    this->unresolved_jmp_insts.push_back(jmp_inst_bundle);
+                    jmp_inst_correction++;
+                    continue;
+                }
+                raw_label = arg.value;
+            }
+            else if (std::holds_alternative<std::string>(inst.arg1))
+            {
+                raw_label = std::get<std::string>(inst.arg1);
+            }
+            else
+            {
+                std::cerr << "Cannot resolve label from instruction arg variant" << std::endl;
+                exit(1);
             }
 
-            std::string raw_label = arg.value;
             if (!raw_label.empty() && raw_label[0] == '.')
             {
                 if (current_scope.empty())
@@ -359,7 +376,6 @@ std::vector<Instruction> InstructionLowerer::lower()
     // insert jmp instructions
     for (auto& jmp_inst_bundle : this->unresolved_jmp_insts)
     {
-        // std::cout << jmpInstBundleRepr(jmp_inst_bundle);
         Instruction lowerd_jmp = {};
 
         lowerd_jmp.type = jmp_inst_bundle.type;
@@ -368,12 +384,20 @@ std::vector<Instruction> InstructionLowerer::lower()
         auto it = this->label_indexes.find(label);
         if (it == this->label_indexes.end())
         {
+            // External global label reference; keep a placeholder and relocate later
+            if (!label.empty() && label[0] == '#')
+            {
+                lowerd_jmp.args[0] = 0;
+                lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
+                this->relocation_entries.push_back({jmp_inst_bundle.index, label});
+                this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.index, lowerd_jmp);
+                continue;
+            }
             std::cout << "Cannot resolve address of label " << label << std::endl;
             exit(1);
         }
-        int idx = this->label_indexes[label];
+        int idx = it->second;
         lowerd_jmp.args[0] = idx;
-        // std::cout << "label: " << label << " = " << idx << "\n========\n";
         lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
         
         this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.index, lowerd_jmp);
@@ -382,7 +406,14 @@ std::vector<Instruction> InstructionLowerer::lower()
     return this->lowerd_insts;
 }
 
+std::vector<RelocationEntry> InstructionLowerer::getRelocationEntries() const
+{
+    return this->relocation_entries;
+}
 
-
+std::map<std::string, int> InstructionLowerer::getSymbolTable() const
+{
+    return this->label_indexes;
+}
 
 #endif

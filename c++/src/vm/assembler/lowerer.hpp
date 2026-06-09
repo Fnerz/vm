@@ -32,6 +32,7 @@ class InstructionLowerer
                                     {33, RegisterState::FREE}};
     std::map<std::string, int>  label_indexes = {};
     std::vector<JmpInstBundle> unresolved_jmp_insts = {};
+    std::vector<RelocationEntry> relocation_entries = {};
 
     int getFreeTempReg();
     void freeTempReg(int reg);
@@ -42,7 +43,8 @@ class InstructionLowerer
     public:
     InstructionLowerer(std::vector<InstructionIr> ir_insts);
     std::vector<Instruction> lower();
-
+    std::map<std::string, int> getSymbolTable() const;
+    std::vector<RelocationEntry> getRelocationEntries() const;
 };
 
 #endif

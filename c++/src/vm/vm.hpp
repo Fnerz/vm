@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include <deque>
 #include <map>
 #include <string>
 #include <ctime>
@@ -12,6 +13,13 @@
 #include <SDL3/SDL.h>
 #include "types.hpp"
 
+enum class InterruptType
+{
+    OFF = 0,
+    TIMED = 1,
+    KEYBOARD = 2,
+};
+
 class VirtualMachine
 {
     private:
@@ -20,8 +28,9 @@ class VirtualMachine
     // r30 - r33 reserved for temp storage. r30 is used for the pointer arithmetic accumulator. r31-r33 are just chilling for now.
     // 29 reserved for keyboard input
     static constexpr int REGISTER_COUNT = 34; 
+    const int MEMORY_SIZE = 1000000; 
     std::vector<uint64_t> registers = std::vector<uint64_t>(REGISTER_COUNT);
-    std::vector<uint64_t> memory = std::vector<uint64_t>(1000000);
+    std::vector<uint64_t> memory = std::vector<uint64_t>(MEMORY_SIZE);
     std::vector<uint64_t> stack = {};
     std::vector<int> call_stack = {};
     
@@ -45,8 +54,17 @@ class VirtualMachine
     void loadBytesFromMemory(uint64_t addr, char* buffer, uint64_t count);
     void storeBytesToMemory(uint64_t addr, const char* buffer, uint64_t count);
 
+    const int KEYBOARD_INPUT_ADDR = 4990;
+    const int KEYDOWN_FLAG_ADDR = 4991;
+    std::deque<char> keyboard_input_queue = {};
+    void pollKeyboardEvents();
     char getKeyboardInput();
 
+    const int INTERRUPT_FLAG_ADDR = 5000;
+    const int INTERRUPT_JMP_ADDR = 6000;
+    const int INTERRUPT_FREQUENCY = 1000;
+    int interrupt_timer = 0;
+    void interrupt();
 
     template<typename T>
     T add(uint64_t a, uint64_t b)

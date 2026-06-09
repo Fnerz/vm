@@ -84,7 +84,15 @@ Node LineParser::parsePointerArithmetic()
 
     if (std::holds_alternative<Token>(left))
     {
-        std::get<Token>(left).type = TokenType::POINTER;
+        Token &tok = std::get<Token>(left);
+        if (tok.type == TokenType::IMMEDIATE_I)
+        {
+            tok.type = TokenType::POINTER_I;
+        }
+        else
+        {
+            tok.type = TokenType::POINTER_R;
+        }
     }
     return left;    
 }
@@ -564,7 +572,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::CALL;
             this->advance();
-            inst.arg1 = this->eat(TokenType::SYMBOL).value;
+            inst.arg1 = this->eat(TokenType::SYMBOL);
             instructions.push_back(inst);
             continue;
         }
