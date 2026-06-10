@@ -113,7 +113,7 @@ void VmAssembler::dumpToBinary(std::string name)
     return;
 }
 
-std::vector<uint64_t> VmAssembler::loadFromBinary(std::string name)
+std::vector<uint8_t> VmAssembler::loadFromBinary(std::string name)
 {
     std::string path = ensureBinaryPath(name);
     std::ifstream file(path, std::ios::binary | std::ios::ate);
@@ -123,16 +123,16 @@ std::vector<uint64_t> VmAssembler::loadFromBinary(std::string name)
     }
 
     std::streamsize file_size = file.tellg();
-    if (file_size < 0 || file_size % sizeof(uint64_t) != 0)
+    if (file_size < 0 || file_size % sizeof(uint8_t) != 0)
     {
         throw std::runtime_error("Invalid binary file size: " + path);
     }
 
-    std::vector<uint64_t> words(static_cast<size_t>(file_size) / sizeof(uint64_t));
+    std::vector<uint8_t> words(static_cast<size_t>(file_size) / sizeof(uint8_t));
     file.seekg(0, std::ios::beg);
     file.read(
         reinterpret_cast<char*>(words.data()),
-        words.size() * sizeof(uint64_t)
+        words.size() * sizeof(uint8_t)
     );
 
     if (!file)

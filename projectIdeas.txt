@@ -1,6 +1,9 @@
-partical simulation
-pathfinding
-snake
-basic interpreter
-python esque lang compiled to vm
+
+connect screen
+
+
+future:
 os
+snake
+python esque lang compiled to vm
+partical simulation

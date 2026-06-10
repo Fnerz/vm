@@ -56,7 +56,7 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
         linked_file.offset = current_offset;
         linked_file.relocations = relocations;
 
-                for (const auto& [symbol_name, local_index] : symbols)
+        for (const auto& [symbol_name, local_index] : symbols)
         {
             int absolute_address = current_offset + local_index;
 
@@ -78,7 +78,6 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
             linked_file.symbols[symbol_name] = absolute_address;
         }
 
-        // entry point can be a local main or exported #main
         if (this->entry_point == -1)
         {
             if (symbols.find("main") != symbols.end())
@@ -111,7 +110,7 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
         std::cout << "Entry point: main @ " << this->entry_point << std::endl;
     }
 
-    // concatenate instructions and patch addresses
+    // concatenate insts and patch addresses
     for (const auto& linked_file : this->linked_files)
     {
         std::map<int, std::string> relocation_map;

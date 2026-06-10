@@ -14,9 +14,10 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/msys64/home/lenna/vm/c++/src/vm/assembler/linker.cpp" "CMakeFiles/VM.dir/src/vm/assembler/linker.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/linker.cpp.obj.d"
   "C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp" "CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj.d"
   "C:/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp" "CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj.d"
-  "C:/msys64/home/lenna/vm/c++/src/vm/debugger.cpp" "CMakeFiles/VM.dir/src/vm/debugger.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/debugger.cpp.obj.d"
   "C:/msys64/home/lenna/vm/c++/src/vm/types.cpp" "CMakeFiles/VM.dir/src/vm/types.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/types.cpp.obj.d"
-  "C:/msys64/home/lenna/vm/c++/src/vm/vm.cpp" "CMakeFiles/VM.dir/src/vm/vm.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/vm.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/vm/debugger.cpp" "CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.cpp" "CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj.d"
+  "C:/msys64/home/lenna/vm/c++/src/vm/vm/vm.cpp" "CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj" "gcc" "CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

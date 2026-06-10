@@ -273,30 +273,6 @@ src/vm/assembler/parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.s
 .PHONY : src/vm/assembler/parser.cpp.s
 
-src/vm/debugger.obj: src/vm/debugger.cpp.obj
-.PHONY : src/vm/debugger.obj
-
-# target to build an object file
-src/vm/debugger.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/debugger.cpp.obj
-.PHONY : src/vm/debugger.cpp.obj
-
-src/vm/debugger.i: src/vm/debugger.cpp.i
-.PHONY : src/vm/debugger.i
-
-# target to preprocess a source file
-src/vm/debugger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/debugger.cpp.i
-.PHONY : src/vm/debugger.cpp.i
-
-src/vm/debugger.s: src/vm/debugger.cpp.s
-.PHONY : src/vm/debugger.s
-
-# target to generate assembly for a file
-src/vm/debugger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/debugger.cpp.s
-.PHONY : src/vm/debugger.cpp.s
-
 src/vm/types.obj: src/vm/types.cpp.obj
 .PHONY : src/vm/types.obj
 
@@ -321,29 +297,77 @@ src/vm/types.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/types.cpp.s
 .PHONY : src/vm/types.cpp.s
 
-src/vm/vm.obj: src/vm/vm.cpp.obj
-.PHONY : src/vm/vm.obj
+src/vm/vm/debugger.obj: src/vm/vm/debugger.cpp.obj
+.PHONY : src/vm/vm/debugger.obj
 
 # target to build an object file
-src/vm/vm.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm.cpp.obj
-.PHONY : src/vm/vm.cpp.obj
+src/vm/vm/debugger.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj
+.PHONY : src/vm/vm/debugger.cpp.obj
 
-src/vm/vm.i: src/vm/vm.cpp.i
-.PHONY : src/vm/vm.i
+src/vm/vm/debugger.i: src/vm/vm/debugger.cpp.i
+.PHONY : src/vm/vm/debugger.i
 
 # target to preprocess a source file
-src/vm/vm.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm.cpp.i
-.PHONY : src/vm/vm.cpp.i
+src/vm/vm/debugger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.i
+.PHONY : src/vm/vm/debugger.cpp.i
 
-src/vm/vm.s: src/vm/vm.cpp.s
-.PHONY : src/vm/vm.s
+src/vm/vm/debugger.s: src/vm/vm/debugger.cpp.s
+.PHONY : src/vm/vm/debugger.s
 
 # target to generate assembly for a file
-src/vm/vm.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm.cpp.s
-.PHONY : src/vm/vm.cpp.s
+src/vm/vm/debugger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.s
+.PHONY : src/vm/vm/debugger.cpp.s
+
+src/vm/vm/disk.obj: src/vm/vm/disk.cpp.obj
+.PHONY : src/vm/vm/disk.obj
+
+# target to build an object file
+src/vm/vm/disk.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj
+.PHONY : src/vm/vm/disk.cpp.obj
+
+src/vm/vm/disk.i: src/vm/vm/disk.cpp.i
+.PHONY : src/vm/vm/disk.i
+
+# target to preprocess a source file
+src/vm/vm/disk.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/disk.cpp.i
+.PHONY : src/vm/vm/disk.cpp.i
+
+src/vm/vm/disk.s: src/vm/vm/disk.cpp.s
+.PHONY : src/vm/vm/disk.s
+
+# target to generate assembly for a file
+src/vm/vm/disk.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/disk.cpp.s
+.PHONY : src/vm/vm/disk.cpp.s
+
+src/vm/vm/vm.obj: src/vm/vm/vm.cpp.obj
+.PHONY : src/vm/vm/vm.obj
+
+# target to build an object file
+src/vm/vm/vm.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj
+.PHONY : src/vm/vm/vm.cpp.obj
+
+src/vm/vm/vm.i: src/vm/vm/vm.cpp.i
+.PHONY : src/vm/vm/vm.i
+
+# target to preprocess a source file
+src/vm/vm/vm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/vm.cpp.i
+.PHONY : src/vm/vm/vm.cpp.i
+
+src/vm/vm/vm.s: src/vm/vm/vm.cpp.s
+.PHONY : src/vm/vm/vm.s
+
+# target to generate assembly for a file
+src/vm/vm/vm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VM.dir/build.make CMakeFiles/VM.dir/src/vm/vm/vm.cpp.s
+.PHONY : src/vm/vm/vm.cpp.s
 
 # Help Target
 help:
@@ -372,15 +396,18 @@ help:
 	@echo "... src/vm/assembler/parser.obj"
 	@echo "... src/vm/assembler/parser.i"
 	@echo "... src/vm/assembler/parser.s"
-	@echo "... src/vm/debugger.obj"
-	@echo "... src/vm/debugger.i"
-	@echo "... src/vm/debugger.s"
 	@echo "... src/vm/types.obj"
 	@echo "... src/vm/types.i"
 	@echo "... src/vm/types.s"
-	@echo "... src/vm/vm.obj"
-	@echo "... src/vm/vm.i"
-	@echo "... src/vm/vm.s"
+	@echo "... src/vm/vm/debugger.obj"
+	@echo "... src/vm/vm/debugger.i"
+	@echo "... src/vm/vm/debugger.s"
+	@echo "... src/vm/vm/disk.obj"
+	@echo "... src/vm/vm/disk.i"
+	@echo "... src/vm/vm/disk.s"
+	@echo "... src/vm/vm/vm.obj"
+	@echo "... src/vm/vm/vm.i"
+	@echo "... src/vm/vm/vm.s"
 .PHONY : help
 
 

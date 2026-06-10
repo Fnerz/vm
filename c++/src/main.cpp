@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <SDL3/SDL.h>
-#include "./vm/vm.hpp"
+#include "./vm/vm/vm.hpp"
 #include "./vm/assembler/assembler.hpp"
 #include "./vm/assembler/linker.hpp"
 

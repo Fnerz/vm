@@ -219,7 +219,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_tray.h \
  C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_version.h \
  C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_oldnames.h \
- C:/msys64/home/lenna/vm/c++/src/vm/vm.hpp \
+ C:/msys64/home/lenna/vm/c++/src/vm/vm/vm.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/vector \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_uninitialized.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h \
@@ -252,6 +252,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_hermite.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
+ C:/msys64/mingw64/include/fcntl.h C:/msys64/mingw64/include/io.h \
  C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/variant \
  C:/msys64/mingw64/include/c++/15.2.0/bits/enable_special_members.h \

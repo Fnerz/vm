@@ -11,9 +11,9 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../pythonIntegrationTesting/src)
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
@@ -22,9 +22,10 @@ find_package(SDL3 REQUIRED CONFIG PATHS ${SDL3_DIR})
 
 set(VM_SOURCES
     src/main.cpp
-    src/vm/vm.cpp
     src/vm/types.cpp
-    src/vm/debugger.cpp
+    src/vm/vm/vm.cpp
+    src/vm/vm/disk.cpp
+    src/vm/vm/debugger.cpp
     src/vm/assembler/lexer.cpp
     src/vm/assembler/parser.cpp
     src/vm/assembler/lowerer.cpp
