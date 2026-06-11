@@ -1,4 +1,7 @@
 file(REMOVE_RECURSE
+  "C:/msys64/home/lenna/vm/out/VM.exe"
+  "C:/msys64/home/lenna/vm/out/VM.exe.manifest"
+  "C:/msys64/home/lenna/vm/out/VM.pdb"
   "CMakeFiles/VM.dir/src/main.cpp.obj"
   "CMakeFiles/VM.dir/src/main.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj"
@@ -19,9 +22,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj.d"
   "CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj"
   "CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj.d"
-  "VM.exe"
-  "VM.exe.manifest"
-  "VM.pdb"
   "libVM.dll.a"
 )
 

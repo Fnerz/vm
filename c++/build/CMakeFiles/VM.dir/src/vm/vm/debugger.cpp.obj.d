@@ -284,4 +284,11 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_heap.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/uniform_int_dist.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_algo.h \
- C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h
+ C:/msys64/mingw64/include/c++/15.2.0/pstl/glue_algorithm_defs.h \
+ C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.hpp \
+ C:/msys64/mingw64/include/c++/15.2.0/cstring \
+ C:/msys64/mingw64/include/c++/15.2.0/fstream \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/codecvt.h \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc

@@ -61,7 +61,7 @@ void VmAssembler::lower()
     this->relocation_table = lowerer.getRelocationEntries();
 }
 
-static std::string ensureBinaryPath(std::string name)
+static std::string ensureImgPath(std::string name)
 {
     if (name.size() >= 4 && name.substr(name.size() - 4) == ".bin")
     {
@@ -99,7 +99,7 @@ void VmAssembler::assamble()
 
 void VmAssembler::dumpToBinary(std::string name)
 {
-    std::string path = ensureBinaryPath(name);
+    std::string path = ensureImgPath(name);
     std::ofstream file(path, std::ios::binary);
     if (!file)
     {
@@ -115,7 +115,7 @@ void VmAssembler::dumpToBinary(std::string name)
 
 std::vector<uint8_t> VmAssembler::loadFromBinary(std::string name)
 {
-    std::string path = ensureBinaryPath(name);
+    std::string path = ensureImgPath(name);
     std::ifstream file(path, std::ios::binary | std::ios::ate);
     if (!file)
     {

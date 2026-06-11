@@ -14,6 +14,7 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 #include "../types.hpp"
+#include "./disk.hpp"
 
 enum class InterruptType
 {
@@ -25,16 +26,30 @@ enum class InterruptType
 class VirtualMachine
 {
     private:
-
-
     // r30 - r33 reserved for temp storage. r30 is used for the pointer arithmetic accumulator. r31-r33 are just chilling for now.
     static constexpr int REGISTER_COUNT = 34; 
     const int MEMORY_SIZE = 8000000; // 8 MB 
-    std::vector<uint64_t> registers = std::vector<uint64_t>(REGISTER_COUNT);
-    std::vector<uint8_t> memory = std::vector<uint8_t>(MEMORY_SIZE);
+  
+    std::vector<uint64_t> regs; // registers is reserved:(
+    std::vector<uint8_t> memory;
     std::vector<uint64_t> stack = {};
     std::vector<int> call_stack = {};
-    
+
+    const int DISK_AUTO_WRITE_FREQ = 5000000;
+    const int DISK_STEP_FREQ = 10000;
+    const int DISK_ADDR = 5050; /*5050 - 5058 reserved*/
+    /*
+    5050 = mode code
+    5051 = mem addr
+    5052 = disk addr
+    5053 = size in bytes
+    5054 = return addr
+    5055 = ready flag
+    5056 = busy flag
+    5057 = done flag
+    */
+    VirtualDisk vdisk;
+
     bool lesser_flag = false;
     bool equal_flag = false;
     bool greater_flag = false;
@@ -63,12 +78,9 @@ class VirtualMachine
 
     const int INTERRUPT_FLAG_ADDR = 5000;
     const int INTERRUPT_JMP_ADDR = 6000;
-    const int INTERRUPT_FREQUENCY = 1000;
+    const int INTERRUPT_FREQ = 1000;
     int interrupt_timer = 0;
     void interrupt();
-
-    const int DISK_AUTO_WRITE_FREQUENCY = 5000000;
-
 
     template<typename T>
     T add(uint64_t a, uint64_t b)
@@ -106,14 +118,14 @@ class VirtualMachine
     {
         if (start == end)
         {
-            std::cout << std::bit_cast<T>(this->registers[start]) << std::endl;
+            std::cout << std::bit_cast<T>(this->regs[start]) << std::endl;
         }
         else
         {
             std::cout << "[";
             for (uint64_t idx = start; idx < end; ++idx)
             {
-                std::cout << this->registers[idx];
+                std::cout << this->regs[idx];
                 if (idx + 1 < end)
                 {
                     std::cout << ", ";
@@ -139,7 +151,7 @@ class VirtualMachine
         memcpy(&tmp,
             &this->memory[static_cast<int>(src_addr)],
             sizeof(T));
-        this->registers[dst_addr] = tmp;
+        this->regs[dst_addr] = tmp;
         return;
     }
     template <typename T>
@@ -156,6 +168,7 @@ class VirtualMachine
 
 
     public:
+    VirtualMachine();
     void testFunc();
     bool step();
     void run();

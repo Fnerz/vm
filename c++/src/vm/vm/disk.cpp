@@ -4,14 +4,13 @@
 #include "disk.hpp"
 
 
-VirtualDisk::VirtualDisk(std::vector<uint64_t>& dma_ref, int communication_addr) : dma(dma_ref) 
+VirtualDisk::VirtualDisk(std::vector<uint8_t> &dma_ref, int communication_addr) : dma(dma_ref) 
 {
     this->communication_addr = communication_addr;
-    this->mode_addr = communication_addr + this->mode_offset;
-    this->mem_begin_addr = communication_addr + this->mem_range_begin_offset;
-    this->mem_end_addr = communication_addr + this->mem_range_end_offset;
-    this->disk_begin_addr = communication_addr + this->disk_begin_offset;
-    this->disk_end_addr = communication_addr + this->disk_end_offset;
+    this->mode_code_addr = communication_addr + this->mode_offset;
+    this->mem_addr_addr = communication_addr + this->mem_addr_offset;
+    this->disk_addr_addr = communication_addr + this->disk_addr_offset;
+    this->size_addr = communication_addr + this->size_offset;
     this->return_addr = communication_addr + this->return_offset;
     this->ready_flag_addr = communication_addr + this->ready_flag_offset;
     this->done_flag_addr = communication_addr + this->done_flag_offset;
@@ -20,53 +19,32 @@ VirtualDisk::VirtualDisk(std::vector<uint64_t>& dma_ref, int communication_addr)
 
 void VirtualDisk::read()
 {
-    uint64_t mem_range_begin = this->dma[this->mem_begin_addr];
-    uint64_t mem_range_end = this->dma[this->mem_end_addr];
+    uint64_t mem_addr = this->dma[this->mem_addr_addr];
+    uint64_t disk_addr = this->dma[this->disk_addr_addr];
+    uint64_t size = this->dma[this->size_addr];
 
-    uint64_t disk_range_begin = this->dma[this->disk_begin_addr];
-    uint64_t disk_range_end = this->dma[this->disk_end_addr];
-
-    uint64_t i_mem = mem_range_begin;
-    uint64_t i_disk = disk_range_begin;
-
-    while ((i_mem < mem_range_end) && i_disk < (disk_range_end))
+    for (int i = 0; i < size; i++)
     {
-        uint64_t word = 0;
-
-        for (int b = 0; b < 8 && i_disk < disk_range_end; b++)
-        {
-            word = (word << 8) | (uint64_t)this->disk_mem[i_disk++];
-        }
-
-        this->dma[i_mem++] = word;
+        this->dma[mem_addr+i] = this->disk_mem[disk_addr+i];
     }
 
-    this->dma[this->return_addr] = i_disk;
+    this->dma[this->return_addr] = size;
+    return;
 }
 
 void VirtualDisk::write()
 {
-    uint64_t mem_range_begin = this->dma[this->mem_begin_addr];
-    uint64_t mem_range_end = this->dma[this->mem_end_addr];
+    uint64_t mem_addr = this->dma[this->mem_addr_addr];
+    uint64_t disk_addr = this->dma[this->disk_addr_addr];
+    uint64_t size = this->dma[this->size_addr];
 
-    uint64_t disk_range_begin = this->dma[this->disk_begin_addr];
-    uint64_t disk_range_end = this->dma[this->disk_end_addr];
-
-    uint64_t i_mem = mem_range_begin;
-    uint64_t i_disk = disk_range_begin;
-
-    while ((i_mem < mem_range_end) && (i_disk < disk_range_end))
+    for (int i = 0; i < size; i++)
     {
-        uint64_t word = this->dma[i_mem++];
-
-        for (int b = 7; (b >= 0) && (i_disk < disk_range_end); b--)
-        {
-            uint8_t byte = (word >> (b * 8)) & 0xFF;
-            this->disk_mem[i_disk++] = byte;
-        }
+        this->disk_mem[disk_addr+i] = this->dma[mem_addr+i];
     }
 
-    this->dma[this->return_addr] = i_disk;
+    this->dma[this->return_addr] = size;
+    return;
 }
 
 void VirtualDisk::step()
@@ -82,7 +60,7 @@ void VirtualDisk::step()
     this->dma[this->done_flag_addr] = 0;
     this->dma[this->ready_flag_addr] = 0;
 
-    int mode_code = static_cast<int>(this->dma[this->mode_addr]);
+    int mode_code = static_cast<int>(this->dma[this->mode_code_addr]);
 
     switch (mode_code)
     {
@@ -102,5 +80,57 @@ void VirtualDisk::step()
     this->dma[this->done_flag_addr] = 1;
     return;
 }
+
+
+void VirtualDisk::loadImg()
+{
+    std::string path = "./vdisk/disk.img";
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
+    if (!file)
+    {
+        throw std::runtime_error("Failed to open binary file: " + path);
+    }
+
+    std::streamsize file_size = file.tellg();
+    if (file_size < 0 || file_size % sizeof(uint8_t) != 0)
+    {
+        throw std::runtime_error("Invalid binary file size: " + path);
+    }
+
+    std::vector<uint8_t> bytes(static_cast<size_t>(file_size) / sizeof(uint8_t));
+    file.seekg(0, std::ios::beg);
+    file.read(
+        reinterpret_cast<char*>(bytes.data()),
+        bytes.size() * sizeof(uint8_t)
+    );
+
+    if (!file)
+    {
+        throw std::runtime_error("Failed to read binary file: " + path);
+    }
+
+    for (int i = 0; (i < bytes.size()) && (i < this->DISK_SIZE); i++)
+    {
+        this->disk_mem[i] = bytes[i];
+    }
+    return;
+}
+
+void VirtualDisk::safeImg()
+{
+    std::string path = "./vdisk/disk.img";
+    std::ofstream file(path, std::ios::binary | std::ios::out);
+
+    if (!file)
+    {
+        throw std::runtime_error("Failed to open binary file: " + path);
+    }
+
+    file.write(
+        reinterpret_cast<const char*>(this->disk_mem.data()),
+        static_cast<std::streamsize>(this->disk_mem.size())
+    );
+}
+
 
 #endif

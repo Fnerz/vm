@@ -363,50 +363,6 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
-        else if (this->cur.value == "open")
-        {
-            inst.type = InstructionType::OPEN;
-            this->advance();
-            inst.arg1 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg2 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg3 = this->getValue();
-            instructions.push_back(inst);
-            continue;
-        }
-        else if (this->cur.value == "read")
-        {
-            inst.type = InstructionType::READ;
-            this->advance();
-            inst.arg1 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg2 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg3 = this->getValue();
-            instructions.push_back(inst);
-            continue;
-        }
-        else if (this->cur.value == "write")
-        {
-            inst.type = InstructionType::WRITE;
-            this->advance();
-            inst.arg1 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg2 = this->getValue();
-            this->eat(TokenType::COMMA);
-            inst.arg3 = this->getValue();
-            instructions.push_back(inst);
-            continue;
-        }
-        else if (this->cur.value == "close")
-        {
-            inst.type = InstructionType::CLOSE;
-            this->advance();
-            inst.arg1 = this->getValue();
-            instructions.push_back(inst);
-            continue;
-        }
         else if (this->cur.value == "deci")
         {
             inst.type = InstructionType::DECI;

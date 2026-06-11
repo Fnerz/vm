@@ -68,10 +68,6 @@ enum class InstructionType
     PRINTF,
     PRINTU,
     PRINTC,
-    OPEN,
-    READ,
-    WRITE,
-    CLOSE,
     BREAKPOINT,
     SCREEN,
     RENDER,
@@ -128,10 +124,6 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"printi" ,InstructionType::PRINTI},
     {"printf" ,InstructionType::PRINTF},
     {"printc" ,InstructionType::PRINTC},
-    {"open" ,InstructionType::OPEN},
-    {"read" ,InstructionType::READ},
-    {"write" ,InstructionType::WRITE},
-    {"close" ,InstructionType::CLOSE},
     {"printu" ,InstructionType::PRINTU},
     {"bp" ,InstructionType::BREAKPOINT},
     {"screen" ,InstructionType::SCREEN},
@@ -189,10 +181,6 @@ inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
     {InstructionType::PRINTI, "printi"},
     {InstructionType::PRINTF, "printf"},
     {InstructionType::PRINTC, "printc"},
-    {InstructionType::OPEN, "open"},
-    {InstructionType::READ, "read"},
-    {InstructionType::WRITE, "write"},
-    {InstructionType::CLOSE, "close"},
     {InstructionType::PRINTU, "printu"},
     {InstructionType::BREAKPOINT  ,"bp"},
     {InstructionType::SCREEN ,"screen"},
@@ -273,6 +261,6 @@ struct Instruction
 };
 std::string instructionRepr(Instruction inst);
 
-inline std::string ALLOWED_SYMBOL_CHARS = "#.abcdefghijklmnopqrstuvwxyz0123456789_";
+inline std::string ALLOWED_SYMBOL_CHARS = ".#abcdefghijklmnopqrstuvwxyz0123456789_";
 
 #endif

@@ -3,6 +3,11 @@
 
 #include "vm.hpp"
 
+VirtualMachine::VirtualMachine() : regs(REGISTER_COUNT),
+                                    memory(MEMORY_SIZE),
+                                    vdisk(memory, DISK_ADDR) 
+{};
+
 void VirtualMachine::resetFlags()
 {
     this->lesser_flag = false;
@@ -19,7 +24,7 @@ uint64_t VirtualMachine::resolveAddress(uint64_t arg, ArgType arg_type)
     }
     else if (arg_type == ArgType::POINTER_R)
     {
-        return this->registers[arg];
+        return this->regs[arg];
     }
     else if (arg_type == ArgType::IMMEDIATE_I)
     {
@@ -45,11 +50,11 @@ uint64_t VirtualMachine::resolveValue(uint64_t arg, ArgType arg_type)
 {
     if (arg_type == ArgType::REGISTER)
     {
-        return this->registers[arg];
+        return this->regs[arg];
     }
     else if (arg_type == ArgType::POINTER_R)
     {
-        return this->registers[arg];
+        return this->regs[arg];
     }
     else if (arg_type == ArgType::IMMEDIATE_I)
     {
@@ -159,10 +164,19 @@ bool VirtualMachine::step()
     }
     else if (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint64_t>(InterruptType::TIMED))
     {
-        if (this->interrupt_timer != 0 && this->interrupt_timer % this->INTERRUPT_FREQUENCY == 0)
+        if (this->interrupt_timer != 0 && this->interrupt_timer % this->INTERRUPT_FREQ == 0)
         {
             this->interrupt();
         }
+    }
+
+    if (this->run_time_counter % this->DISK_AUTO_WRITE_FREQ)
+    {
+        this->vdisk.safeImg();
+    }
+    if (this->run_time_counter % this->DISK_STEP_FREQ)
+    {
+        this->vdisk.step();
     }
 
     // std::cout << input << std::endl;
@@ -178,7 +192,7 @@ bool VirtualMachine::step()
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            this->registers[dest] = src;
+            this->regs[dest] = src;
             break;
         }
         case InstructionType::ADDI:
@@ -186,7 +200,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = add<int64_t>(left, right);
+            this->regs[dest] = add<int64_t>(left, right);
             break;
         }
         case InstructionType::ADDF:
@@ -194,7 +208,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = std::bit_cast<uint64_t>(add<double>(left, right));
+            this->regs[dest] = std::bit_cast<uint64_t>(add<double>(left, right));
             break;
         }
         case InstructionType::ADDU:
@@ -202,7 +216,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = add<uint64_t>(left, right);
+            this->regs[dest] = add<uint64_t>(left, right);
             break;
         }
         case InstructionType::SUBI:
@@ -210,7 +224,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = sub<int64_t>(left, right);
+            this->regs[dest] = sub<int64_t>(left, right);
             break;
         }
         case InstructionType::SUBF:
@@ -218,7 +232,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = std::bit_cast<uint64_t>(sub<double>(left, right));
+            this->regs[dest] = std::bit_cast<uint64_t>(sub<double>(left, right));
             break;
         }
         case InstructionType::SUBU:
@@ -226,7 +240,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = sub<uint64_t>(left, right);
+            this->regs[dest] = sub<uint64_t>(left, right);
             break;
         }
         case InstructionType::MULI:
@@ -234,7 +248,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = mul<int64_t>(left, right);
+            this->regs[dest] = mul<int64_t>(left, right);
             break;
         }
         case InstructionType::MULF:
@@ -242,7 +256,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = std::bit_cast<uint64_t>(mul<double>(left, right));
+            this->regs[dest] = std::bit_cast<uint64_t>(mul<double>(left, right));
             break;
         }
         case InstructionType::MULU:
@@ -250,7 +264,7 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t left = this->resolveValue(inst.args[1], inst.arg_types[1]);
             uint64_t right = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            this->registers[dest] = mul<uint64_t>(left, right);
+            this->regs[dest] = mul<uint64_t>(left, right);
             break;
         }
         case InstructionType::DIVI:
@@ -263,7 +277,7 @@ bool VirtualMachine::step()
                 std::cerr << "Integer division by zero" << std::endl;
                 exit(1);
             }
-            this->registers[dest] = div<int64_t>(left, right);
+            this->regs[dest] = div<int64_t>(left, right);
             break;
         }
         case InstructionType::DIVF:
@@ -276,7 +290,7 @@ bool VirtualMachine::step()
                 std::cerr << "Floating division by zero" << std::endl;
                 exit(1);
             }
-            this->registers[dest] = std::bit_cast<uint64_t>(div<double>(left, right));
+            this->regs[dest] = std::bit_cast<uint64_t>(div<double>(left, right));
             break;
         }
         case InstructionType::DIVU:
@@ -289,7 +303,7 @@ bool VirtualMachine::step()
                 std::cerr << "Floating division by zero" << std::endl;
                 exit(1);
             }
-            this->registers[dest] = div<uint64_t>(left, right);
+            this->regs[dest] = div<uint64_t>(left, right);
             break;
         }
         case InstructionType::MODI:
@@ -302,19 +316,19 @@ bool VirtualMachine::step()
                 std::cerr << "Modulo by zero" << std::endl;
                 exit(1);
             }
-            this->registers[dest] = mod<int64_t>(left, right);
+            this->regs[dest] = mod<int64_t>(left, right);
             break;
         }
         case InstructionType::ABSI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = abs<int64_t>(this->registers[dest]);
+            this->regs[dest] = abs<int64_t>(this->regs[dest]);
             break;
         }
             case InstructionType::ABSF:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = std::bit_cast<uint64_t>(abs<double>(this->registers[dest]));
+            this->regs[dest] = std::bit_cast<uint64_t>(abs<double>(this->regs[dest]));
             break;
         }
         case InstructionType::CMPI:
@@ -448,107 +462,15 @@ bool VirtualMachine::step()
             uint64_t end = this->resolveAddress(inst.args[1], inst.arg_types[1]);
             if (start == end)
             {
-                std::cout << static_cast<char>(this->registers[start]);
+                std::cout << static_cast<char>(this->regs[start]);
             }
             else
             {
                 for (uint64_t idx = start; idx < end; ++idx)
                 {
-                    std::cout << static_cast<char>(this->registers[idx]);
+                    std::cout << static_cast<char>(this->regs[idx]);
                 }
             }
-            break;
-        }
-        case InstructionType::OPEN:
-        {
-            uint64_t filename_addr = this->resolveValue(inst.args[0], inst.arg_types[0]);
-            uint64_t mode_code = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint64_t ret_adress = this->resolveAddress(inst.args[2], inst.arg_types[2]);
-            std::string path = this->readStringFromMemory(filename_addr);
-            std::cout << "\nfilename_addr: " << filename_addr << std::endl;
-            std::cout << "mode_code: " << mode_code << std::endl;
-            std::cout << "ret_adress: " << ret_adress << std::endl;
-            int flags = 0;
-            if (mode_code == 0)
-            {
-                flags = O_RDONLY;
-            }
-            else if (mode_code == 1)
-            {
-                flags = O_WRONLY | O_CREAT | O_TRUNC;
-            }
-            else if (mode_code == 2)
-            {
-                flags = O_RDWR | O_CREAT;
-            }
-            else if (mode_code == 3)
-            {
-                flags = O_WRONLY | O_CREAT | O_APPEND;
-            }
-            else
-            {
-                std::cerr << "Unsupported open mode: " << mode_code << std::endl;
-                this->memory[ret_adress] = -1;
-                break;
-            }
-            int fd = ::open(path.c_str(), flags);
-            if (fd < 0)
-            {
-                std::cout << "coudnt open file" << std::endl << strerror(errno) << std::endl;
-                std::cout << "args: " << path.c_str() << ", " << flags << std::endl;
-            }
-            this->memory[ret_adress] = static_cast<uint64_t>(fd);
-            break;
-        }
-        case InstructionType::READ:
-        {
-            int fd = static_cast<int>(this->resolveValue(inst.args[0], inst.arg_types[0]));
-            uint64_t buffer_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint64_t count = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            if (!this->isValidMemoryRange(buffer_addr, count))
-            {
-                std::cerr << "Read buffer out of range: " << buffer_addr << " + " << count << std::endl;
-                this->registers[0] = static_cast<uint64_t>(-1);
-                break;
-            }
-            std::vector<char> scratch(count);
-            ssize_t bytes_read = ::read(fd, scratch.data(), static_cast<size_t>(count));
-            if (bytes_read < 0)
-            {
-                this->registers[0] = static_cast<uint64_t>(-1);
-                break;
-            }
-            this->storeBytesToMemory(buffer_addr, scratch.data(), static_cast<uint64_t>(bytes_read));
-            this->registers[0] = static_cast<uint64_t>(bytes_read);
-            break;
-        }
-        case InstructionType::WRITE:
-        {
-            int fd = static_cast<int>(this->resolveValue(inst.args[0], inst.arg_types[0]));
-            uint64_t buffer_addr = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            uint64_t count = this->resolveValue(inst.args[2], inst.arg_types[2]);
-            if (!this->isValidMemoryRange(buffer_addr, count))
-            {
-                std::cerr << "Write buffer out of range: " << buffer_addr << " + " << count << std::endl;
-                this->registers[0] = static_cast<uint64_t>(-1);
-                break;
-            }
-            std::vector<char> scratch(count);
-            this->loadBytesFromMemory(buffer_addr, scratch.data(), count);
-            ssize_t bytes_written = ::write(fd, scratch.data(), static_cast<size_t>(count));
-            if (bytes_written < 0)
-            {
-                this->registers[0] = static_cast<uint64_t>(-1);
-                break;
-            }
-            this->registers[0] = static_cast<uint64_t>(bytes_written);
-            break;
-        }
-        case InstructionType::CLOSE:
-        {
-            int fd = static_cast<int>(this->resolveValue(inst.args[0], inst.arg_types[0]));
-            int result = ::close(fd);
-            this->registers[0] = static_cast<uint64_t>(result == 0 ? 0 : static_cast<uint64_t>(-1));
             break;
         }
         case InstructionType::BREAKPOINT:
@@ -586,51 +508,51 @@ bool VirtualMachine::step()
                 exit(1);
             }
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = this->stack.back();
+            this->regs[dest] = this->stack.back();
             this->stack.pop_back();
             break;
         }
         case InstructionType::DECI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = dec<int64_t>(this->registers[dest]);
+            this->regs[dest] = dec<int64_t>(this->regs[dest]);
             break;
         }
         case InstructionType::DECF:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = std::bit_cast<uint64_t>(dec<double>(this->registers[dest]));
+            this->regs[dest] = std::bit_cast<uint64_t>(dec<double>(this->regs[dest]));
             break;
         }
         case InstructionType::DECU:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = dec<uint64_t>(this->registers[dest]);
+            this->regs[dest] = dec<uint64_t>(this->regs[dest]);
             break;
         }
         case InstructionType::INCI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = inc<int64_t>(this->registers[dest]);
+            this->regs[dest] = inc<int64_t>(this->regs[dest]);
             break;
         }
         case InstructionType::INCF:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = std::bit_cast<uint64_t>(inc<double>(this->registers[dest]));
+            this->regs[dest] = std::bit_cast<uint64_t>(inc<double>(this->regs[dest]));
             break;
         }
         case InstructionType::INCU:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
-            this->registers[dest] = inc<uint64_t>(this->registers[dest]);
+            this->regs[dest] = inc<uint64_t>(this->regs[dest]);
             break;
         }
         case InstructionType::TIME:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             std::time_t now = std::time(nullptr);
-            this->registers[dest] = std::bit_cast<uint64_t>(static_cast<double>(now));
+            this->regs[dest] = std::bit_cast<uint64_t>(static_cast<double>(now));
             break;
         }
         case InstructionType::HALT:
@@ -642,28 +564,28 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
             double dv = static_cast<double>(static_cast<int64_t>(src));
-            this->registers[dest] = std::bit_cast<uint64_t>(dv);
+            this->regs[dest] = std::bit_cast<uint64_t>(dv);
             break;
         }
         case InstructionType::ITOU:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            this->registers[dest] = static_cast<uint64_t>(static_cast<int64_t>(std::bit_cast<int64_t>(src)));
+            this->regs[dest] = static_cast<uint64_t>(static_cast<int64_t>(std::bit_cast<int64_t>(src)));
             break;
         }
         case InstructionType::FTOI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            this->registers[dest] = static_cast<uint64_t>(static_cast<int64_t>(std::bit_cast<double>(src)));
+            this->regs[dest] = static_cast<uint64_t>(static_cast<int64_t>(std::bit_cast<double>(src)));
             break;
         }
         case InstructionType::FTOU:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            this->registers[dest] = static_cast<uint64_t>(static_cast<uint64_t>(std::bit_cast<double>(src)));
+            this->regs[dest] = static_cast<uint64_t>(static_cast<uint64_t>(std::bit_cast<double>(src)));
             break;
         }
         case InstructionType::UTOF:
@@ -671,14 +593,14 @@ bool VirtualMachine::step()
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
             double dv = static_cast<double>(src);
-            this->registers[dest] = std::bit_cast<uint64_t>(dv);
+            this->regs[dest] = std::bit_cast<uint64_t>(dv);
             break;
         }
         case InstructionType::UTOI:
         {
             uint64_t dest = this->resolveAddress(inst.args[0], inst.arg_types[0]);
             uint64_t src = this->resolveValue(inst.args[1], inst.arg_types[1]);
-            this->registers[dest] = static_cast<uint64_t>(static_cast<int64_t>(src));
+            this->regs[dest] = static_cast<uint64_t>(static_cast<int64_t>(src));
             break;
         }
         default:

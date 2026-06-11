@@ -67,6 +67,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/assembler/parser.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/vm/vm.hpp \
   C:/msys64/mingw64/include/_mingw.h \
   C:/msys64/mingw64/include/_mingw_mac.h \
@@ -186,6 +187,7 @@ CMakeFiles/VM.dir/src/main.cpp.obj: C:/msys64/home/lenna/vm/c++/src/main.cpp \
   C:/msys64/mingw64/include/c++/15.2.0/cstdint \
   C:/msys64/mingw64/include/c++/15.2.0/cstdio \
   C:/msys64/mingw64/include/c++/15.2.0/cstdlib \
+  C:/msys64/mingw64/include/c++/15.2.0/cstring \
   C:/msys64/mingw64/include/c++/15.2.0/ctime \
   C:/msys64/mingw64/include/c++/15.2.0/cwchar \
   C:/msys64/mingw64/include/c++/15.2.0/cwctype \
@@ -1614,6 +1616,7 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm
   C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_video.h \
   C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/vm/debugger.hpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/vm/vm.hpp \
   C:/msys64/mingw64/include/_mingw.h \
   C:/msys64/mingw64/include/_mingw_mac.h \
@@ -1640,6 +1643,7 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_string.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/char_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/codecvt.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/concept_check.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cpp_type_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_forced.h \
@@ -1650,6 +1654,7 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_ptr.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functexcept.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functional_hash.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/hash_bytes.h \
@@ -1731,6 +1736,7 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm
   C:/msys64/mingw64/include/c++/15.2.0/cstdint \
   C:/msys64/mingw64/include/c++/15.2.0/cstdio \
   C:/msys64/mingw64/include/c++/15.2.0/cstdlib \
+  C:/msys64/mingw64/include/c++/15.2.0/cstring \
   C:/msys64/mingw64/include/c++/15.2.0/ctime \
   C:/msys64/mingw64/include/c++/15.2.0/cwchar \
   C:/msys64/mingw64/include/c++/15.2.0/cwctype \
@@ -1745,6 +1751,7 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm
   C:/msys64/mingw64/include/c++/15.2.0/ext/numeric_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/string_conversions.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/type_traits.h \
+  C:/msys64/mingw64/include/c++/15.2.0/fstream \
   C:/msys64/mingw64/include/c++/15.2.0/initializer_list \
   C:/msys64/mingw64/include/c++/15.2.0/ios \
   C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
@@ -1784,8 +1791,10 @@ CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm
   C:/msys64/mingw64/include/c++/15.2.0/variant \
   C:/msys64/mingw64/include/c++/15.2.0/vector \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++locale.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
@@ -1870,6 +1879,7 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_string.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/char_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/codecvt.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/concept_check.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cpp_type_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_forced.h \
@@ -1879,6 +1889,7 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_ptr.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functexcept.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functional_hash.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/hash_bytes.h \
@@ -1970,6 +1981,7 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/
   C:/msys64/mingw64/include/c++/15.2.0/ext/numeric_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/string_conversions.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/type_traits.h \
+  C:/msys64/mingw64/include/c++/15.2.0/fstream \
   C:/msys64/mingw64/include/c++/15.2.0/initializer_list \
   C:/msys64/mingw64/include/c++/15.2.0/ios \
   C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
@@ -1996,8 +2008,10 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/
   C:/msys64/mingw64/include/c++/15.2.0/variant \
   C:/msys64/mingw64/include/c++/15.2.0/vector \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++locale.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
@@ -2111,6 +2125,7 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_version.h \
   C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_video.h \
   C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
+  C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.hpp \
   C:/msys64/home/lenna/vm/c++/src/vm/vm/vm.hpp \
   C:/msys64/mingw64/include/_mingw.h \
   C:/msys64/mingw64/include/_mingw_mac.h \
@@ -2137,6 +2152,7 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/mingw64/include/c++/15.2.0/bits/basic_string.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/char_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/charconv.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/codecvt.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/concept_check.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cpp_type_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/cxxabi_forced.h \
@@ -2147,6 +2163,7 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/exception_ptr.h \
+  C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functexcept.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/functional_hash.h \
   C:/msys64/mingw64/include/c++/15.2.0/bits/hash_bytes.h \
@@ -2228,6 +2245,7 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/mingw64/include/c++/15.2.0/cstdint \
   C:/msys64/mingw64/include/c++/15.2.0/cstdio \
   C:/msys64/mingw64/include/c++/15.2.0/cstdlib \
+  C:/msys64/mingw64/include/c++/15.2.0/cstring \
   C:/msys64/mingw64/include/c++/15.2.0/ctime \
   C:/msys64/mingw64/include/c++/15.2.0/cwchar \
   C:/msys64/mingw64/include/c++/15.2.0/cwctype \
@@ -2242,6 +2260,7 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/mingw64/include/c++/15.2.0/ext/numeric_traits.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/string_conversions.h \
   C:/msys64/mingw64/include/c++/15.2.0/ext/type_traits.h \
+  C:/msys64/mingw64/include/c++/15.2.0/fstream \
   C:/msys64/mingw64/include/c++/15.2.0/initializer_list \
   C:/msys64/mingw64/include/c++/15.2.0/ios \
   C:/msys64/mingw64/include/c++/15.2.0/iosfwd \
@@ -2281,8 +2300,10 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/mingw64/include/c++/15.2.0/variant \
   C:/msys64/mingw64/include/c++/15.2.0/vector \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/atomic_word.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++allocator.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
+  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++locale.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/cpu_defines.h \
   C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_base.h \
@@ -2340,8 +2361,6 @@ CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj: C:/msys64/home/lenna/vm/c++/src/vm/vm/vm
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdint.h \
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h
 
-
-C:/msys64/mingw64/include/c++/15.2.0/cstring:
 
 C:/msys64/home/lenna/vm/c++/src/vm/types.cpp:
 
@@ -2425,6 +2444,10 @@ C:/msys64/mingw64/include/errno.h:
 
 C:/msys64/mingw64/include/ctype.h:
 
+C:/msys64/mingw64/include/corecrt_wstdlib.h:
+
+C:/msys64/mingw64/include/corecrt_wctype.h:
+
 C:/msys64/mingw64/include/c++/15.2.0/bits/node_handle.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/cstdint:
@@ -2459,13 +2482,7 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/invoke.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/exception_ptr.h:
 
-C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.hpp:
-
-C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_timer.h:
-
 C:/msys64/mingw64/include/c++/15.2.0/bits/memoryfwd.h:
-
-C:/msys64/mingw64/include/corecrt_wstdlib.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/erase_if.h:
 
@@ -2556,6 +2573,14 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/shared_ptr_base.h:
 C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.tcc:
 
 C:/msys64/mingw64/include/c++/15.2.0/stdexcept:
+
+C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_timer.h:
+
+C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.hpp:
+
+C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_version.h:
+
+C:/msys64/mingw64/include/c++/15.2.0/tuple:
 
 C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.hpp:
 
@@ -2759,10 +2784,6 @@ C:/msys64/mingw64/include/c++/15.2.0/ext/aligned_buffer.h:
 
 C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_time.h:
 
-C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets.h:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/ostream_insert.h:
-
 C:/msys64/home/lenna/vm/c++/src/main.cpp:
 
 C:/msys64/mingw64/include/c++/15.2.0/debug/assertions.h:
@@ -2783,9 +2804,9 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc:
 
 C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_close_code.h:
 
-C:/msys64/home/lenna/vm/c++/src/SDL3-3.2.16/x86_64-w64-mingw32/include/SDL3/SDL_version.h:
+C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets.h:
 
-C:/msys64/mingw64/include/c++/15.2.0/tuple:
+C:/msys64/mingw64/include/c++/15.2.0/bits/ostream_insert.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/parse_numbers.h:
 
@@ -2882,6 +2903,8 @@ C:/msys64/mingw64/include/c++/15.2.0/clocale:
 C:/msys64/mingw64/include/c++/15.2.0/cmath:
 
 C:/msys64/mingw64/include/c++/15.2.0/cstdio:
+
+C:/msys64/mingw64/include/c++/15.2.0/cstring:
 
 C:/msys64/mingw64/include/c++/15.2.0/ext/atomicity.h:
 
@@ -2982,5 +3005,3 @@ C:/msys64/mingw64/include/corecrt.h:
 C:/msys64/mingw64/include/corecrt_startup.h:
 
 C:/msys64/mingw64/include/corecrt_stdio_config.h:
-
-C:/msys64/mingw64/include/corecrt_wctype.h:

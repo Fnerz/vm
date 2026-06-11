@@ -229,9 +229,7 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::DIVF) ||
             (inst.type == InstructionType::DIVU) ||
             (inst.type == InstructionType::MODI) ||
-            (inst.type == InstructionType::MODF) ||
-            (inst.type == InstructionType::READ) ||
-            (inst.type == InstructionType::WRITE))
+            (inst.type == InstructionType::MODF))
         {
             std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
             std::tuple<uint64_t, ArgType> arg2_bundle = this->nodeToArgBundle(inst.arg2);
@@ -258,7 +256,6 @@ std::vector<Instruction> InstructionLowerer::lower()
             (inst.type == InstructionType::PRINTF)||
             (inst.type == InstructionType::PRINTC)||
             (inst.type == InstructionType::PRINTU)||
-            (inst.type == InstructionType::OPEN)||
             (inst.type == InstructionType::ITOF)||
             (inst.type == InstructionType::ITOU)||
             (inst.type == InstructionType::FTOI)||
@@ -277,11 +274,10 @@ std::vector<Instruction> InstructionLowerer::lower()
         // 1 arg instructions
         else if (
             (inst.type == InstructionType::PUSH) ||
-            (inst.type == InstructionType::POP) ||
+            (inst.type == InstructionType::POP)  ||
             (inst.type == InstructionType::DECI) ||
             (inst.type == InstructionType::INCI) ||
-            (inst.type == InstructionType::TIME) ||
-            (inst.type == InstructionType::CLOSE))
+            (inst.type == InstructionType::TIME))
         {
             std::tuple<uint64_t, ArgType> arg1_bundle = this->nodeToArgBundle(inst.arg1);
 

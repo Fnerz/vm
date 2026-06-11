@@ -13,7 +13,6 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: \
  C:/msys64/mingw64/include/_mingw_secapi.h \
  C:/msys64/mingw64/include/vadefs.h \
  C:/msys64/mingw64/include/sec_api/string_s.h \
- C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
  C:/msys64/mingw64/include/c++/15.2.0/string \
  C:/msys64/mingw64/include/c++/15.2.0/bits/requires_hosted.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stringfwd.h \
@@ -110,9 +109,8 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/uses_allocator_args.h \
  C:/msys64/mingw64/include/c++/15.2.0/tuple \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ranges_util.h \
- C:/msys64/mingw64/include/c++/15.2.0/iostream \
- C:/msys64/mingw64/include/c++/15.2.0/ostream \
- C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.h \
+ C:/msys64/mingw64/include/c++/15.2.0/fstream \
+ C:/msys64/mingw64/include/c++/15.2.0/istream \
  C:/msys64/mingw64/include/c++/15.2.0/ios \
  C:/msys64/mingw64/include/c++/15.2.0/exception \
  C:/msys64/mingw64/include/c++/15.2.0/bits/exception_ptr.h \
@@ -153,9 +151,16 @@ CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/ctype_inline.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/bits/basic_ios.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/ostream \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.tcc \
- C:/msys64/mingw64/include/c++/15.2.0/istream \
  C:/msys64/mingw64/include/c++/15.2.0/bits/istream.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/codecvt.h \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/fstream.tcc \
+ C:/msys64/home/lenna/vm/c++/src/vm/types.hpp \
+ C:/msys64/mingw64/include/c++/15.2.0/iostream \
  C:/msys64/mingw64/include/c++/15.2.0/variant \
  C:/msys64/mingw64/include/c++/15.2.0/bits/enable_special_members.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/monostate.h \

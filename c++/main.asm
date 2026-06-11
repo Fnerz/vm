@@ -6,7 +6,7 @@ load r0, [i4990] ; last key
 load r1, [i4991] ; key down
 
 cmpi r2, i13 ; enter
-je loadFile
+je storeFile
 
 cmpi r2, i8 ; backspace
 je .backspace
@@ -20,26 +20,19 @@ jne getFileName
 
 .saveChar:
 printc r0, r0
-store r0, r3
+store r0, [r3]
 inci r3
-store i0, r3
+store i0, [r3]
 jmp getFileName
 
 .backspace:
-store i0, r3
+store i0, [r3]
 deci r3
 jmp getFileName
 
 
 
-loadFile:
-open r4, i2, i500
+storeFile:
 
-load r5, [i500] ; load file fd into r5
-
-printi r5, r5
-read r5, i200, i144
-printi r0, r0
-; jmp i200
 
 
