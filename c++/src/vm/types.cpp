@@ -134,7 +134,6 @@ std::string instructionRepr(Instruction inst)
         if (inst.arg_types[i] == ArgType::IMMEDIATE_I)
         {
             ret += "i";
-            
         }
         if (inst.arg_types[i] == ArgType::IMMEDIATE_F)
         {
@@ -144,7 +143,15 @@ std::string instructionRepr(Instruction inst)
         {
             ret += "p";
         }
-        ret += std::to_string(inst.args[i]);
+
+        if (inst.arg_types[i] == ArgType::LABEL_INDEX)
+        {
+            ret += std::to_string(static_cast<int>(inst.args[i]));
+        } 
+        else
+        {
+            ret += std::to_string(inst.args[i]);
+        }
 
         if (i+1 != count)
         {

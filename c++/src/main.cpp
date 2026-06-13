@@ -122,6 +122,7 @@ int main(int argc, char *argv[])
     }
     else
     {
+        std::cout << "Single file compiler" << std::endl;
         std::ifstream file_reader(inputPath);
         if (!file_reader)
         {

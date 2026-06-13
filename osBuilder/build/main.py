@@ -56,6 +56,7 @@ bootloader_build.setSourceFiles(["../src/bootloader.asm",
                                 "../src/fileIO/io.asm"])
 bootloader_build.compile()
 
+with open(bootloader_build.path, "rb") as f:
+    data = f.read()
+print(len(data))
 # db = diskBuilder([bootloader_build])
-# with open(bootloader_build.path, "rb") as f:
-#     print(f.read())

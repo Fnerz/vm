@@ -392,7 +392,9 @@ std::vector<Instruction> InstructionLowerer::lower()
             std::cout << "Cannot resolve address of label " << label << std::endl;
             exit(1);
         }
-        int idx = it->second;
+        int global_idx = it->second;
+        int idx = global_idx - jmp_inst_bundle.index;
+        std::cout << "idx = " << global_idx << " - " << jmp_inst_bundle.index << " = " << idx << std::endl;
         lowerd_jmp.args[0] = idx;
         lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
         

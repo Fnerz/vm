@@ -363,14 +363,14 @@ bool VirtualMachine::step()
         }
         case InstructionType::JMP:
         {
-            this->ic = inst.args[0];
+            this->ic += inst.args[0];
             return true;
         }
         case InstructionType::JE:
         {
             if (this->equal_flag)
             {
-                this->ic = inst.args[0];
+                this->ic += inst.args[0];
                 return true;
             }
             break;
@@ -379,7 +379,7 @@ bool VirtualMachine::step()
         {
             if (!this->equal_flag)
             {
-                this->ic = inst.args[0];
+                this->ic += inst.args[0];
                 return true;
             }
             break;
@@ -388,7 +388,7 @@ bool VirtualMachine::step()
         {
             if (this->greater_flag)
             {
-                this->ic = inst.args[0];
+                this->ic += inst.args[0];
                 return true;
             }
             break;
@@ -397,7 +397,7 @@ bool VirtualMachine::step()
         {
             if (this->lesser_flag)
             {
-                this->ic = inst.args[0];
+                this->ic += inst.args[0];
                 return true;
             }
             break;
@@ -406,7 +406,7 @@ bool VirtualMachine::step()
         {
             if (this->greater_flag || this->equal_flag)
             {
-                this->ic = inst.args[0];
+                this->ic += inst.args[0];
                 return true;
             }
             break;
@@ -415,7 +415,7 @@ bool VirtualMachine::step()
         {
             if (this->lesser_flag || this->equal_flag)
             {
-                this->ic = inst.args[0];
+                this->ic += inst.args[0];
                 return true;
             }
             break;
@@ -480,7 +480,7 @@ bool VirtualMachine::step()
         case InstructionType::CALL:
         {
             this->call_stack.push_back(this->ic + 1);
-            this->ic = inst.args[0];
+            this->ic += inst.args[0];
             return true;
         }
         case InstructionType::RET:

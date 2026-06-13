@@ -58,10 +58,9 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
 
         for (const auto& [symbol_name, local_index] : symbols)
         {
-            int absolute_address = current_offset + local_index;
-
             if (isGlobalSymbol(symbol_name))
             {
+                int absolute_address = current_offset + local_index;
                 if (this->global_symbols.find(symbol_name) != this->global_symbols.end())
                 {
                     throw std::runtime_error("Global symbol '" + symbol_name + 
@@ -73,9 +72,8 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
                 {
                     std::cout << "Global symbol: " << symbol_name << " @ " << absolute_address << std::endl;
                 }
+                linked_file.symbols[symbol_name] = absolute_address;
             }
-
-            linked_file.symbols[symbol_name] = absolute_address;
         }
 
         if (this->entry_point == -1)
@@ -132,38 +130,26 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
                  inst.type == InstructionType::JGE || 
                  inst.type == InstructionType::JLE ||
                  inst.type == InstructionType::CALL) &&
-                inst.arg_types[0] == ArgType::LABEL_INDEX)
+                 inst.arg_types[0] == ArgType::LABEL_INDEX)
             {
                 auto reloc_it = relocation_map.find(local_index);
                 if (reloc_it != relocation_map.end())
                 {
                     const std::string& symbol = reloc_it->second;
-                    int absolute_index;
 
                     if (isGlobalSymbol(symbol))
                     {
                         auto global_it = this->global_symbols.find(symbol);
                         if (global_it == this->global_symbols.end())
                         {
-                            throw std::runtime_error("Undefined global symbol: " + symbol);
+                            throw std::runtime_error(
+                                "Undefined global symbol: " + symbol);
                         }
-                        absolute_index = global_it->second;
+
+                        int target_absolute = global_it->second;
+                        int current_absolute = linked_file.offset + local_index;
+                        patched_inst.args[0] = target_absolute - current_absolute;
                     }
-                    else
-                    {
-                        auto local_it = linked_file.symbols.find(symbol);
-                        if (local_it == linked_file.symbols.end())
-                        {
-                            throw std::runtime_error("Undefined local symbol: " + symbol);
-                        }
-                        absolute_index = local_it->second;
-                    }
-                    patched_inst.args[0] = absolute_index;
-                }
-                else
-                {
-                    int local_target = static_cast<int>(inst.args[0]);
-                    patched_inst.args[0] = linked_file.offset + local_target;
                 }
             }
 
