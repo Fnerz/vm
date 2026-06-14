@@ -420,6 +420,65 @@ bool VirtualMachine::step()
             }
             break;
         }
+        case InstructionType::JMPA:
+        {
+            this->ic = inst.args[0];
+            return true;
+        }
+        case InstructionType::JEA:
+        {
+            if (this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JNEA:
+        {
+            if (!this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JGA:
+        {
+            if (this->greater_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JLA:
+        {
+            if (this->lesser_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JGEA:
+        {
+            if (this->greater_flag || this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
+        case InstructionType::JLEA:
+        {
+            if (this->lesser_flag || this->equal_flag)
+            {
+                this->ic = inst.args[0];
+                return true;
+            }
+            break;
+        }
         case InstructionType::LOAD:
         {
             uint64_t dst_addr = this->resolveAddress(inst.args[0], inst.arg_types[0]);

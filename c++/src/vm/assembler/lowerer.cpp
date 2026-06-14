@@ -287,12 +287,19 @@ std::vector<Instruction> InstructionLowerer::lower()
         // instructions with a label
         else if (
             (inst.type == InstructionType::JMP) ||
-            (inst.type == InstructionType::JE) ||
+            (inst.type == InstructionType::JE)  ||
             (inst.type == InstructionType::JNE) ||
-            (inst.type == InstructionType::JG) ||
-            (inst.type == InstructionType::JL) ||
+            (inst.type == InstructionType::JG)  ||
+            (inst.type == InstructionType::JL)  ||
             (inst.type == InstructionType::JGE) ||
-            (inst.type == InstructionType::JLE)||
+            (inst.type == InstructionType::JLE) ||
+            (inst.type == InstructionType::JMPA)||
+            (inst.type == InstructionType::JEA) ||
+            (inst.type == InstructionType::JNEA)||
+            (inst.type == InstructionType::JGA) ||
+            (inst.type == InstructionType::JLA) ||
+            (inst.type == InstructionType::JGEA)||
+            (inst.type == InstructionType::JLEA)||
             (inst.type == InstructionType::CALL))
         {
             std::string raw_label;
@@ -394,7 +401,10 @@ std::vector<Instruction> InstructionLowerer::lower()
         }
         int global_idx = it->second;
         int idx = global_idx - jmp_inst_bundle.index;
-        std::cout << "idx = " << global_idx << " - " << jmp_inst_bundle.index << " = " << idx << std::endl;
+        if (isAbsoluteJmpInst(jmp_inst_bundle.type))
+        {
+            idx = global_idx;
+        }
         lowerd_jmp.args[0] = idx;
         lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
         

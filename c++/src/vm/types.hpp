@@ -62,6 +62,13 @@ enum class InstructionType
     JL,
     JGE,
     JLE,
+    JMPA,
+    JEA,
+    JNEA,
+    JGA,
+    JLA,
+    JGEA,
+    JLEA,
     LOAD,
     STORE,
     PRINTI,
@@ -119,6 +126,13 @@ inline std::map<std::string, InstructionType> STR_TO_INSTRUCTION_TYPE = {
     {"jl" ,InstructionType::JL},
     {"jge" ,InstructionType::JGE},
     {"jle" ,InstructionType::JLE},
+    {"jmpa", InstructionType::JMPA},
+    {"jea", InstructionType::JEA},
+    {"jnea", InstructionType::JNEA},
+    {"jga", InstructionType::JGA},
+    {"jla", InstructionType::JLA},
+    {"jgea", InstructionType::JGEA},
+    {"jlea", InstructionType::JLEA},
     {"load" ,InstructionType::LOAD},
     {"store" ,InstructionType::STORE},
     {"printi" ,InstructionType::PRINTI},
@@ -176,6 +190,13 @@ inline std::map<InstructionType, std::string> INST_TYPE_TO_STR = {
     {InstructionType::JL  ,"jl"},
     {InstructionType::JGE  ,"jge"},
     {InstructionType::JLE  ,"jle"},
+    { InstructionType::JMPA, "jmpa"},
+    { InstructionType::JEA, "jea"},
+    { InstructionType::JNEA, "jnea"},
+    { InstructionType::JGA, "jga"},
+    { InstructionType::JLA, "jla"},
+    { InstructionType::JGEA, "jgea"},
+    { InstructionType::JLEA, "jlea"},
     {InstructionType::LOAD, "load"},
     {InstructionType::STORE, "store"},
     {InstructionType::PRINTI, "printi"},
@@ -262,5 +283,7 @@ struct Instruction
 std::string instructionRepr(Instruction inst);
 
 inline std::string ALLOWED_SYMBOL_CHARS = ".#abcdefghijklmnopqrstuvwxyz0123456789_";
+
+bool isAbsoluteJmpInst(InstructionType jmp_inst_type);
 
 #endif

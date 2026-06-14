@@ -93,8 +93,7 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
 
         if (debug)
         {
-            std::cout << "Linked file: " << asm_file << " (" << instructions.size() 
-                     << " instructions, offset " << linked_file.offset << ")" << std::endl;
+            std::cout << "Linked file: " << asm_file << " (" << instructions.size() << " instructions, offset " << linked_file.offset << ")" << std::endl;
         }
     }
 
@@ -129,7 +128,8 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
                  inst.type == InstructionType::JL ||
                  inst.type == InstructionType::JGE || 
                  inst.type == InstructionType::JLE ||
-                 inst.type == InstructionType::CALL) &&
+                 inst.type == InstructionType::CALL ||
+                 isAbsoluteJmpInst(inst.type)) &&
                  inst.arg_types[0] == ArgType::LABEL_INDEX)
             {
                 auto reloc_it = relocation_map.find(local_index);
@@ -147,8 +147,15 @@ void VmLinker::linkFiles(const std::vector<std::string>& asm_files, bool debug)
                         }
 
                         int target_absolute = global_it->second;
-                        int current_absolute = linked_file.offset + local_index;
-                        patched_inst.args[0] = target_absolute - current_absolute;
+                        if (isAbsoluteJmpInst(inst.type))
+                        {
+                            patched_inst.args[0] = target_absolute;
+                        }
+                        else
+                        {
+                            int current_absolute = linked_file.offset + local_index;
+                            patched_inst.args[0] = target_absolute - current_absolute;
+                        }
                     }
                 }
             }

@@ -161,4 +161,16 @@ std::string instructionRepr(Instruction inst)
     return ret;
 }
 
+bool isAbsoluteJmpInst(InstructionType jmp_inst_type)
+{
+    return (
+        (jmp_inst_type == InstructionType::JMPA)||
+        (jmp_inst_type == InstructionType::JEA) ||
+        (jmp_inst_type == InstructionType::JNEA)||
+        (jmp_inst_type == InstructionType::JGA) ||
+        (jmp_inst_type == InstructionType::JLA) ||
+        (jmp_inst_type == InstructionType::JGEA)||
+        (jmp_inst_type == InstructionType::JLEA));
+}
+
 #endif

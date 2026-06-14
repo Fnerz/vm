@@ -4,4 +4,5 @@ ret
 
 #func2:
 mov r1, i30
-ret
+printi r1, r1
+jmpa #ret_abs

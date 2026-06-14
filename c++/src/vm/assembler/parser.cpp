@@ -467,6 +467,62 @@ std::vector<InstructionIr> LineParser::parse()
             instructions.push_back(inst);
             continue;
         }
+        else if (this->cur.value == "jmpa")  
+        {
+            inst.type = InstructionType::JMPA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "jea")  
+        {
+            inst.type = InstructionType::JEA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "jnea")  
+        {
+            inst.type = InstructionType::JNEA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "jga")  
+        {
+            inst.type = InstructionType::JGA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "jgea")  
+        {
+            inst.type = InstructionType::JGEA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "jla")  
+        {
+            inst.type = InstructionType::JLA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
+        else if (this->cur.value == "jlea")  
+        {
+            inst.type = InstructionType::JLEA;
+            this->advance();
+            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            instructions.push_back(inst);
+            continue;
+        }
         else if (this->cur.value == "cmpi")
         {
             inst.type = InstructionType::CMPI;

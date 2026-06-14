@@ -1,8 +1,3 @@
-main:
-call #func1
-call #func2
-printi r0, r2
-hlt
 ; mov r4, i100 ; str start addr
 ; mov r3, r4   ; pointer for storing
 ; getFileName:
@@ -34,9 +29,16 @@ hlt
 ; deci r3
 ; jmp getFileName
 
+main:
+    mov r0, i100
+    jmp print_rel
+    ret_rel:
+    jmpa #func2
+    mov r0, i200
+    #ret_abs:
+    hlt
 
 
-storeFile:
-
-
-
+print_rel:
+printi r0, r0
+jmp ret_rel

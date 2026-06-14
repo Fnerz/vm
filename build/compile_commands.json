@@ -1,0 +1,62 @@
+[
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\main.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\main.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/main.cpp",
+  "output": "CMakeFiles/VM.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\types.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\types.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/types.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/types.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\vm\\vm.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\vm\\vm.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/vm/vm.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/vm/vm.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\vm\\disk.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\vm\\disk.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/vm/disk.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/vm/disk.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\vm\\debugger.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\vm\\debugger.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/vm/debugger.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/vm/debugger.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\assembler\\lexer.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\assembler\\lexer.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/assembler/lexer.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/assembler/lexer.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\assembler\\parser.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\assembler\\parser.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/assembler/parser.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/assembler/parser.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\assembler\\lowerer.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\assembler\\lowerer.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/assembler/lowerer.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/assembler/lowerer.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\assembler\\assembler.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\assembler\\assembler.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/assembler/assembler.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/assembler/assembler.cpp.obj"
+},
+{
+  "directory": "C:/msys64/home/lenna/vm/build",
+  "command": "C:\\mingw64\\bin\\g++.exe  @CMakeFiles/VM.dir/includes_CXX.rsp -g -g -std=c++20 -o CMakeFiles\\VM.dir\\src\\vm\\assembler\\linker.cpp.obj -c C:\\msys64\\home\\lenna\\vm\\c++\\src\\vm\\assembler\\linker.cpp",
+  "file": "C:/msys64/home/lenna/vm/c++/src/vm/assembler/linker.cpp",
+  "output": "CMakeFiles/VM.dir/src/vm/assembler/linker.cpp.obj"
+}
+]
