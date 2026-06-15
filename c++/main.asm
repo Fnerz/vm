@@ -30,15 +30,17 @@
 ; jmp getFileName
 
 main:
-    mov r0, i100
-    jmp print_rel
-    ret_rel:
-    jmpa #func2
     mov r0, i200
-    #ret_abs:
+    call print_rel
+    ret_rel:
+    ; #ret_abs:
+    ; jmpa r10
+    ; jmpa i100
+    mov r10, i100
+    jmpa r10
     hlt
 
 
 print_rel:
 printi r0, r0
-jmp ret_rel
+ret

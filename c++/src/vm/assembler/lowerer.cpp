@@ -306,14 +306,24 @@ std::vector<Instruction> InstructionLowerer::lower()
             if (std::holds_alternative<Token>(inst.arg1))
             {
                 Token arg = std::get<Token>(inst.arg1);
+                JmpInstBundle jmp_inst_bundle = {};
+                jmp_inst_bundle.type = inst.type;
                 if (arg.type == TokenType::IMMEDIATE_I)
                 {
-                    JmpInstBundle jmp_inst_bundle = {};
-                    jmp_inst_bundle.type = inst.type;
                     jmp_inst_bundle.label = arg.value;
                     jmp_inst_bundle.index = this->lowerd_insts.size() + jmp_inst_correction;
 
                     this->label_indexes[arg.value] = std::stoi(arg.value);
+                    this->unresolved_jmp_insts.push_back(jmp_inst_bundle);
+                    jmp_inst_correction++;
+                    continue;
+                }
+                if (arg.type == TokenType::REGISTER)
+                {
+                    jmp_inst_bundle.label = "reg";
+                    jmp_inst_bundle.index = this->lowerd_insts.size() + jmp_inst_correction;
+                    jmp_inst_bundle.absolute_jmp_addr = std::stoi(arg.value);
+
                     this->unresolved_jmp_insts.push_back(jmp_inst_bundle);
                     jmp_inst_correction++;
                     continue;
@@ -383,9 +393,8 @@ std::vector<Instruction> InstructionLowerer::lower()
 
         lowerd_jmp.type = jmp_inst_bundle.type;
         std::string label = jmp_inst_bundle.label;
-
         auto it = this->label_indexes.find(label);
-        if (it == this->label_indexes.end())
+        if ((it == this->label_indexes.end()) && (label != "reg") )
         {
             // External global label reference; keep a placeholder and relocate later
             if (!label.empty() && label[0] == '#')
@@ -403,11 +412,20 @@ std::vector<Instruction> InstructionLowerer::lower()
         int idx = global_idx - jmp_inst_bundle.index;
         if (isAbsoluteJmpInst(jmp_inst_bundle.type))
         {
-            idx = global_idx;
+            idx = jmp_inst_bundle.absolute_jmp_addr;
         }
         lowerd_jmp.args[0] = idx;
-        lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
+        if (label == "reg")
+        {
+
+            lowerd_jmp.arg_types[0] = ArgType::REGISTER;
+        }
+        else
+        {
+            lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
+        }
         
+        std::cout << instructionRepr(lowerd_jmp) << std::endl;
         this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.index, lowerd_jmp);
     }
 

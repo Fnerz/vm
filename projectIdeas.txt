@@ -1,6 +1,4 @@
 connect screen
-add jmpa, jea, .. for absolute jmps
-add multiplication to 
 
 
 future:

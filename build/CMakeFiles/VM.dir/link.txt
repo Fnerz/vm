@@ -1,3 +1,0 @@
-C:\mingw64\bin\cmake.exe -E rm -f CMakeFiles\VM.dir/objects.a
-C:\mingw64\bin\ar.exe qc CMakeFiles\VM.dir/objects.a @CMakeFiles\VM.dir\objects1.rsp
-C:\mingw64\bin\g++.exe -g -g -Wl,--whole-archive CMakeFiles\VM.dir/objects.a -Wl,--no-whole-archive -o C:\msys64\home\lenna\vm\out\VM.exe -Wl,--out-implib,libVM.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\VM.dir\linkLibs.rsp

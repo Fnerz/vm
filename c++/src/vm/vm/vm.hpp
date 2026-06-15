@@ -55,7 +55,6 @@ class VirtualMachine
     bool greater_flag = false;
     
     int ic = 0;
-    int instruction_count = 0;
     static constexpr int INSTRUCTION_BYTES = sizeof(Instruction) / sizeof(uint8_t);
 
     int run_time_counter = 0;

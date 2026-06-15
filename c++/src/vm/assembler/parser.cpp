@@ -50,7 +50,11 @@ Token LineParser::eats(std::vector<TokenType> types)
     if (! inTokenTypes(this->cur.type, types))
     {
         std::cout << "Expected token of type " << tokenTypesRepr(types) << ", received " << tokenTypeRepr(this->cur.type) << std::endl;
-        exit(0);
+        for (auto tok : this->tokens)
+        {
+            std::cout << tokenRepr(tok) << "(" << tokenTypeRepr(tok.type) << ")" << " ";
+        }
+        exit(1);
     }
     this->advance();
     return last;
@@ -415,7 +419,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JMP;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -423,7 +427,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JE;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -431,7 +435,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JNE;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -439,7 +443,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JG;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -447,7 +451,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JGE;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -455,7 +459,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JL;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -463,7 +467,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JLE;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::SYMBOL});
             instructions.push_back(inst);
             continue;
         }
@@ -471,7 +475,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JMPA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }
@@ -479,7 +483,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JEA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }
@@ -487,7 +491,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JNEA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }
@@ -495,7 +499,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JGA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }
@@ -503,7 +507,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JGEA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }
@@ -511,7 +515,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JLA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }
@@ -519,7 +523,7 @@ std::vector<InstructionIr> LineParser::parse()
         {
             inst.type = InstructionType::JLEA;
             this->advance();
-            inst.arg1 = this->eats({TokenType::SYMBOL, TokenType::IMMEDIATE_I});
+            inst.arg1 = this->eats({TokenType::REGISTER, TokenType::IMMEDIATE_I});
             instructions.push_back(inst);
             continue;
         }

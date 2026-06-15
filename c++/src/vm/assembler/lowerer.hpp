@@ -15,7 +15,8 @@ struct JmpInstBundle
 {
     InstructionType type;
     std::string label;
-    int index;
+    int absolute_jmp_addr; // used to store the addr or the register
+    int index; // index at which the jmp inst will be inserted
 };
 std::string jmpInstBundleRepr(JmpInstBundle bundle);
 

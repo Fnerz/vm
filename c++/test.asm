@@ -5,4 +5,4 @@ ret
 #func2:
 mov r1, i30
 printi r1, r1
-jmpa #ret_abs
+jmp #ret_abs

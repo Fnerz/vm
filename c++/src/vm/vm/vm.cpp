@@ -140,7 +140,7 @@ void VirtualMachine::storeBytesToMemory(uint64_t addr, const char* buffer, uint6
 
 bool VirtualMachine::step()
 {
-    if (this->ic < 0 || this->ic >= this->instruction_count)
+    if (this->ic < 0)
     {
         return false;
     }
@@ -158,11 +158,11 @@ bool VirtualMachine::step()
         this->memory[this->KEYDOWN_FLAG_ADDR] = 0;
     }
 
-    if ((input != '\0') && (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint64_t>(InterruptType::KEYBOARD)))
+    if ((input != '\0') && (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint8_t>(InterruptType::KEYBOARD)))
     {
         this->interrupt();
     }
-    else if (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint64_t>(InterruptType::TIMED))
+    else if (this->memory[this->INTERRUPT_FLAG_ADDR] == static_cast<uint8_t>(InterruptType::TIMED))
     {
         if (this->interrupt_timer != 0 && this->interrupt_timer % this->INTERRUPT_FREQ == 0)
         {
@@ -184,7 +184,7 @@ bool VirtualMachine::step()
     const Instruction* inst_ptr = reinterpret_cast<const Instruction*>(&this->memory[this->ic * INSTRUCTION_BYTES]);
     Instruction inst = *inst_ptr;
     bool advance_ip = true;
-    // std::cout << this->ic << " " << instructionRepr(inst) << std::endl;
+    std::cout << this->ic << " " << instructionRepr(inst) << std::endl;
 
     switch (inst.type)
     {
@@ -736,7 +736,6 @@ void VirtualMachine::loadInstBinary(std::vector<uint8_t> bytes)
         exit(1);
     }
 
-    this->instruction_count = static_cast<int>(bytes.size() / INSTRUCTION_BYTES);
     for (int i = 0; i < static_cast<int>(bytes.size()); i++)
     {
         this->memory[i] = bytes[i];

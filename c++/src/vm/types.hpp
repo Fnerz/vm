@@ -35,7 +35,8 @@ bool inTokenTypes(TokenType tok_type, std::vector<TokenType> tok_types);
 
 enum class InstructionType
 {
-    MOV,
+    MOV = 1,
+    // arithmetic
     ADDI,
     ADDF,
     ADDU,
@@ -52,9 +53,13 @@ enum class InstructionType
     MODF,
     ABSI,
     ABSF,
+
+    // comparision
     CMPI,
     CMPU,
     CMPF,
+
+    // label jumps
     JMP,
     JE,
     JNE,
@@ -62,6 +67,8 @@ enum class InstructionType
     JL,
     JGE,
     JLE,
+
+    // absolute jumps
     JMPA,
     JEA,
     JNEA,
@@ -69,28 +76,48 @@ enum class InstructionType
     JLA,
     JGEA,
     JLEA,
+
+    // memory
     LOAD,
     STORE,
+
+    // debug io, will be removed later once io threw display is working
     PRINTI,
     PRINTF,
     PRINTU,
     PRINTC,
+
+    // debug
     BREAKPOINT,
+
+    // screen io. will probably be replaced threw a memroy bus
     SCREEN,
     RENDER,
+
+    // "functions"
     CALL,
     RET,
+
+    // stack
     PUSH,
     POP,
+
+    // increment // decrement
     DECI,
     DECF,
     DECU,
     INCI,
     INCF,
     INCU,
+
+    // sys
     TIME,
     HALT,
+
+    // only used for the assembler
     LABEL,
+
+    // conversion
     ITOF,
     ITOU,
     FTOI,
