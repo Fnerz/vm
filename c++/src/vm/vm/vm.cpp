@@ -170,11 +170,11 @@ bool VirtualMachine::step()
         }
     }
 
-    if (this->run_time_counter % this->DISK_AUTO_WRITE_FREQ)
+    if (this->run_time_counter % this->DISK_AUTO_WRITE_FREQ == 0)
     {
         this->vdisk.safeImg();
     }
-    if (this->run_time_counter % this->DISK_STEP_FREQ)
+    if (this->run_time_counter % this->DISK_STEP_FREQ == 0)
     {
         this->vdisk.step();
     }
