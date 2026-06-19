@@ -1,15 +1,11 @@
 
 
-; r17 = mode code: 1 = read, 2 = write
-; r18 = ram addr
-; r19 = disk addr
-; r20 = num of bytes
 ; r23 = return val
 #__DISK_OPERATION:
-    store r17, [i5050]
-    store r18, [i5058]
-    store r19, [i5066]
-    store r20, [i5074] 
+    store r17, [i5050] ; mode code: 1 = read, 2 = write
+    store r18, [i5058] ; ram addr
+    store r19, [i5066] ; disk addr
+    store r20, [i5074] ; num of bytes
     .await_function_clerence:
     load r24, [i5098] ; busy flag
     cmpi r24, i1
@@ -30,7 +26,7 @@
     jmp .await_done ; loop
 
     .succsess:
-    mov r23, i0
+    mov r23, i1
     jmp .func_end
 
     .failure:

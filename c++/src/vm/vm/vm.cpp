@@ -179,12 +179,10 @@ bool VirtualMachine::step()
         this->vdisk.step();
     }
 
-    // std::cout << input << std::endl;
-
     const Instruction* inst_ptr = reinterpret_cast<const Instruction*>(&this->memory[this->ic * INSTRUCTION_BYTES]);
     Instruction inst = *inst_ptr;
     bool advance_ip = true;
-    std::cout << this->ic << " " << instructionRepr(inst) << std::endl;
+    // std::cout << this->ic << " " << instructionRepr(inst) << std::endl;
 
     switch (inst.type)
     {

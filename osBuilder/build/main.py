@@ -26,7 +26,8 @@ class binBuildInfo:
 
 
 class diskBuilder:
-    def __init__(self, bins: list[binBuildInfo]):
+    def __init__(self, output_dir: str, bins: list[binBuildInfo]):
+        self.output_dir = output_dir
         self.DISK_SIZE = 64 * 1024 * 1024 # 64 MB
         self.disk_mem = bytearray(self.DISK_SIZE)
         self.bins = bins
@@ -47,16 +48,26 @@ class diskBuilder:
 
             self.disk_mem[binary.disk_location : end] = bytes
         
+        with open(f"{self.output_dir}/disk.img", "wb") as f:
+            f.write(self.disk_mem)
+        
 
 
 
 
-bootloader_build = binBuildInfo("./bins", "bootloader.bin")
+bootloader_build = binBuildInfo("../../c++/out/", "bootloader.bin")
 bootloader_build.setSourceFiles(["../src/bootloader.asm",
                                 "../src/fileIO/io.asm"])
 bootloader_build.compile()
 
-with open(bootloader_build.path, "rb") as f:
-    data = f.read()
-print(len(data))
-# db = diskBuilder([bootloader_build])
+
+test_builder = binBuildInfo("./bins", "test.bin", 0)
+test_builder.setSourceFiles(["../src/random/test.asm"])
+
+
+db = diskBuilder("../../c++/out/vdisk",[test_builder])
+db.build()
+
+# with open(bootloader_build.path, "rb") as f:
+#     data = f.read()
+# print(len(data))

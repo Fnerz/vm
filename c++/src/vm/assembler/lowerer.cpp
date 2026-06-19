@@ -425,7 +425,6 @@ std::vector<Instruction> InstructionLowerer::lower()
             lowerd_jmp.arg_types[0] = ArgType::LABEL_INDEX;
         }
         
-        std::cout << instructionRepr(lowerd_jmp) << std::endl;
         this->lowerd_insts.insert(this->lowerd_insts.begin() + jmp_inst_bundle.index, lowerd_jmp);
     }
 

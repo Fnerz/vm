@@ -23,6 +23,10 @@ void VirtualDisk::read()
     uint64_t disk_addr = this->dma[this->disk_addr_addr];
     uint64_t size = this->dma[this->size_addr];
 
+    std::cout << "mem_addr: " << mem_addr << std::endl;
+    std::cout << "disk_addr: " << disk_addr << std::endl;
+    std::cout << "size: " << size << std::endl;
+
     for (int i = 0; i < size; i++)
     {
         this->dma[mem_addr+i] = this->disk_mem[disk_addr+i];
@@ -49,8 +53,11 @@ void VirtualDisk::write()
 
 void VirtualDisk::step()
 {
+    std::cout << "vdisk step" << std::endl;
     int ready_flag = static_cast<int>(this->dma[this->ready_flag_addr]);
     int busy_flag = static_cast<int>(this->dma[this->busy_flag_addr]);
+    std::cout << "ready_flag: " << ready_flag << std::endl;
+    std::cout << "busy_flag: " << busy_flag << std::endl;
     if ((ready_flag != 1) || (busy_flag == 1))
     {
         return;
@@ -65,6 +72,7 @@ void VirtualDisk::step()
     switch (mode_code)
     {
     case (int)DiskModeCodes::READ:
+        std::cout << "vdisk read" << std::endl;
         this->read();
         break;
     case (int)DiskModeCodes::WRITE:
